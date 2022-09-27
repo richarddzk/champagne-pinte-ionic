@@ -1,0 +1,6 @@
+*.css
+*.gif
+*.svg
+tsconfig.json
+_app.js
+_document.js

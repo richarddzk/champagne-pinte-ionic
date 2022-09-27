@@ -1,0 +1,101 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "tsconfigRootDir": "."
+  },
+  "env": {
+    "browser": true,
+    "jest/globals": true,
+    "node": true,
+    "es6": true
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "prettier",
+    "import",
+    "react-hooks",
+    "jest"
+  ],
+  "extends": [
+    "airbnb",
+    "airbnb-typescript"
+    // "prettier"
+  ],
+  "settings": {
+    "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {},
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+  "rules": {
+    "operator-linebreak": "off",
+    "no-empty-function": "off",
+    "no-undef": "off",
+    "no-unused-expressions": [
+      "warn",
+      {
+        "allowShortCircuit": true,
+        "allowTernary": true
+      }
+    ],
+    "linebreak-style": 0,
+    "react/jsx-wrap-multilines": "off",
+    "react/require-default-props": "off",
+    "@typescript-eslint/naming-convention": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/no-unescaped-entities": 0,
+    "@typescript-eslint/ban-ts-comment": "off",
+    "no-use-before-define": "off",
+    "implicit-arrow-linebreak": "off",
+    "object-curly-newline": "off",
+    "@typescript-eslint/comma-dangle": "off",
+    "no-confusing-arrow": "off",
+    "function-paren-newline": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "@typescript-eslint/camelcase": "off",
+    "camelcase": "off",
+    "variable-name": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "react/jsx-filename-extension": [
+      "warn",
+      {
+        "extensions": [".jsx", ".tsx"]
+      }
+    ],
+    "semi": "off",
+    "@typescript-eslint/semi": "off",
+    "@typescript-eslint/space-before-blocks": "off",
+    "indent": ["error", 2],
+    // we want to avoid extraneous spaces
+    "no-multi-spaces": ["error"],
+    // "linebreak-style": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/prop-types": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "prettier/prettier": [
+      0,
+      {
+        "singleQuote": true,
+        "semi": false
+      }
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "pinte_champagne",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "custom"
+}

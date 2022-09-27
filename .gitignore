@@ -1,0 +1,8 @@
+node_modules
+.next
+tsconfig.tsbuildinfo
+--fix\_logs
+.vscode
+.eslintcache
+global.todo
+out
