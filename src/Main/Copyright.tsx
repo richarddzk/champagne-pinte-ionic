@@ -14,7 +14,7 @@ function Copyright(props: any) {
         component="button"
         variant="body2"
         onClick={() => {
-          router.push('/')
+          router.push('/accueil')
         }}
       >
         Champagne Pinte

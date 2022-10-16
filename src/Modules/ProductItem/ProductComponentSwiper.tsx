@@ -4,7 +4,7 @@ import React from 'react'
 import { GlobalStyles } from 'tss-react'
 import { useCart } from '@/Main/Providers/CartProvider'
 import { useAuth } from '@/Main/auth-provider/AuthProvider'
-import useI18n from '../../Utils/hooks/use-i18n'
+
 import { ProductComponentProps, ImageObject } from './interfaces'
 import ButtonStyled from '../../Main/ButtonStyled'
 import ProductImageSwiper from './ProductImageSwiper'
@@ -19,13 +19,12 @@ const ProductComponentSwiper: React.FC<ProductComponentProps> = (props) => {
     elevation,
     height,
     backgroundColor,
-    buttonPanier
+    buttonPanier,
+    description
   } = props
   const { title, images, id } = product
 
   const { addProduct } = useCart()
-  const i18n = useI18n()
-  const { activeLocale } = i18n
 
   const { auth } = useAuth()
 
@@ -35,7 +34,7 @@ const ProductComponentSwiper: React.FC<ProductComponentProps> = (props) => {
   const makeImagesSlide = () => {
     const acc: ImageObject[] = []
     images.forEach((image: ImageObject) => {
-      if (image.title && image.title !== 'icon') {
+      if (image.title && !['icon', 'background', 'ico'].includes(image.title)) {
         acc.push({
           src: image.src,
           altText: `Slide ${id}`,
@@ -43,15 +42,16 @@ const ProductComponentSwiper: React.FC<ProductComponentProps> = (props) => {
           header: '',
           key: image.id,
           name: title,
-          page: `/${activeLocale ?? 'fr'}/product/${id}`
+          page: ` /produit/${id}`
         } as ImageObject)
       }
     })
     return acc
   }
   const items = makeImagesSlide()
+
   const onClick = () => {
-    Router.push(`/${activeLocale ?? 'fr'}/product/${id}`)
+    Router.push(` /produit/${id}`)
   }
   return (
     <>
@@ -60,20 +60,18 @@ const ProductComponentSwiper: React.FC<ProductComponentProps> = (props) => {
         styles={{
           '#middle': {
             transition: '.5s ease',
-            opacity: 0,
+
             height: 0,
             transform: 'translate(-50%, -50%)',
             msTransform: 'translate(-50%, -50%)',
-            textAlign: 'center'
+            textAlign: 'center',
+            opacity: 1
           },
 
           '#container:hover #image': {
             opacity: 0.3
           },
 
-          '#container:hover #middle': {
-            opacity: 1
-          },
           '#Button': {
             display: 'none'
           },
@@ -92,7 +90,7 @@ const ProductComponentSwiper: React.FC<ProductComponentProps> = (props) => {
       <Paper
         className={classes.PaperSliderProduct}
         style={{
-          height
+          height: '100%'
         }}
         elevation={elevation}
       >
@@ -104,6 +102,7 @@ const ProductComponentSwiper: React.FC<ProductComponentProps> = (props) => {
             backgroundColor={backgroundColor}
             onClick={onClick}
           />
+          {description}
           {!noTitle && (
             <Grid className={classes.gridTypo}>
               <Typography align="justify" className={classes.typo} variant="h6">

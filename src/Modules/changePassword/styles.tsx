@@ -1,11 +1,12 @@
 import { makeStyles } from '@/makeStyles'
 import { alpha } from '@mui/material'
 
-const useStyles = makeStyles()((theme) => ({
+const useStyles = makeStyles()((theme: any) => ({
   container: {
     height: '100%',
     width: '100%',
-    backgroundColor: theme.palette.mode !== 'dark' ? 'antiquewhite' : '#a39a8e',
+    backgroundColor: theme.palette.background.default,
+
     textAlign: 'center',
     paddingTop: 70,
     paddingBottom: 200
@@ -20,7 +21,7 @@ const useStyles = makeStyles()((theme) => ({
     bottom: '95%',
     minWidth: 440,
     zIndex: 5,
-    backgroundColor: theme.palette.mode !== 'dark' ? '#f5f5f5eb' : '#121212',
+
     margin: 'auto',
     width: '100%',
     flexDirection: 'column',
@@ -29,6 +30,7 @@ const useStyles = makeStyles()((theme) => ({
     borderRadius: 10,
     padding: 5,
     textAlign: '-webkit-center' as any,
+    backgroundColor: theme.palette.background.default,
     ':hover': {
       boxShadow:
         '0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%);'
@@ -42,7 +44,11 @@ const useStyles = makeStyles()((theme) => ({
     width: 'fit-content',
     padding: 30,
     margin: 30,
-    backgroundColor: theme.palette.mode !== 'dark' ? '#f5f5f5eb' : '#000000d9'
+    backgroundColor: theme.palette.background.second,
+    ':hover': {
+      boxShadow:
+        '0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%);'
+    }
   },
 
   center: {

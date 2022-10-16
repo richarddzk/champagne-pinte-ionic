@@ -2,11 +2,7 @@ import React from 'react'
 import Page from '@/Main/Page'
 
 import { Main } from '@/Main'
-import dynamic from 'next/dynamic'
-
-const SavoirFaire = dynamic(() => import('./SavoirFaire'), {
-  loading: () => <>...</>
-})
+import SavoirFaire from './SavoirFaire'
 
 const Savoir: React.FC = () => (
   <Page>

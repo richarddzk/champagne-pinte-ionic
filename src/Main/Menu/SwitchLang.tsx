@@ -1,14 +1,11 @@
-import React, { useEffect } from 'react'
-import Image from 'next/future/image'
+import React from 'react'
+import Image from '@/Utils/MidgardImage'
 import { Select, MenuItem, ListItemIcon } from '@mui/material'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { Css } from 'tss-react'
-import fr from '../../../public/img/logo/fr.webp'
-import en from '../../../public/img/logo/en.webp'
-import useI18n from '../../Utils/hooks/use-i18n'
-import EN from '../../../public/locales/en/common.json'
-import FR from '../../../public/locales/fr/common.json'
+import fr from '../../../public/image/logo/fr.webp'
+import en from '../../../public/image/logo/en.webp'
 
 export interface SwitchLangProps {
   onClick: () => void
@@ -16,22 +13,11 @@ export interface SwitchLangProps {
 }
 
 const SwitchLang: React.FC<SwitchLangProps> = ({ onClick, css }) => {
-  const i18n = useI18n()
-
-  const handleChange = (event: any) => {
-    i18n.locale(event.target.value, event.target.value === 'fr' ? FR : EN)
+  const handleChange = () => {
     onClick()
   }
   const router = useRouter()
   const defaultLang = router.locale === 'default'
-
-  useEffect(() => {
-    if (defaultLang) i18n.locale('fr', FR)
-  }, [defaultLang])
-
-  useEffect(() => {
-    if (!defaultLang) i18n.locale(router.locale, router.locale === 'fr' ? FR : EN)
-  }, [router.locale !== i18n.activeLocale])
 
   const height = 15
   const width = 25
@@ -56,14 +42,14 @@ const SwitchLang: React.FC<SwitchLangProps> = ({ onClick, css }) => {
       }}
     >
       <MenuItem value="fr">
-        <Link href={`/fr${router.pathname}`} locale="fr">
+        <Link href={`${router.pathname}`} locale="fr">
           <ListItemIcon>
             <Image height={height} width={width} src={fr} alt="fr" />
           </ListItemIcon>
         </Link>
       </MenuItem>
       <MenuItem value="en">
-        <Link href={`/en${router.pathname}`} locale="en">
+        <Link href={`/${router.pathname}`} locale="en">
           <ListItemIcon>
             <Image height={height} width={width} src={en} alt="en" />
           </ListItemIcon>

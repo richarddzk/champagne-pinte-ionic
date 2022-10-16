@@ -17,14 +17,7 @@ const ConditionsGeneral: React.FC = () => {
   }
   return (
     <Main>
-      <Grid
-        style={{
-          paddingBottom: 100,
-          paddingTop: 100,
-          paddingRight: '15vw',
-          paddingLeft: '15vw'
-        }}
-      >
+      <Grid className={classes.grid}>
         <Typography className={classes.titre}>Conditions générales d’utilisation</Typography>
         <Typography className={classes.titre3}>Dernière mise à jour : Janvier 2021</Typography>
         <Typography className={classes.titre3}>1. EDITEUR – CONTACT</Typography>

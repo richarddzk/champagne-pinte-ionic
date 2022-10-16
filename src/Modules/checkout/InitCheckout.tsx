@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { useState, useEffect } from 'react'
-import { Grid, AppBar, Button, Typography, GlobalStyles } from '@mui/material'
+import { Grid, AppBar, Button, Typography } from '@mui/material'
+import GlobalStyles from '@mui/material/GlobalStyles'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe, StripeElementsOptions } from '@stripe/stripe-js'
 import { useDarkMode } from 'next-dark-mode'
 import { useRouter } from 'next/router'
-import Image from 'next/future/image'
+import Image from '@/Utils/MidgardImage'
 import dynamic from 'next/dynamic'
 import loading2 from 'react-useanimations/lib/loading2'
 import { v4 as uuid } from 'uuid'
@@ -16,11 +17,11 @@ import getEnvBackend from '@/Utils/hooks/getEnvBackend'
 import { useAuth } from '@/Main/auth-provider/AuthProvider'
 import { calculateTotal } from '@/Main/Cart/Cart'
 import Page from '@/Main/Page'
+import useScreen from '@/Utils/hooks/useScreen'
 import Checkout from './Checkout'
 import useStyles from './style'
-import mainLogoW from '../../../public/img/logo/logoVierge2.webp'
-import mainLogoB from '../../../public/img/logo/pintechamplisse2Or.webp'
-import useI18n from '../../Utils/hooks/use-i18n'
+import mainLogoW from '../../../public/image/logo/logoVierge2.webp'
+import mainLogoB from '../../../public/image/logo/pintechamplisse2Or.webp'
 
 const UseAnimations = dynamic(() => import('react-useanimations'), {
   loading: () => <>...</>
@@ -39,14 +40,13 @@ const InitCheckout: React.FC = () => {
   const { auth, UserInfos: data } = useAuth()
   const { classes, css } = useStyles()
   const router = useRouter()
-  const i18n = useI18n()
 
   const { Products } = useCart()
   const { email, lastName } = (auth && auth) ?? {
     email: 'email',
     lastName: 'lastName'
   }
-  const { activeLocale } = i18n
+  const { isTablette } = useScreen()
 
   const total = calculateTotal(Products).toFixed(2)
   const [shippingMethod, setShippingMethod] = useState({ id: 0, price: 0 })
@@ -100,7 +100,7 @@ const InitCheckout: React.FC = () => {
               key={uuid()}
               startIcon={<Logout fontSize="small" />}
               onClick={() => {
-                router.push(`/${activeLocale}/login`)
+                router.push('  /connexion')
               }}
               className={classes.typo}
             >
@@ -109,7 +109,7 @@ const InitCheckout: React.FC = () => {
             <Button
               key={uuid()}
               onClick={() => {
-                router.push(`/${activeLocale}/login`)
+                router.push('  /connexion')
               }}
               className={classes.typo}
             >
@@ -158,10 +158,10 @@ const InitCheckout: React.FC = () => {
       />
       <AppBar className={classes.appBar} position="static">
         <Grid container>
-          <Grid item xs={1}>
+          <Grid item xs={isTablette ? 6 : 0}>
             <Button
               onClick={() => {
-                router.push(`/${activeLocale ?? 'fr'}/`)
+                router.push(' /')
               }}
               className={css({ padding: 4 })}
             >
@@ -173,7 +173,7 @@ const InitCheckout: React.FC = () => {
               />
             </Button>
           </Grid>
-          <Grid item className={classes.typoButton} xs={10}>
+          <Grid item className={classes.typoButton} xs>
             <Typography
               variant="h6"
               component="div"

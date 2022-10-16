@@ -12,7 +12,7 @@ const ProductImage: React.FC<ProductImageProps> = ({
 }) => {
   if (noAnimation) {
     return (
-      <Grid className={classes.imgSlider}>
+      <Grid className={classes.imageSlider}>
         <Slideshow
           items={images}
           itemsToShow={1}
@@ -20,7 +20,7 @@ const ProductImage: React.FC<ProductImageProps> = ({
           speed={1000}
           autoplaySpeed={10000}
           pauseOnHover
-          fade={false}
+          fade
           initialSlide={1}
           button={false}
           height={height}
@@ -32,7 +32,7 @@ const ProductImage: React.FC<ProductImageProps> = ({
   }
 
   return (
-    <Grid className={classes.imgSlider}>
+    <Grid className={classes.imageSlider}>
       <Slideshow
         items={images}
         itemsToShow={1}
@@ -40,7 +40,7 @@ const ProductImage: React.FC<ProductImageProps> = ({
         speed={1000}
         autoplaySpeed={10000}
         pauseOnHover
-        fade={false}
+        fade
         initialSlide={1}
         button={false}
         height={height}

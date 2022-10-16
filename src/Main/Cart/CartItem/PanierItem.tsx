@@ -1,10 +1,9 @@
-import React, { RefObject, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { Typography, Grid, TextField, IconButton, Button } from '@mui/material'
-import Image from 'next/future/image'
+import Image from '@/Utils/MidgardImage'
 import dynamic from 'next/dynamic'
 import DelIcon from '@mui/icons-material/RemoveCircleOutline'
 import AddIcon from '@mui/icons-material/AddCircleOutline'
-import RmIcon from '@mui/icons-material/DeleteOutline'
 import { useDarkMode } from 'next-dark-mode'
 import { useCart } from '@/Main/Providers/CartProvider'
 import { Product } from '@/Modules/ProductItem/interfaces'
@@ -14,7 +13,9 @@ import Router from 'next/router'
 
 import alertCircle from 'react-useanimations/lib/alertCircle'
 import { v4 as uuid } from 'uuid'
-import useI18n from '@/Utils/hooks/use-i18n'
+
+import Tooltip from '@mui/material/Tooltip'
+import ClearIcon from '@mui/icons-material/Clear'
 import useStyles from '../style'
 
 export interface PanierItemProps {
@@ -30,9 +31,7 @@ const PanierItem: React.FC<PanierItemProps> = ({ checkout = false, item, main })
   const { darkModeActive } = useDarkMode()
   const { setQtyProduct, removeProduct, getTotalPrice } = useCart()
   const [localQty, setLocalQty] = useState(item.amount)
-  const textFieldRef: RefObject<any> = useRef()
-  const i18n = useI18n()
-  const { activeLocale } = i18n
+
   const { classes, css } = useStyles({ darkModeActive })
   let icon = item.images[0]
   item.images.forEach((image) => {
@@ -59,16 +58,15 @@ const PanierItem: React.FC<PanierItemProps> = ({ checkout = false, item, main })
       direction="row"
       container
       justifyContent="space-around"
-      alignItems="stretch"
     >
       <Grid
         item
-        xs={3}
+        xs={2}
         onClick={() => {
-          Router.push(`/${activeLocale ?? 'fr'}/product/${item.id}`)
+          Router.push(` /produit/${item.id}`)
         }}
         style={{
-          height: 140,
+          height: 210,
           width: 80,
           textAlign: 'center',
           alignSelf: 'center',
@@ -76,7 +74,7 @@ const PanierItem: React.FC<PanierItemProps> = ({ checkout = false, item, main })
         }}
       >
         <motion.div key={uuid()} whileHover={{ scale: !checkout ? 1.2 : 1 }}>
-          <Image src={icon.src} alt={icon.title} height={200} width={60} />
+          <Image src={icon.src} alt={icon.title} height={210} width={65} />
         </motion.div>
       </Grid>
       <Grid
@@ -85,27 +83,27 @@ const PanierItem: React.FC<PanierItemProps> = ({ checkout = false, item, main })
         className={css({
           height: '100%',
           alignSelf: 'center',
-          alignItems: 'center',
+          alignItems: 'flex-start',
           margin: 2
         })}
         direction="column"
         justifySelf="flex-start"
         xs={6}
-        rowSpacing={3}
+        rowSpacing={2}
       >
         <Grid justifyContent="flex-start" alignItems="stretch" item>
           <Typography className={classes.typo} variant="h6">
             Champagne {item.title}
           </Typography>
         </Grid>
-        <Grid direction="row" justifyContent="flex-start" container item xs={12}>
+        <Grid justifyContent="flex-start" alignItems="stretch" item>
+          <Typography className={classes.typo} variant="body1" color="primary">
+            Bouteille - 75 cL - {item.price} €{' '}
+          </Typography>
+        </Grid>
+        <Grid direction="row" justifyContent="flex-start" container item xs={8}>
           {main && (
-            <Grid
-              style={{
-                alignSelf: 'center'
-              }}
-              item
-            >
+            <Grid item>
               <IconButton
                 color="primary"
                 aria-label="delete"
@@ -123,8 +121,7 @@ const PanierItem: React.FC<PanierItemProps> = ({ checkout = false, item, main })
             {main ? (
               <TextField
                 id="outlined-number"
-                helperText="Quantity"
-                ref={textFieldRef}
+                helperText="Quantité"
                 size="medium"
                 className={classes.panierTextfield}
                 onChange={(res: { target: { value: string } }) => {
@@ -144,12 +141,7 @@ const PanierItem: React.FC<PanierItemProps> = ({ checkout = false, item, main })
             )}
           </Grid>
           {main && (
-            <Grid
-              style={{
-                alignSelf: 'center'
-              }}
-              item
-            >
+            <Grid item>
               <IconButton
                 color="primary"
                 aria-label="delete"
@@ -164,8 +156,33 @@ const PanierItem: React.FC<PanierItemProps> = ({ checkout = false, item, main })
             </Grid>
           )}
         </Grid>
-        {main && (
-          <Grid direction="row" justifyContent="flex-start" container>
+        <Grid style={{ height: 100 }} item xs>
+          {localQty !== item.amount && (
+            <Button
+              key={uuid()}
+              className={classes.buttonMajPanier}
+              onClick={() => {
+                refreshCart(localQty)
+              }}
+            >
+              <UseAnimations
+                key={uuid()}
+                strokeColor="#CCBF90"
+                size={45}
+                aria-label="maj"
+                loop
+                animation={alertCircle}
+              />
+              <Typography className={classes.typoMaj} variant="body2">
+                mettre à jour
+              </Typography>
+            </Button>
+          )}
+        </Grid>
+      </Grid>
+      {main && (
+        <Grid direction="row" item>
+          <Tooltip title="Supprimer">
             <IconButton
               color="primary"
               size="small"
@@ -174,55 +191,11 @@ const PanierItem: React.FC<PanierItemProps> = ({ checkout = false, item, main })
                 refreshCart(0, true)
               }}
             >
-              <RmIcon />
+              <ClearIcon />
             </IconButton>
-            <Grid style={{ height: 40 }} item xs={7}>
-              {localQty !== item.amount && (
-                <Button
-                  key={uuid()}
-                  className={classes.buttonMajPanier}
-                  onClick={() => {
-                    refreshCart(localQty)
-                  }}
-                >
-                  <UseAnimations
-                    key={uuid()}
-                    strokeColor="#CCBF90"
-                    size={45}
-                    aria-label="maj"
-                    loop
-                    animation={alertCircle}
-                  />
-                  <Typography className={classes.typoMaj} variant="body2">
-                    mettre à jour
-                  </Typography>
-                </Button>
-              )}
-            </Grid>
-          </Grid>
-        )}
-      </Grid>
-      <Grid
-        justifyContent="spacing-between"
-        alignItems="stretch"
-        style={{
-          alignSelf: 'end'
-        }}
-        item
-        xs={2}
-      >
-        <Grid item>
-          <Typography className={classes.typo} variant="body1">
-            Unit {item.price} €{' '}
-          </Typography>
+          </Tooltip>
         </Grid>
-        <Grid item>
-          <Typography className={classes.typo} variant="body1">
-            Sous-total:{' '}
-            {localQty * (typeof item.price === 'string' ? parseInt(item.price, 10) : item.price)} €
-          </Typography>
-        </Grid>
-      </Grid>
+      )}
     </Grid>
   )
 }

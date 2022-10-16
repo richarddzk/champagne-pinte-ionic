@@ -9,9 +9,12 @@ import { ProductComponent, ProductDescription } from '@/Modules/ProductItem'
 import PathLink from '@/Main/PathLink'
 import { Product } from '@/Modules/ProductItem/interfaces'
 import dynamic from 'next/dynamic'
+import { useDarkMode } from 'next-dark-mode'
+import useScreen from '@/Utils/hooks/useScreen'
 import useStyles from './style'
 import ProductBrutBody from './ProductBrutBody'
 import ProductRoseBody from './ProductRoseBody'
+
 import { GET_PRODUCT as GET_PRODUCT_TYPE } from './__generated__/GET_PRODUCT'
 import { GET_PRODUCT, ProductProps } from './interfaces'
 
@@ -21,10 +24,14 @@ const Loading = dynamic(() => import('@/Utils/Loading'), {
 
 const ProductModule: React.FC<ProductProps> = ({ id }) => {
   const { classes } = useStyles()
+
   const { loading, data } = useQuery<GET_PRODUCT_TYPE>(GET_PRODUCT, {
     variables: { id },
     fetchPolicy: 'network-only'
   })
+  const { darkModeActive } = useDarkMode()
+  const { isWideMob } = useScreen()
+
   if (loading) {
     return (
       <Main>
@@ -34,13 +41,23 @@ const ProductModule: React.FC<ProductProps> = ({ id }) => {
   }
 
   const { product } = data ?? { product: null }
+
   return (
     <Main>
       <Grid className={classes.gridProduct}>
         <PathLink />
         {product && (
           <Grid container alignItems="center" justifyContent="center" direction="column">
-            <Grid container alignItems="center" justifyContent="center" direction="row">
+            <Grid container className={classes.GridTitre} direction={isWideMob ? 'column' : 'row'}>
+              <Grid
+                className={classes.ProductDescription}
+                justifyContent="center"
+                alignItems="center"
+                item
+                xs={isWideMob ? 12 : 5}
+              >
+                <ProductDescription product={product as unknown as Product} />
+              </Grid>
               {loading ? (
                 <Stack spacing={1}>
                   <Skeleton variant="text" />
@@ -48,7 +65,7 @@ const ProductModule: React.FC<ProductProps> = ({ id }) => {
                   <Skeleton variant="rectangular" width={210} height={118} />
                 </Stack>
               ) : (
-                <Grid key={uuid()} className={classes.gridImage} item xs={7}>
+                <Grid key={uuid()} className={classes.gridImage} item xs={6}>
                   {product && (
                     <ProductComponent
                       classes={classes}
@@ -58,21 +75,14 @@ const ProductModule: React.FC<ProductProps> = ({ id }) => {
                       noTitle
                       noAnimation
                       height="85vh"
-                      width="80wv"
+                      width="100%"
                       elevation={0}
+                      slideDotBottom={50}
+                      slideDotColor={darkModeActive ? 'white' : '#ccbf90'}
                     />
                   )}
                 </Grid>
               )}
-              <Grid
-                className={classes.ProductDescription}
-                justifyContent="center"
-                alignItems="center"
-                item
-                xs={5}
-              >
-                <ProductDescription product={product as unknown as Product} />
-              </Grid>
             </Grid>
             <Grid
               className={classes.center}

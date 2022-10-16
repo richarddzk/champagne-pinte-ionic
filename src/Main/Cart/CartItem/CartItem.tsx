@@ -1,9 +1,8 @@
 import React, { RefObject, useRef, useState } from 'react'
 import { Typography, Grid, TextField, IconButton, Button } from '@mui/material'
-import Image from 'next/future/image'
+import Image from '@/Utils/MidgardImage'
 import DelIcon from '@mui/icons-material/RemoveCircleOutline'
 import AddIcon from '@mui/icons-material/AddCircleOutline'
-import RmIcon from '@mui/icons-material/DeleteOutline'
 import { useDarkMode } from 'next-dark-mode'
 import dynamic from 'next/dynamic'
 import { v4 as uuid } from 'uuid'
@@ -11,6 +10,7 @@ import { useCart } from '@/Main/Providers/CartProvider'
 import { Product } from '@/Modules/ProductItem/interfaces'
 import alertCircle from 'react-useanimations/lib/alertCircle'
 import { useKeyPressEvent } from 'react-use'
+import ClearIcon from '@mui/icons-material/Clear'
 import useStyles from '../style'
 
 interface CartItemProps {
@@ -55,7 +55,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = React.memo(({ refreshCar
         <Grid item xs={5}>
           <TextField
             id="outlined-number"
-            helperText="Quantity"
+            helperText="Quantité"
             // type="number"
             ref={textFieldRef}
             size="small"
@@ -97,7 +97,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = React.memo(({ refreshCar
               refreshCart(0)
             }}
           >
-            <RmIcon />
+            <ClearIcon />
           </IconButton>
         </Grid>
       </Grid>
@@ -125,11 +125,6 @@ const CustomTextField: React.FC<CustomTextFieldProps> = React.memo(({ refreshCar
               </Typography>
             </Button>
           )}
-        </Grid>
-        <Grid style={{ height: 40 }} item xs={5}>
-          <Typography className={classes.typo} variant="body1">
-            {localQty * (typeof item.price === 'string' ? parseInt(item.price, 10) : item.price)} €
-          </Typography>
         </Grid>
       </Grid>
     </>
@@ -167,6 +162,18 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
       >
         <Grid
           item
+          xs={3}
+          style={{
+            height: '120',
+            width: '80',
+            textAlign: 'center',
+            alignSelf: 'center'
+          }}
+        >
+          <Image src={icon.src ?? ''} alt={icon.title} height={140} width={40} />{' '}
+        </Grid>
+        <Grid
+          item
           className={css({
             height: '100%',
             alignSelf: 'center',
@@ -184,23 +191,11 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
             </Grid>
             <Grid item xs={4}>
               <Typography className={classes.typo} variant="body1">
-                Unit {item.price} €{' '}
+                {item.price} €{' '}
               </Typography>
             </Grid>
           </Grid>
           <CustomTextField refreshCart={refreshCart} item={item} Products={Products} />
-        </Grid>
-        <Grid
-          item
-          xs={3}
-          style={{
-            height: '120',
-            width: '80',
-            textAlign: 'center',
-            alignSelf: 'center'
-          }}
-        >
-          <Image src={icon.src ?? ''} alt={icon.title} height={140} width={40} />{' '}
         </Grid>
       </Grid>
     </Grid>

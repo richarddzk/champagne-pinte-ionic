@@ -318,7 +318,7 @@ const Display: React.FC<DisplayProps> = (props) => {
 
   const isSelected = (name: string) => selected.indexOf(name) !== -1
   return (
-    <Grid container direction="column">
+    <Grid style={{ padding: 5 }} container direction="column">
       <SimpleDialog selected={selected} open={openDel} onClose={handleClose} classes={classes} />
       <Grid
         style={{ textAlign: 'start', width: '100%' }}

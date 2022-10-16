@@ -18,6 +18,8 @@ import { useDarkMode } from 'next-dark-mode'
 import { Logout } from '@mui/icons-material'
 import LoginIcon from '@mui/icons-material/Login'
 import dynamic from 'next/dynamic'
+import Image from '@/Utils/MidgardImage'
+
 import { DarkModeSwitch } from 'react-toggle-dark-mode'
 import Slide from '@mui/material/Slide'
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn'
@@ -31,7 +33,8 @@ import { ApolloQueryResult } from '@apollo/client'
 import settings from 'react-useanimations/lib/settings'
 import { useCart } from '@/Main/Providers/CartProvider'
 import { useAuth } from '../../auth-provider/AuthProvider'
-import useI18n from '../../../Utils/hooks/use-i18n'
+import iconWallet from '../../../../public/image/crypto/iconWallet.webp'
+import iconWalletB from '../../../../public/image/crypto/iconWalletB.webp'
 import SwitchLang from '../SwitchLang'
 import actionSnack from '../interfaces'
 import useStyles from './style'
@@ -67,8 +70,7 @@ function SimpleDialog(props: SimpleDialogProps) {
   const handleClose = () => {
     onClose()
   }
-  const i18n = useI18n()
-  const { activeLocale } = i18n ?? { activeLocale: 'fr' }
+
   const router = useRouter()
 
   return (
@@ -99,7 +101,7 @@ function SimpleDialog(props: SimpleDialogProps) {
             logout()
             handleClose()
 
-            router.push(`/${activeLocale ?? 'fr'}`).then(() => {
+            router.push(' ').then(() => {
               router.reload()
             })
           }}
@@ -121,9 +123,8 @@ export interface CartMenuProps {
 const CartMenu: React.FC<CartMenuProps> = ({ open, onClose }) => {
   const { darkModeActive, switchToLightMode, switchToDarkMode } = useDarkMode()
   const [openDeco, setOpenDeco] = React.useState(false)
-  const { classes, css } = useStyles({ darkModeActive })
-  const i18n = useI18n()
-  const { activeLocale } = i18n
+  const { classes, css } = useStyles()
+
   const router = useRouter()
   const { enqueueSnackbar, closeSnackbar } = useSnackbar()
   const { cartOpen, setCartOpen } = useCart()
@@ -173,11 +174,11 @@ const CartMenu: React.FC<CartMenuProps> = ({ open, onClose }) => {
           {auth ? (
             <Grid direction="row" justifyContent="space-evenly" container>
               <Grid item>
-                <Tooltip color="primary" title="Mon Compte">
+                <Tooltip color="primary" title="Mon compte">
                   <IconButton
                     onClick={() => {
                       handleToggle()
-                      router.push(`/${activeLocale}/account/${auth.id}`)
+                      router.push(`/compte/${auth.id}`)
                     }}
                     size="small"
                     sx={{ ml: 2 }}
@@ -191,8 +192,31 @@ const CartMenu: React.FC<CartMenuProps> = ({ open, onClose }) => {
                   </IconButton>
                 </Tooltip>
               </Grid>
-
               <Grid item>
+                <Tooltip color="primary" title="Mon Wallet">
+                  <IconButton
+                    onClick={() => {
+                      handleToggle()
+                      router.push(`/compte/${auth.id}`)
+                    }}
+                    size="small"
+                    sx={{ ml: 2 }}
+                    aria-controls={open ? 'account-menu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
+                  >
+                    <Avatar color="primary" sx={{ width: 32, height: 32 }}>
+                      <Image
+                        src={darkModeActive ? iconWallet : iconWalletB}
+                        alt="Logo"
+                        width={25}
+                        height={25}
+                      />
+                    </Avatar>
+                  </IconButton>
+                </Tooltip>
+              </Grid>
+              <Grid item sx={{ alignSelf: 'center' }}>
                 <Button
                   key={uuid()}
                   startIcon={<Logout fontSize="small" />}
@@ -210,7 +234,7 @@ const CartMenu: React.FC<CartMenuProps> = ({ open, onClose }) => {
                 startIcon={<LoginIcon fontSize="small" />}
                 onClick={() => {
                   handleToggle()
-                  router.push(`/${activeLocale}/login`)
+                  router.push('/connexion')
                 }}
                 className={classes.typo}
               >

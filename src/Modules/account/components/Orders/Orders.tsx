@@ -4,7 +4,7 @@ import Divider from '@mui/material/Divider'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import { Link } from '@mui/material'
-import useI18n from '@/Utils/hooks/use-i18n'
+
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import useStyles from '../../style'
@@ -16,8 +16,7 @@ const Loading = dynamic(() => import('@/Utils/Loading'), {
 })
 const Orders: React.FC<OrdersProps> = (props) => {
   const { classes } = useStyles()
-  const i18n = useI18n()
-  const { activeLocale } = i18n
+
   const router = useRouter()
   const { orders } = props
   return orders && orders.length > 0 ? (
@@ -58,7 +57,7 @@ const Orders: React.FC<OrdersProps> = (props) => {
         variant="h4"
         onClick={() => {
           // @ts-ignore
-          router.push(`/${activeLocale}/champagnes`)
+          router.push('  /champagnes')
         }}
       >
         Nos Champagnes

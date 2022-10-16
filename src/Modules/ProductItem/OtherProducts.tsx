@@ -1,29 +1,26 @@
-import { Grid } from '@mui/material';
-import { useAnimation, motion } from 'framer-motion';
-import React, { useEffect } from 'react';
+import { Grid } from '@mui/material'
+import { useAnimation, motion } from 'framer-motion'
+import React, { useEffect } from 'react'
 
-import { useInView } from 'react-intersection-observer';
+import { useInView } from 'react-intersection-observer'
 
-import { ProductImageProps } from './interfaces';
+import { ProductImageProps } from './interfaces'
 
-const OtherProducts: React.FC<ProductImageProps> = ({
-  classes,
-  noAnimation,
-}) => {
+const OtherProducts: React.FC<ProductImageProps> = ({ classes, noAnimation }) => {
   const { ref, inView } = useInView({
     /* Optional options */
-    threshold: 0,
-  });
-  const controls = useAnimation();
+    threshold: 0
+  })
+  const controls = useAnimation()
   useEffect(() => {
     if (inView) {
-      controls.start('visible');
+      controls.start('visible')
     }
-  }, [controls, inView]);
+  }, [controls, inView])
 
   if (noAnimation) {
     return (
-      <Grid className={classes.imgSlider}>
+      <Grid className={classes.imageSlider}>
         {/* <Slideshow
           items={images}
           itemsToShow={1}
@@ -36,7 +33,7 @@ const OtherProducts: React.FC<ProductImageProps> = ({
           button={false}
         /> */}
       </Grid>
-    );
+    )
   }
 
   return (
@@ -47,10 +44,10 @@ const OtherProducts: React.FC<ProductImageProps> = ({
       transition={{ delay: 0.5, duration: 0.3 }}
       variants={{
         visible: { opacity: 1, scale: 1 },
-        hidden: { opacity: 0, scale: 0 },
+        hidden: { opacity: 0, scale: 0 }
       }}
     >
-      <Grid className={classes.imgSlider}>
+      <Grid className={classes.imageSlider}>
         {/* <Slideshow
           items={images}
           itemsToShow={1}
@@ -64,7 +61,7 @@ const OtherProducts: React.FC<ProductImageProps> = ({
         /> */}
       </Grid>
     </motion.div>
-  );
-};
+  )
+}
 
-export default React.memo(OtherProducts);
+export default React.memo(OtherProducts)

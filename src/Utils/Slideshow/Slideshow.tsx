@@ -2,14 +2,17 @@ import React from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import Router from 'next/router'
-import Image from 'next/future/image'
-import { GlobalStyles, Grid } from '@mui/material'
+import Image from '@/Utils/MidgardImage'
+import { GlobalStyles } from 'tss-react'
+
 import { ButtonStyled } from '@/Main'
 import { Item } from '@/Main/interfaces'
 import { ImageObject } from '@/Modules/ProductItem/interfaces'
 import { v4 as uuid } from 'uuid'
-import useI18n from '../hooks/use-i18n'
+import Grid from '@mui/material/Grid'
+
 import { SlideshowProps } from './interface'
+import useScreen from '../hooks/useScreen'
 
 const Slideshow: React.FC<SlideshowProps> = ({
   items,
@@ -25,8 +28,6 @@ const Slideshow: React.FC<SlideshowProps> = ({
   width = '100vw',
   objectFit = 'contain'
 }) => {
-  const i18n = useI18n()
-  const { activeLocale } = i18n
   const settings = {
     className: classes.slideContainer,
     arrows: false,
@@ -43,6 +44,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
     // autoplay: false,
     autoplaySpeed
   }
+  const { isMob } = useScreen()
 
   return (
     <div
@@ -61,7 +63,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
         }}
       />
       <Slider {...settings}>
-        {items(classes).map((item: Item | ImageObject) => {
+        {items(classes, isMob).map((item: Item | ImageObject) => {
           const { src } = item
 
           return (
@@ -69,7 +71,8 @@ const Slideshow: React.FC<SlideshowProps> = ({
               key={uuid()}
               style={{
                 overflowX: 'hidden',
-                height
+                height,
+                maxHeight: 937
               }}
             >
               <div
@@ -77,7 +80,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
                   width,
                   height,
                   position: 'relative',
-                  maxHeight: '100%',
+                  maxHeight: 937,
                   overflow: 'hidden'
                 }}
               >
@@ -87,12 +90,19 @@ const Slideshow: React.FC<SlideshowProps> = ({
                     priority
                     alt="Slideshow"
                     sizes="100vw"
-                    style={{ objectFit }}
+                    style={{ maxHeight: 937, objectFit }}
                     fill
+                    placeholder={item.blur ? 'blur' : undefined}
+                    blurDataURL={item.blur ? item.blur : undefined}
                     src={src}
                   />
                 ) : (
-                  <video autoPlay loop muted style={{ width: '100%', height: '100vh', objectFit }}>
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    style={{ maxHeight: 937, width: '100%', height: '100vh', objectFit }}
+                  >
                     <source src={src} type="video/mp4" />
                   </video>
                 )}
@@ -100,12 +110,12 @@ const Slideshow: React.FC<SlideshowProps> = ({
               {button && (
                 <Grid id="ButtonSlideShow" className={classes.maisonButtonDiv}>
                   <ButtonStyled
-                    width={170}
+                    width={200}
                     image={classes.maisonButton}
                     title={item.name}
                     fullybackground={1}
                     onClick={() => {
-                      Router.push(`/${activeLocale ?? 'fr'}${item.page}`)
+                      Router.push(` ${item.page}`)
                     }}
                   />
                 </Grid>

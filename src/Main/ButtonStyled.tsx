@@ -25,8 +25,8 @@ const ButtonRoot = React.forwardRef(
 )
 
 const mainColor = {
-  50: '#d7d7d7',
-  100: '#d5d0d0',
+  50: '#d5d0d000',
+  100: '#d5d0d000',
   200: '#d3d1cc',
   400: '#d1cec4',
   500: '#cfcbbd',
@@ -104,7 +104,7 @@ const CustomFullyButtonRoot = styled(ButtonRoot)(
 
     & .content {
       font-size:  1.2em;
-      font-family: Fira Sans, serif;
+      font-family: din;
            font-weight: 900;
       line-height: 2;
       height: 100%;
@@ -181,7 +181,7 @@ const CustomButtonRoot = styled(ButtonRoot)(
 
     & .content {
       font-size:  1.2em;
-      font-family: Fira Sans, serif;
+      font-family: din;
       font-weight: 900;
       line-height: 2;
       height: 100%;

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
-import Image from 'next/future/image'
+import Image from '@/Utils/MidgardImage'
 import { useDarkMode } from 'next-dark-mode'
 import Router from 'next/router'
 import {
@@ -24,9 +24,9 @@ import { ApolloError, useMutation } from '@apollo/client'
 import { ButtonStyled, Main } from '@/Main'
 import PathLink from '@/Main/PathLink'
 import Encrypt from '@/Utils/Encrypt'
-import useI18n from '../../Utils/hooks/use-i18n'
-import mainLogoW from '../../../public/img/logo/MainLogoChampWhite.webp'
-import mainLogoB from '../../../public/img/logo/MainLogoChampBlack.webp'
+
+import mainLogoW from '../../../public/image/logo/MainLogoChampWhite.webp'
+import mainLogoB from '../../../public/image/logo/MainLogoChampBlack.webp'
 import useStyles from './styles'
 import { CHANGE_PASSWORD } from './request'
 import { changePassword, changePasswordVariables } from './__generated__/changePassword'
@@ -38,8 +38,7 @@ interface MyForm {
 
 const ChangePassword: React.FC = () => {
   const { classes } = useStyles()
-  const i18n = useI18n()
-  const { activeLocale } = i18n
+
   const { darkModeActive } = useDarkMode()
   const { UserInfos } = useAuth()
 
@@ -74,7 +73,7 @@ const ChangePassword: React.FC = () => {
       onError: handleError,
       onCompleted: () => {
         handleSuccess('Mot de passe updated')
-        Router.push(`/${activeLocale ?? 'fr'}/`)
+        Router.push(' /')
       }
     }
   )
@@ -135,7 +134,7 @@ const ChangePassword: React.FC = () => {
           <Grid className={classes.gridForm} item xs={4}>
             <Button
               onClick={() => {
-                Router.push(`/${activeLocale ?? 'fr'}/`)
+                Router.push(' /')
               }}
               className={classes.button}
             >

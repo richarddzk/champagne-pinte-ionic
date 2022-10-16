@@ -7,25 +7,28 @@ const useStyles = makeStyles()((theme: Theme) => ({
     height: '90vh'
   },
   PaperSliderProduct: {
-    background: 'transparent',
+    padding: 20,
+    paddingBottom: 100,
+    backgroundColor: 'transparent',
     borderRadius: 20,
+    backgroundImage: 'none',
+    boxShadow: 'none',
     ':hover': {
-      backgroundColor: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3c7',
-
       boxShadow:
         '0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%);'
     }
   },
   container: {
     width: '80vw',
-    height: '90vh',
+    height: '100vh',
     ':hover': {
       boxShadow:
         '0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%);'
     }
   },
   productComponent: {
-    maxWidth: '100%'
+    maxWidth: '100%',
+    height: '100vh'
   },
   gridImage: {
     maxWidth: '30%',
@@ -76,7 +79,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
     transition: '.5s ease',
     textAlign: 'center',
     backgroundColor: 'transparent',
-    [theme.breakpoints.down(501)]: {
+    [theme.breakpoints.down(701)]: {
       opacity: 1,
       visibility: 'visible'
     },
@@ -94,6 +97,10 @@ const useStyles = makeStyles()((theme: Theme) => ({
     ':hover': {
       opacity: 1,
       visibility: 'visible'
+    },
+    [theme.breakpoints.down(701)]: {
+      opacity: 1,
+      visibility: 'visible'
     }
   },
   divImageSlideShow: {
@@ -103,32 +110,32 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
   decouvirButton: {
     marginBottom: 100,
-    font: ' italic 1.2em "Fira Sans", serif',
+    font: ' italic 1.2em Times New Roman, serif',
     width: '45%'
   },
 
   gridProduct: {
     paddingTop: 200,
     paddingBottom: 200,
-    backgroundColor: 'antiquewhite'
+    backgroundColor: 'white'
   },
   button: {
     // backgroundColor: '#000',
   },
   gridTypo: {
     color: theme.palette.mode === 'dark' ? 'white' : 'black',
-    backgroundColor: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3c7',
-
+    backgroundColor: theme.palette.background.default,
     borderRadius: '0px 0px 10px 10px'
   },
   typo: {
-    // padding: 20,
     textAlign: 'center',
-    fontFamily: 'Fira Sans , serif'
+    fontFamily: 'Times New Roman , serif'
+  },
+  typoJust: {
+    padding: 20,
+    fontFamily: 'Times New Roman , serif'
   },
   gridButton: {
-    // height: 200,
-    // width: 0,
     zIndex: 9,
     position: 'relative',
     bottom: -10,
@@ -142,9 +149,10 @@ const useStyles = makeStyles()((theme: Theme) => ({
     maxWidth: 450,
     padding: 20,
     color: theme.palette.mode === 'dark' ? 'white' : 'black',
-    backgroundColor: theme.palette.mode === 'dark' ? '#121212b0' : '#ffffffc7',
+    backgroundColor: theme.palette.background.default,
     ':hover': {
-      backgroundColor: theme.palette.mode === 'dark' ? 'black' : 'white'
+      boxShadow:
+        '0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%);'
     },
     // left: 'max(-35vw,)',
     marginLeft: '5em',
@@ -161,6 +169,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
     fontFamily: 'Fira Sans , serif'
   },
   paperProduct: {
+    backgroundColor: theme.palette.background.default,
     ':hover': {
       // backgroundColor: theme.palette.mode === 'dark' ? 'black' : 'white',
       boxShadow:

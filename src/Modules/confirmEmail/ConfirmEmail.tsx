@@ -3,7 +3,7 @@ import { Grid, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
 import { useMutation } from '@apollo/client'
 import PathLink from '@/Main/PathLink'
-import useI18n from '@/Utils/hooks/use-i18n'
+
 import { useAuth } from '@/Main/auth-provider/AuthProvider'
 import { ButtonStyled, Main } from '../../Main'
 import useStyles from './style'
@@ -15,8 +15,7 @@ const ConfirmEmail: React.FC = () => {
   const { auth } = useAuth()
 
   const email = (auth && auth.email) ?? 'no email'
-  const i18n = useI18n()
-  const { activeLocale } = i18n
+
   const [confirmEmail] = useMutation(CONFIRM_EMAIL)
   const [resendEmail] = useMutation(RESEND_EMAIL)
   const { query, push } = useRouter()
@@ -43,7 +42,7 @@ const ConfirmEmail: React.FC = () => {
         <Grid item xs={12}>
           <PathLink />
         </Grid>
-        <Grid container xs>
+        <Grid container>
           <Grid className={classes.gridNewsletter}>
             <Grid container justifyContent="center" direction="column">
               <Typography
@@ -63,7 +62,7 @@ const ConfirmEmail: React.FC = () => {
               <ButtonStyled
                 onClick={async () => {
                   if (success) {
-                    push(`/${activeLocale ?? 'fr'}/champagnes`)
+                    push(' /champagnes')
                   } else {
                     const res = await resendEmail({
                       variables: {

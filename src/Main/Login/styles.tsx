@@ -1,4 +1,4 @@
-import { Theme } from '@mui/material'
+import { alpha, Theme } from '@mui/material'
 import { makeStyles } from '@/makeStyles'
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -12,14 +12,64 @@ const useStyles = makeStyles()((theme: Theme) => ({
     height: 'auto',
     objectFit: 'cover'
   },
+  TextField: {
+    paddingTop: 20,
+    '& .MuiInputBase-input': {
+      padding: 5,
+      borderRadius: 4,
+      position: 'relative',
+      backgroundColor: theme.palette.mode === 'light' ? '#fcfcfb' : '#2b2b2b',
+      border: '1px solid #ced4da',
+      fontSize: 16,
+      textAlign: '-webkit-center' as any,
+      transition: theme.transitions.create(['border-color', 'background-color', 'box-shadow']),
+      // Use the system font instead of the default Roboto font.
+      fontFamily: [
+        '-apple-system',
+        'BlinkMacSystemFont',
+        '"Segoe UI"',
+        'Roboto',
+        '"Helvetica Neue"',
+        'Arial',
+        'sans-serif',
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"'
+      ].join(','),
+      '&:focus': {
+        boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
+        borderColor: theme.palette.primary.main
+      },
+      '&:hover': {
+        borderColor: theme.palette.primary.main
+      }
+    }
+  },
+  typo: {
+    marginLeft: 10,
+    marginTop: 10,
+    marginBottom: 10,
+
+    font: ' 1.5em Times New Roman, serif',
+    [theme.breakpoints.down(1200)]: {
+      marginLeft: 0
+    }
+  },
+  typoHeader: {
+    marginTop: 10,
+    marginBottom: 30,
+    textAlign: '-webkit-center' as any,
+    font: ' italic 1.2em Times New Roman, serif'
+  },
   gridImage: {
     position: 'relative',
-    height: '100%'
+    height: '100%',
+    width: '100%'
   },
   gridForm: {
     position: 'relative',
     bottom: '95%',
-    minWidth: 440,
+    minWidth: 300,
     zIndex: 5,
     backgroundColor: theme.palette.mode !== 'dark' ? '#f5f5f5eb' : '#000000e0',
     margin: 'auto',
@@ -52,7 +102,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
   googeButtonText: {
     color: 'white',
     // fontWeight: 'bold',
-    font: '1.3em "Fira Sans", serif'
+    font: '1.3em Times New Roman, serif'
   },
   googeIcon: { marginTop: 10, paddingRight: 5 },
   googeGridText: {
@@ -73,7 +123,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
     cursor: 'pointer',
     border: 'none',
     backgroundColor: 'transparent',
-    font: '1.2em "Fira Sans", serif'
+    font: '1.2em Times New Roman, serif'
   },
   stepper: {
     marginBottom: 40,
@@ -84,7 +134,18 @@ const useStyles = makeStyles()((theme: Theme) => ({
     padding: 5
   },
   form: {
-    minWidth: 'fit-content'
+    width: '100%',
+    minWidth: 0,
+
+    [theme.breakpoints.down(1200)]: {
+      padding: 20
+    },
+    [theme.breakpoints.down(800)]: {
+      padding: 10
+    },
+    [theme.breakpoints.down(500)]: {
+      padding: 0
+    }
   },
   center: {
     textAlign: '-webkit-center' as any

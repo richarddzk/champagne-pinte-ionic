@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import React from 'react'
-import { GlobalStyles } from '@mui/material'
+import { GlobalStyles } from 'tss-react'
 
 interface StylesWrapperProps {
   backgroundColor?: string
@@ -66,15 +66,15 @@ const StylesWrapper: React.FC<StylesWrapperProps> = React.memo(({ children }) =>
           width: '100%'
         },
 
-        '.swiper-slide img': {
+        '.swiper-slide image': {
           display: 'block',
           width: '100%',
           height: '100%'
         },
-        '.mySwiper2Img': {
+        '.mySwiper2image': {
           objectFit: 'contain'
         },
-        '.mySwiperImg': {
+        '.mySwiperimage': {
           objectFit: 'cover'
         }
       }}

@@ -1,4 +1,5 @@
 import { Theme } from '@mui/system'
+import { ReactElement } from 'react'
 
 export interface ProductComponentProps {
   product: Product
@@ -13,9 +14,13 @@ export interface ProductComponentProps {
   backgroundColor?: string
   theme?: Theme
   buttonPanier?: boolean
+  slideDotBottom?: number
+  slideDotColor?: string
+  description?: ReactElement<any>
 }
 export interface ImageObject {
   src: string
+  blur?: string
   altText: string
   caption: string
   header: string
@@ -49,7 +54,6 @@ export interface TitreProduitProps {
   product: Product
   classes: any
   darkMode: boolean
-  activeLocale: any
 }
 export interface Product {
   title?: string

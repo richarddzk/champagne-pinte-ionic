@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import { Grid, Paper, Typography } from '@mui/material'
 import { useAnimation } from 'framer-motion'
-// import { useSnackbar } from 'notistack'
 import { useInView } from 'react-intersection-observer'
-import Image from 'next/future/image'
+import Image from '@/Utils/MidgardImage'
 import PathLink from '@/Main/PathLink'
 import useStyles from '@/Modules/about/style'
-import pinteOr from '../../../public/img/logo/pintechamplisse2Or.webp'
-import brutTable from '../../../public/img/table/brutTable1.webp'
-import serviceVigne from '../../../public/img/vigne/serviceVigne.webp'
-import cave from '../../../public/img/cave/cave5.webp'
-import tabledouble from '../../../public/img/table/tabledouble1.webp'
+import useScreen from '@/Utils/hooks/useScreen'
+import pinteOr from '../../../public/image/logo/pintechamplisse2Or.webp'
+import tableChamp2 from '../../../public/image/table/tableChamp2.webp'
+import tableChamp1Mob from '../../../public/image/table/tableChamp1Mob.webp'
+import serviceVigne from '../../../public/image/vigne/serviceVigne.webp'
+import serviceVigne2 from '../../../public/image/vigne/serviceVigne2.webp'
+
+import cave from '../../../public/image/cave/cave5.webp'
+import cavePanneauMob from '../../../public/image/cave/cavePanneauMob.webp'
+import tabledouble from '../../../public/image/table/tabledouble1.webp'
 
 const SavoirFaire: React.FC = () => {
   const { classes } = useStyles()
+  const { isTablette } = useScreen()
 
   const [isBrowser, setIsBrowser] = useState(false)
   useEffect(() => {
@@ -39,7 +44,7 @@ const SavoirFaire: React.FC = () => {
       style={{
         maxWidth: '100%',
         textAlign: 'center',
-        paddingTop: 70
+        paddingTop: !isTablette ? 70 : 0
       }}
       justifyContent="center"
       direction="row"
@@ -48,7 +53,7 @@ const SavoirFaire: React.FC = () => {
       <PathLink />
       <Grid style={{ justifyContent: 'center' }} container item xs={12}>
         <Grid item xs={12}>
-          <Typography className={classes.typoTitre} variant="h5">
+          <Typography color="primary" className={classes.typoTitre} variant="h5">
             Les Recommandations de la Maison
           </Typography>
         </Grid>
@@ -64,7 +69,14 @@ const SavoirFaire: React.FC = () => {
           }}
           elevation={5}
         >
-          <Image style={{ objectFit: 'cover' }} fill sizes="100vw" src={tabledouble} alt="Logo" />
+          <Image
+            style={{ objectFit: 'cover' }}
+            fill
+            sizes="100vw"
+            src={tabledouble}
+            alt="Logo"
+            placeholder="blur"
+          />
         </Paper>
 
         <Grid className={classes.gridPaperSavoirFaire}>
@@ -79,7 +91,7 @@ const SavoirFaire: React.FC = () => {
             </Grid>
             <Grid item xs={12}>
               <Typography className={classes.typoTextBold} variant="h4">
-                Conservation, Dégustation, Service ...
+                Conservation, Dégustation, Service
               </Typography>
             </Grid>
           </Paper>
@@ -97,7 +109,13 @@ const SavoirFaire: React.FC = () => {
       >
         <Grid className={classes.gridPaperRight} container item xs={12}>
           <Paper className={classes.paperRight}>
-            <Image style={{ objectFit: 'cover' }} fill sizes="60vw" src={cave} alt="Logo" />
+            <Image
+              style={{ objectFit: 'cover' }}
+              fill
+              sizes="60vw"
+              src={isTablette ? cavePanneauMob : cave}
+              alt="Logo"
+            />
           </Paper>
           <Grid
             style={{
@@ -167,7 +185,13 @@ const SavoirFaire: React.FC = () => {
         </Grid>
         <Grid className={classes.gridPaperLeft} container item xs={12}>
           <Paper className={classes.paperLeft}>
-            <Image style={{ objectFit: 'cover' }} fill sizes="60vw" src={brutTable} alt="Logo" />
+            <Image
+              style={{ objectFit: 'cover' }}
+              fill
+              sizes="60vw"
+              src={isTablette ? tableChamp1Mob : tableChamp2}
+              alt="Logo"
+            />
           </Paper>{' '}
           <Grid
             style={{
@@ -177,7 +201,7 @@ const SavoirFaire: React.FC = () => {
             <Paper className={classes.paperTextLeftSavoirFaire}>
               <Grid item xs={12}>
                 <Typography className={classes.typoTextBold} variant="h5">
-                  À CHAQUE CHAMPAGNE SA TEMPÉRATURE DE DÉGUSTATION
+                  À chaque champagne sa température de degustation
                 </Typography>
               </Grid>
 
@@ -192,15 +216,15 @@ const SavoirFaire: React.FC = () => {
               <Grid item xs={12}>
                 <Typography align="justify" className={classes.typoText} variant="h6">
                   Pour les champagnes
-                  <strong> Millésimé</strong> la température de service est légèrement plus haute,
-                  entre
-                  <strong>10 et 12 °C</strong> ce qui permet de libérer toute la complexité de leurs
-                  arômes.
+                  <strong> millésimé</strong> la température de service est légèrement plus haute.
+                  Entre
+                  <strong> 10 et 12 °C</strong> ce qui permet de libérer toute la complexité de
+                  leurs arômes.
                 </Typography>
               </Grid>
               <Grid item xs={12}>
                 <Typography className={classes.typoTextBold} variant="h5">
-                  COMMENT OBTENIR LA TEMPÉRATURE DE SERVICE IDÉALE ?
+                  Comment obtenir la température de service idéale ?
                 </Typography>
               </Grid>
 
@@ -234,7 +258,13 @@ const SavoirFaire: React.FC = () => {
           xs={12}
         >
           <Paper className={classes.paperRight}>
-            <Image style={{ objectFit: 'cover' }} fill sizes="60vw" src={serviceVigne} alt="Logo" />
+            <Image
+              style={{ objectFit: 'cover' }}
+              fill
+              sizes="60vw"
+              src={isTablette ? serviceVigne2 : serviceVigne}
+              alt="Logo"
+            />
           </Paper>
           <Grid
             style={{
@@ -244,7 +274,7 @@ const SavoirFaire: React.FC = () => {
             <Paper className={classes.paperTextRightSavoirFaire}>
               <Grid item xs={12}>
                 <Typography className={classes.typoTextBold} variant="h5">
-                  LE RITUEL DU SERVICE
+                  Le rituel du service
                 </Typography>
               </Grid>
               <Grid item xs={12}>
@@ -257,7 +287,7 @@ const SavoirFaire: React.FC = () => {
               </Grid>
               <Grid item xs={12}>
                 <Typography className={classes.typoTextBold} variant="h5">
-                  COMMENT OUVRIR UNE BOUTEILLE DE CHAMPAGNE ?
+                  Comment ouvrir une bouteille de champagne ?
                 </Typography>
               </Grid>
               <Grid item xs={12}>
@@ -281,7 +311,7 @@ const SavoirFaire: React.FC = () => {
               </Grid>
               <Grid item xs={12}>
                 <Typography className={classes.typoTextBold} variant="h5">
-                  COMMENT SERVIR LE CHAMPAGNE ?
+                  Comment servir le champagne ?
                 </Typography>
               </Grid>
               <Grid item xs={12}>

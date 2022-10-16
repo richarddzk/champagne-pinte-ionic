@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Image from 'next/future/image'
+import Image from '@/Utils/MidgardImage'
 import { Grid, Button, Paper, Divider, InputBase, Typography } from '@mui/material'
 import { useDarkMode } from 'next-dark-mode'
 import { useMutation } from '@apollo/client'
@@ -11,11 +11,11 @@ import PathLink from '@/Main/PathLink'
 import LoginIcon from '@mui/icons-material/Login'
 import Router from 'next/router'
 import { useAuth } from '@/Main/auth-provider/AuthProvider'
-import useI18n from '@/Utils/hooks/use-i18n'
+
 import { Main } from '../../Main'
 import useStyles from './style'
-import mainLogoB from '../../../public/img/logo/MainLogoChampBlack.webp'
-import mainLogoW from '../../../public/img/logo/MainLogoChampWhite.webp'
+import mainLogoB from '../../../public/image/logo/MainLogoChampBlack.webp'
+import mainLogoW from '../../../public/image/logo/MainLogoChampWhite.webp'
 
 const Newsletter: React.FC = () => {
   const [emailLocal, setEmailLocal] = useState<string | undefined>(undefined)
@@ -27,8 +27,6 @@ const Newsletter: React.FC = () => {
   const [sendNewsletterConfirmation] = useMutation(SEND_NEWSLETTER_CONFIRMATION)
   const { enqueueSnackbar } = useSnackbar()
   const { auth } = useAuth()
-  const i18n = useI18n()
-  const { activeLocale } = i18n
 
   const SendNewsletterConfirmation = async () => {
     const schema = Yup.object().shape({
@@ -67,14 +65,14 @@ const Newsletter: React.FC = () => {
   }
 
   return (
-    <Main menuOnly>
+    <Main account>
       <Grid container className={classes.container} direction="column">
         <Grid item xs={12}>
           <PathLink />
         </Grid>
-        <Grid container xs>
+        <Grid container>
           <Grid className={classes.gridNewsletter}>
-            <Grid container justifyContent="center" item>
+            <Grid container justifyContent="center">
               <Image
                 alt="mainLogoB"
                 className={classes.homeLogo}
@@ -150,13 +148,13 @@ const Newsletter: React.FC = () => {
                   />
                 </Grid>
 
-                <Grid style={{ maxWidth: '100%', marginTop: 50 }} xs>
+                <Grid item style={{ maxWidth: '100%', marginTop: 50 }} xs>
                   <Typography style={{ padding: 10 }} variant="body1">
                     Vous pouvez également vous creer un compte afin de faciliter vos prochaines
                     commandes, et de vous inscrire à notre Newsletter
                   </Typography>
                 </Grid>
-                <Grid xs>
+                <Grid item xs>
                   {/* <Divider
                       sx={{ height: 28, m: 0.5 }}
                       orientation="vertical"
@@ -165,7 +163,7 @@ const Newsletter: React.FC = () => {
                     style={{ minWidth: 'fit-content', padding: 10 }}
                     endIcon={<LoginIcon />}
                     onClick={() => {
-                      Router.push(`/${activeLocale}/login`)
+                      Router.push('  /connexion')
                     }}
                   >
                     {' '}

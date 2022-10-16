@@ -1,20 +1,25 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import React, { useEffect, useState } from 'react'
-import Image, { StaticImageData } from 'next/future/image'
+import Image from '@/Utils/MidgardImage'
 import { Button, Grid, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
+import { GlobalStyles } from 'tss-react'
+import { StaticImageData } from 'next/future/image'
+
 import { useDarkMode } from 'next-dark-mode'
 import { Url } from 'url'
 import { gql, useQuery } from '@apollo/client'
 import Slideshow from '@/Utils/Slideshow'
 import dynamic from 'next/dynamic'
-import vendange2 from '../../../public/img/vigne/vendange2.webp'
+import useScreen from '@/Utils/hooks/useScreen'
+import raisinCoupe3 from '../../../public/image/vigne/raisinCoupe3.webp'
 import { ButtonStyled, Main } from '../../Main'
-import pinteBlack from '../../../public/img/logo/pinteBlack.webp'
-import tabledouble1 from '../../../public/img/table/tabledouble1.webp'
-import pinteWhite from '../../../public/img/logo/pinteWhite.webp'
+import logoChampLisse from '../../../public/image/logo/pintechamplisse2Or.webp'
+import serviceVigne2 from '../../../public/image/vigne/serviceVigne2.webp'
+import tableChamp3 from '../../../public/image/table/tableChamp3.webp'
+import tableChamp2 from '../../../public/image/table/tableChamp2.webp'
 import useStyles from './style'
-import useI18n from '../../Utils/hooks/use-i18n'
+
 import { homeItems } from './Interfaces'
 import SuccessDialog from './SuccessDialog'
 import { GET_PRODUCTS as GET_PRODUCTS_TYPE } from '../champagnes/__generated__/GET_PRODUCTS'
@@ -53,7 +58,6 @@ export interface ArticleComponentProps {
   size?: { width: number; height: number }
   noProduct?: boolean
   push?: (url: Url, as?: Url, options?: any) => Promise<boolean>
-  activeLocale: any
   darkModeActive: boolean
 }
 
@@ -89,17 +93,20 @@ const Home: React.FC = () => {
   const { products } = data ?? { products: [] }
 
   const { classes } = useStyles()
-  const i18n = useI18n()
-  const { activeLocale } = i18n
+
   const { query, push } = useRouter()
 
   const { redirect_status } = query
+
   const handleClose = () => {
     setOpen(false)
   }
   const handleClickOpen = () => {
     setOpen(true)
   }
+  // const isWide = useMedia('(min-width: 501px)') as boolean
+
+  const { isMob } = useScreen()
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
@@ -115,12 +122,19 @@ const Home: React.FC = () => {
   }
 
   return (
-    <Main overflowX="hidden">
+    <Main>
+      <GlobalStyles
+        styles={{
+          '.slick-dots': {
+            bottom: 200
+          }
+        }}
+      />
       <SuccessDialog open={open} handleClose={handleClose} />
       <Grid container style={{ maxWidth: '100vw' }} justifyContent="center" direction="row">
-        <Grid className={classes.imgSlider}>
+        <Grid className={classes.imageSlider}>
           <Slideshow
-            items={homeItems}
+            items={homeItems as any}
             itemsToShow={1}
             classes={classes}
             speed={1000}
@@ -141,7 +155,7 @@ const Home: React.FC = () => {
             fullybackground={1}
             title="Découvrez nos cuvées"
             onClick={() => {
-              push(`/${activeLocale ?? 'fr'}/champagnes/`)
+              push('/champagnes')
             }}
           />
         </Grid>
@@ -151,63 +165,78 @@ const Home: React.FC = () => {
           alignItems="center"
           className={classes.productComponent}
         >
-          <HomeProduct loading={loading} products={products} buttonPanier={false} />
+          <HomeProduct
+            loading={loading}
+            products={products}
+            buttonPanier={false}
+            backgroundColor="transparent"
+          />
         </Grid>
         <Grid item className={classes.maisonHome}>
           <ArticleComponent
-            image={tabledouble1}
+            image={isMob ? tableChamp3 : tableChamp2}
             push={push}
-            activeLocale={activeLocale}
             darkModeActive={darkModeActive}
-            text="Née en 1990, Pinte est une Maison de champagne construite
-            sur 3 générations. Située à Lisse-en-Champagne, le cépage chardonnay est la signature de
-            la Maison Pinte. Son raisin, issu principalement du Vitryat
-            et de la Côte des Blancs est au cœur de toutes ses cuvées."
+            text={[
+              "Née en 1990, la maison Pinte est le produit d'un travail construit sur 3 générations. Située à Lisse-en-Champagne, le cépage chardonnay est la signature de la Maison. ",
+              'Son raisin, issu principalement du Vitryat et de la Côte des Blancs est au cœur de toutes ses cuvées.'
+            ]}
             logo={
-              <Image
-                priority
-                width={342 * 0.8}
-                height={108 * 0.8}
-                src={!darkModeActive ? pinteBlack : pinteWhite}
-                alt="Logo"
-              />
+              <Grid
+                onClick={() => {
+                  push(' /lamaison')
+                }}
+                style={{
+                  cursor: 'pointer',
+                  paddingBottom: 20,
+                  width: 342 * 0.8,
+                  height: 108 * 0.8
+                }}
+                item
+                xs={12}
+              >
+                <Image
+                  priority
+                  style={{ width: '100%', height: 'auto' }}
+                  sizes="100vw"
+                  src={logoChampLisse}
+                  alt="Logo"
+                />
+              </Grid>
             }
             title="Découvrir la Maison"
             buttonTitle="Découvrir notre Maison"
-            route="about"
+            route="lamaison"
             position="left"
           />
         </Grid>
         <Grid item className={classes.maisonHome}>
           <ArticleComponent
-            image={vendange2}
+            image={isMob ? serviceVigne2 : raisinCoupe3}
             push={push}
-            activeLocale={activeLocale}
             darkModeActive={darkModeActive}
-            text="À l'occasion des vendanges 2022, la Maison Pinte vous invite de fin août à mi-septembre, les vendanges durent en général de 8 à 15 jours , nos vendanges sont réalisées à la main et donc prennent plus de temps que les vendanges mécaniques, car les grappes sont sélectionnées avec précaution pour l’élaboration des grands champagnes."
+            text={[
+              "À l'occasion des vendanges 2023, la Maison Pinte vous invite de fin août à mi-septembre. La période des vendanges, réalisées à la main, est d'environ de 8 à 15 jours en fonction des saisons.",
+              "Primordial à l'élaboration de grands champagnes, cette cueillette artisanale sélectionne les meilleures grappes avec précaution afin de préserver leurs arômes."
+            ]}
             title="En ce moment"
-            buttonTitle="Découvrir notre Actualités"
-            route="actu"
+            buttonTitle="Découvrir nos Actualités"
+            route="actualites"
             position="right"
           />
         </Grid>
-        {/* <video
-          autoPlay
-          loop
-          muted
-          style={{ width: '90vw', height: '1080px', objectFit: 'cover' }}
+        <Grid
+          style={{ marginTop: '10%', textAlign: '-webkit-center' as any }}
+          item
+          className={classes.gridMap}
         >
-          <source src="/img/cave/cave4.mp4" type="video/mp4" />
-        </video> */}
-
-        <Grid style={{ marginTop: '10%' }} item className={classes.gridMap}>
           <Typography className={classes.typoText} variant="h4">
-            Où nous trouver ?
+            Où sommes-nous?
           </Typography>
           <Grid className={classes.mapLisse} item>
-            <Map layer={1} />
+            <Map />
             <Typography className={classes.typoAdresse} variant="h4">
-              1 Grand Rue, Lisse-en-Champagne, 51300 Champagne
+              6 Grand Rue, Lisse-en-Champagne, 51300 Champagne
             </Typography>
           </Grid>
         </Grid>

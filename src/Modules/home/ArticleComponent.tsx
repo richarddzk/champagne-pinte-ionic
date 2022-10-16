@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import React, { useEffect } from 'react'
-import Image, { StaticImageData } from 'next/future/image'
-import { GlobalStyles, Grid, Paper, Typography } from '@mui/material'
+import Image from '@/Utils/MidgardImage'
+import { Grid, Paper, Typography } from '@mui/material'
 import { useAnimation, motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { Url } from 'url'
+import { StaticImageData } from 'next/future/image'
 import { ButtonStyled } from '../../Main'
 import useStyles from './style'
 import { GET_PRODUCTS_products } from '../champagnes/__generated__/GET_PRODUCTS'
@@ -14,11 +15,10 @@ export interface ArticleComponentProps {
   size?: { width: number; height: number }
   noProduct?: boolean
   push?: (url: Url, as?: Url, options?: any) => Promise<boolean>
-  activeLocale: any
   darkModeActive: boolean
   position?: string
   title?: string
-  text?: string
+  text?: string | string[]
   route?: string
   buttonTitle?: string
   logo?: React.ReactNode
@@ -58,7 +58,7 @@ const ArticleImage: React.FC<ArticleComponentProps> = React.memo(({ image }) =>
 )
 
 const ArticleComponent: React.FC<ArticleComponentProps> = React.memo(
-  ({ image, noProduct, push, activeLocale, position, title, text, route, buttonTitle, logo }) => {
+  ({ image, noProduct, push, position, title, text, route, buttonTitle, logo }) => {
     const { classes } = useStyles()
     const { ref, inView } = useInView({
       /* Optional options */
@@ -77,41 +77,6 @@ const ArticleComponent: React.FC<ArticleComponentProps> = React.memo(
 
     return (
       <>
-        <GlobalStyles
-          styles={{
-            '#middle': {
-              // transition: '.5s ease',
-              opacity: 0,
-              height: 0,
-              transform: 'translate(-50%, -50%)',
-              msTransform: 'translate(-50%, -50%)',
-              textAlign: 'center'
-            },
-            '#container:hover #image': {
-              opacity: 0.3,
-              backgroundColor: 'transparent'
-            },
-
-            '#container:hover #middle': {
-              opacity: 1,
-              backgroundColor: 'transparent'
-            },
-            '#Button': {
-              display: 'none'
-            },
-
-            '#item': {
-              display: 'none'
-            },
-            '#container:hover #Button ': {
-              display: 'unset'
-            },
-            '#container:hover #item ': {
-              display: 'unset'
-            }
-          }}
-        />
-
         <Paper className={classes.container}>
           <motion.div
             ref={ref}
@@ -127,7 +92,7 @@ const ArticleComponent: React.FC<ArticleComponentProps> = React.memo(
             }}
           >
             <Grid id="container" className={classes.container} item>
-              <ArticleImage image={image} activeLocale={undefined} darkModeActive={false} />
+              <ArticleImage image={image} darkModeActive={false} />
 
               <div id="middle">
                 <Grid direction="column" className={classes.gridButton} container spacing={4}>
@@ -139,7 +104,7 @@ const ArticleComponent: React.FC<ArticleComponentProps> = React.memo(
                       title={buttonTitle ?? ''}
                       onClick={() => {
                         // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-                        push && push(`/${activeLocale ?? 'fr'}/${route}` as unknown as Url)
+                        push && push(` /${route}` as unknown as Url)
                       }}
                     />
                   </Grid>
@@ -150,26 +115,25 @@ const ArticleComponent: React.FC<ArticleComponentProps> = React.memo(
                 elevation={5}
               >
                 <Grid item xs={12}>
-                  <Typography className={classes.typoText} variant="h5">
+                  <Typography className={classes.typoText} variant="h4">
                     {title}
                   </Typography>
                 </Grid>
 
-                {logo && (
-                  <Grid
-                    style={{
-                      paddingBottom: 20
-                    }}
-                    item
-                    xs={12}
-                  >
-                    {logo}
-                  </Grid>
-                )}
-                <Grid item xs={12}>
-                  <Typography align="justify" className={classes.typoText} variant="h6">
-                    {text}
-                  </Typography>
+                {logo && logo}
+                <Grid item style={{ paddingTop: 60 }} xs={12}>
+                  {typeof text === 'string' ? (
+                    <Typography align="justify" className={classes.typoText} variant="h6">
+                      {text}
+                    </Typography>
+                  ) : (
+                    text &&
+                    text.map((t) => (
+                      <Typography key={t} align="justify" className={classes.typoText} variant="h6">
+                        {t}
+                      </Typography>
+                    ))
+                  )}
                 </Grid>
               </Paper>
             </Grid>

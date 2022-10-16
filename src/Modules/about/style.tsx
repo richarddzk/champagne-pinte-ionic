@@ -22,17 +22,31 @@ const useStyles = makeStyles()((theme: Theme) => ({
   GridPaperVigne: {
     paddingLeft: '10%',
     justifyContent: 'center',
+    [theme.breakpoints.down(1501)]: {
+      padding: 0,
+      margin: 80,
+      marginTop: 10
+    },
+    [theme.breakpoints.down(900)]: {
+      margin: 40,
+      marginTop: 10
+    },
+    [theme.breakpoints.down(700)]: {
+      margin: 10
+    },
     [theme.breakpoints.down(500)]: {
-      paddingLeft: 0
+      margin: 0
     }
   },
   typo: {
     margin: 10,
-    textAlign: 'center',
-    fontFamily: 'Fira Sans , serif'
+    textAlign: '-webkit-center' as any,
+    fontFamily: 'Fira Sans , serif',
+    textAlignLast: 'left'
   },
   typoText: {
     paddingBottom: 20,
+    textAlignLast: 'left',
     fontFamily: 'Fira Sans , serif'
   },
   gridLogoSavoirFaire: {
@@ -57,7 +71,6 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
   typoRaisin: {
     margin: 10,
-    textAlign: 'center',
     fontFamily: 'Fira Sans , serif',
     paddingBottom: 10
   },
@@ -72,7 +85,8 @@ const useStyles = makeStyles()((theme: Theme) => ({
     padding: 20,
     textAlign: 'center',
     fontFamily: 'Fira Sans , serif',
-    paddingBottom: 10
+    paddingBottom: 10,
+    textAlignLast: 'left'
   },
   typoNftTitre: {
     margin: 10,
@@ -87,18 +101,18 @@ const useStyles = makeStyles()((theme: Theme) => ({
     position: 'relative',
     zIndex: 9,
     maxWidth: 530,
-    padding: 20,
+    padding: 30,
+    marginRight: 'auto',
     color: theme.palette.mode === 'dark' ? 'white' : 'black',
-    backgroundColor: theme.palette.mode === 'dark' ? '#121212b0' : '#ffffffc7',
+    backgroundColor: theme.palette.background.default,
     ':hover': {
-      backgroundColor: theme.palette.mode === 'dark' ? 'black' : 'white',
       boxShadow:
         '0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%);'
     },
-    // left: 'max(-35vw,)',
     marginLeft: '-5em',
-    [theme.breakpoints.down(500)]: {
-      marginLeft: 0
+    [theme.breakpoints.down(1501)]: {
+      padding: 5,
+      margin: 5
     }
   },
 
@@ -121,9 +135,8 @@ const useStyles = makeStyles()((theme: Theme) => ({
     maxWidth: 650,
     padding: 30,
     color: theme.palette.mode === 'dark' ? 'white' : 'black',
-    backgroundColor: theme.palette.mode === 'dark' ? '#121212b0' : '#ffffffc7',
+    backgroundColor: theme.palette.background.default,
     ':hover': {
-      backgroundColor: theme.palette.mode === 'dark' ? 'black' : 'white',
       boxShadow:
         '0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%);'
     }
@@ -136,9 +149,8 @@ const useStyles = makeStyles()((theme: Theme) => ({
     maxWidth: 540,
     padding: 20,
     color: theme.palette.mode === 'dark' ? 'white' : 'black',
-    backgroundColor: theme.palette.mode === 'dark' ? '#121212b0' : '#ffffffc7',
+    backgroundColor: theme.palette.background.default,
     ':hover': {
-      backgroundColor: theme.palette.mode === 'dark' ? 'black' : 'white',
       boxShadow:
         '0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%);'
     },
@@ -182,9 +194,8 @@ const useStyles = makeStyles()((theme: Theme) => ({
     alignSelf: 'center',
     padding: 20,
     minWidth: 350,
-
+    backgroundColor: theme.palette.background.default,
     ':hover': {
-      backgroundColor: theme.palette.mode === 'dark' ? 'black' : 'white',
       boxShadow:
         '0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%);'
     }
@@ -194,58 +205,57 @@ const useStyles = makeStyles()((theme: Theme) => ({
     position: 'relative',
     zIndex: 9,
     maxWidth: 530,
-    padding: 20,
+    padding: 40,
     color: theme.palette.mode === 'dark' ? 'white' : 'black',
-    backgroundColor: theme.palette.mode === 'dark' ? '#121212b0' : '#ffffffc7',
+    backgroundColor: theme.palette.background.default,
     ':hover': {
-      backgroundColor: theme.palette.mode === 'dark' ? 'black' : 'white',
       boxShadow:
         '0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%);'
     },
     // left: 'max(-35vw,)',
     marginRight: '-5em',
-    [theme.breakpoints.down(500)]: {
-      marginRight: 0
+    [theme.breakpoints.down(1501)]: {
+      padding: 5,
+      margin: 5
     }
   },
   GridPaperChamp: {
     paddingTop: 100,
     paddingRight: '10%',
     justifyContent: 'center',
-    [theme.breakpoints.down(500)]: {
-      paddingRight: 0,
-      marginBottom: 50
-    }
-  },
-  paperTextRight2: {
-    bottom: 500,
-    position: 'relative',
-    zIndex: 9,
-    maxWidth: 530,
-    padding: 20,
-    color: theme.palette.mode === 'dark' ? 'white' : 'black',
-    backgroundColor: theme.palette.mode === 'dark' ? '#121212b0' : '#ffffffc7',
-    ':hover': {
-      backgroundColor: theme.palette.mode === 'dark' ? 'black' : 'white',
-      boxShadow:
-        'box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;'
+    [theme.breakpoints.down(1501)]: {
+      padding: 0,
+      margin: 80,
+      marginTop: 10
     },
-    // left: 'max(-35vw,)',
-    marginRight: '1em',
-    [theme.breakpoints.down('xl')]: {
-      bottom: 200,
-      marginRight: 0
+    [theme.breakpoints.down(900)]: {
+      margin: 40
+    },
+    [theme.breakpoints.down(700)]: {
+      margin: 10,
+      padding: 0
+    },
+    [theme.breakpoints.down(500)]: {
+      margin: 0
     }
   },
   paperImage: {
+    width: 867,
+    height: 669,
     bottom: 700,
     position: 'relative',
     zIndex: 2,
     marginLeft: '-5em',
-    height: 0,
     marginRight: 'auto',
-    [theme.breakpoints.down(500)]: {
-      bottom: 600
+    [theme.breakpoints.down(1600)]: {
+      bottom: 400,
+      padding: 5,
+      margin: 5,
+      paddingTop: 100
+    },
+    [theme.breakpoints.down(501)]: {
+      padding: 0,
+      bottom: 200
     }
   },
   paperImage2: {
@@ -260,23 +270,23 @@ const useStyles = makeStyles()((theme: Theme) => ({
     }
   },
   gridRaisin: {
-    minWidth: 180,
-    maxWidth: 420,
-    padding: 50,
+    minWidth: 280,
+    margin: 5,
+    marginTop: 50,
+    padding: 20,
+
+    marginBottom: 50,
+
     color: theme.palette.mode === 'dark' ? 'white' : 'black',
-    backgroundColor: theme.palette.mode === 'dark' ? '#121212b0' : 'white',
+    backgroundColor: theme.palette.background.default,
     ':hover': {
-      backgroundColor: theme.palette.mode === 'dark' ? 'black' : '#f3f3f3c7',
       boxShadow:
         '0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%);'
     },
     borderRadius: 20,
-    [theme.breakpoints.down(850)]: {
-      padding: 5
+    [theme.breakpoints.down(501)]: {
+      margin: 5
     }
-    // [theme.breakpoints.down('xs')]: {
-    //   minWidth: 320,
-    // },
   },
   gridNftContainer: {
     margin: 50,
@@ -290,9 +300,8 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
   gridNFT: {
     color: theme.palette.mode === 'dark' ? 'white' : 'black',
-    backgroundColor: theme.palette.mode === 'dark' ? '#121212b0' : '#f3f3f300',
+    backgroundColor: theme.palette.background.default,
     ':hover': {
-      backgroundColor: theme.palette.mode === 'dark' ? 'black' : 'white',
       boxShadow:
         '0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%);'
     },
@@ -307,24 +316,56 @@ const useStyles = makeStyles()((theme: Theme) => ({
     paddingLeft: '10%',
     paddingTop: 100,
     justifyContent: 'center',
+    [theme.breakpoints.down(1600)]: {
+      padding: 0,
+      margin: 80,
+      marginBottom: 300
+    },
+    [theme.breakpoints.down(900)]: {
+      margin: 40,
+      marginBottom: 400
+    },
+    [theme.breakpoints.down(700)]: {
+      margin: 10,
+      marginBottom: 400,
+      padding: 0
+    },
     [theme.breakpoints.down(500)]: {
-      paddingLeft: 0
-    }
+      padding: 5
+    },
+    height: '100vh'
   },
-  gridtextMap: {
-    height: 0,
-    marginLeft: 'auto',
-    [theme.breakpoints.down('xl')]: {
-      height: 150
+  paperTextRight2: {
+    bottom: 500,
+    position: 'relative',
+    zIndex: 9,
+    maxWidth: 530,
+    padding: 40,
+    height: 'fit-content',
+    color: theme.palette.mode === 'dark' ? 'white' : 'black',
+    backgroundColor: theme.palette.background.default,
+    ':hover': {
+      boxShadow:
+        '0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%);'
+    },
+    // left: 'max(-35vw,)',
+    marginRight: '1em',
+    [theme.breakpoints.down(1590)]: {
+      marginLeft: 0,
+      bottom: 1500,
+      padding: 5,
+      margin: 5
     }
   },
   gridtextRaisin: {
+    alignItems: 'center',
     maxWidth: '100%',
     padding: 100,
+
     [theme.breakpoints.down('xl')]: {
       padding: 0,
       paddingBottom: 100,
-      paddingTop: 120
+      paddingTop: 100
     }
   },
 
@@ -364,17 +405,11 @@ const useStyles = makeStyles()((theme: Theme) => ({
     position: 'relative',
     maxHeight: '100%',
     overflow: ' auto',
+    backgroundColor: theme.palette.background.default,
     ':hover': {
-      backgroundColor: theme.palette.mode === 'dark' ? 'black' : 'white',
       boxShadow:
         '0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%);'
     }
-
-    // [theme.breakpoints.down(1595)]: {
-    //   marginBottom: 800,
-    //   marginLeft: 0,
-    //   textAlign: '-webkit-center' as any,
-    // },
   },
   paperTextRightSavoirFaire: {
     bottom: 900,
@@ -386,9 +421,8 @@ const useStyles = makeStyles()((theme: Theme) => ({
     marginLeft: '10%',
 
     color: theme.palette.mode === 'dark' ? 'white' : 'black',
-    backgroundColor: theme.palette.mode === 'dark' ? '#121212b0' : '#ffffffc7',
+    backgroundColor: theme.palette.background.default,
     ':hover': {
-      backgroundColor: theme.palette.mode === 'dark' ? 'black' : 'white',
       boxShadow:
         '0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%);'
     },
@@ -431,18 +465,11 @@ const useStyles = makeStyles()((theme: Theme) => ({
     height: '100vh',
     position: 'relative',
     maxHeight: '100%',
-    overflow: ' auto',
+    backgroundColor: theme.palette.background.default,
     ':hover': {
-      backgroundColor: theme.palette.mode === 'dark' ? 'black' : 'white',
       boxShadow:
         '0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%);'
     }
-
-    // [theme.breakpoints.down(1595)]: {
-    //   marginBottom: 800,
-    //   marginLeft: 0,
-    //   textAlign: '-webkit-center' as any,
-    // },
   },
   paperTextLeftSavoirFaire: {
     bottom: 850,
@@ -454,9 +481,8 @@ const useStyles = makeStyles()((theme: Theme) => ({
     marginRight: '10%',
 
     color: theme.palette.mode === 'dark' ? 'white' : 'black',
-    backgroundColor: theme.palette.mode === 'dark' ? '#121212b0' : '#ffffffc7',
+    backgroundColor: theme.palette.background.default,
     ':hover': {
-      backgroundColor: theme.palette.mode === 'dark' ? 'black' : 'white',
       boxShadow:
         '0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%);'
     },
@@ -484,7 +510,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
     }
   },
   gridMapLisse: {
-    width: '70%',
+    width: '100%',
     height: 700,
     marginBottom: 50,
     ':hover': {
@@ -493,11 +519,11 @@ const useStyles = makeStyles()((theme: Theme) => ({
     }
   },
   decouvrirButton: {
-    font: ' italic 1.2em "Fira Sans", serif',
+    font: ' italic 1.2em Times New Roman, serif',
     width: '25%',
     minWidth: 120,
+    backgroundColor: theme.palette.background.default,
     ':hover': {
-      backgroundColor: theme.palette.mode === 'dark' ? 'black' : 'white',
       boxShadow:
         '0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%);'
     }

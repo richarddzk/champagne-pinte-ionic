@@ -9,9 +9,11 @@ import {
   ListItemText,
   ListItemButton,
   ListItem,
-  Tooltip
+  Tooltip,
+  ListItemAvatar,
+  Avatar
 } from '@mui/material'
-import Image from 'next/future/image'
+import Image from '@/Utils/MidgardImage'
 import PrivacyTipOutlinedIcon from '@mui/icons-material/PrivacyTipOutlined'
 import { useDarkMode } from 'next-dark-mode'
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
@@ -21,40 +23,31 @@ import { KeyboardArrowDown } from '@mui/icons-material'
 import styled from '@mui/styles/styled'
 import { useAuth } from '@/Main/auth-provider/AuthProvider'
 import dynamic from 'next/dynamic'
+import useScreen from '@/Utils/hooks/useScreen'
+import logo from '../../../public/image/logo/LogoSansFond.webp'
+import iconWallet from '../../../public/image/crypto/iconWallet.webp'
+import iconWalletB from '../../../public/image/crypto/iconWalletB.webp'
 import { Infos, Orders, Adresses, Cart } from './components'
-import logo from '../../../public/img/logo/LogoSansFond.webp'
 import Main from '../../Main/Main'
 import useStyles from './style'
+import Wallet from './components/Wallet'
 
 const Loading = dynamic(() => import('@/Utils/Loading'), {
   loading: () => <>...</>
 })
 
-const drawerWidthOpen = 240
 const drawerWidthClose = 80
-
-const FireNav = styled(List)<{ component?: any }>({
-  '& .MuiListItemButton-root': {
-    paddingLeft: 24,
-    paddingRight: 24
-  },
-  '& .MuiListItemIcon-root': {
-    minWidth: 0,
-    marginRight: 16
-  },
-  '& .MuiSvgIcon-root': {
-    fontSize: 20
-  }
-})
+const drawerWidthCloseTablette = 40
 
 const Account: React.FC<{
   id: string
 }> = () => {
   const [componentSelected, setComponentSelected] = useState(0)
 
-  const { classes } = useStyles()
-  const [open, setOpen] = React.useState(true)
+  const { classes, theme } = useStyles()
+  const [open, setOpen] = React.useState(false)
   const { UserInfos: userData, loading, refetch } = useAuth()
+  const { isTablette } = useScreen()
 
   const { customers } = (userData && userData) ?? {
     customers: undefined
@@ -67,7 +60,25 @@ const Account: React.FC<{
   } = (customers && customers[0]) ?? {
     addresses: undefined
   }
+  const FireNav = styled(List)<{ component?: any }>({
+    '& .MuiListItemButton-root': {
+      paddingRight: 0,
 
+      textAlign: '-webkit-center' as any,
+      paddingLeft: 0,
+      placeContent: 'center'
+    },
+    '& .MuiListItemIcon-root': {
+      minWidth: 0,
+      marginRight: 0
+    },
+    '& .MuiSvgIcon-root': {
+      fontSize: 20
+    },
+    '& .MuiListItemText-root ': {
+      marginRight: 0
+    }
+  })
   const { darkModeActive } = useDarkMode()
 
   const changeAccountComp = (
@@ -76,6 +87,16 @@ const Account: React.FC<{
   ) => {
     setComponentSelected(index)
   }
+
+  const maxWithClose = isTablette ? drawerWidthCloseTablette : drawerWidthClose
+  const menuWidth = isTablette ? '90%' : '250px'
+  const tabMarginLeft = open ? '250px' : maxWithClose
+
+  const marginLeft = open ? tabMarginLeft : 110
+  const paddingTop = isTablette ? 20 : 100
+
+  const paddingTopCompo = isTablette ? 20 : 100
+
   const componentMap = [
     {
       title: 'Commandes',
@@ -105,6 +126,14 @@ const Account: React.FC<{
       name: 'infos',
       component: userData && userData ? <Infos /> : <></>,
       icon: <PrivacyTipOutlinedIcon />
+    },
+    {
+      title: 'Wallet',
+      name: 'wallet',
+      component: <Wallet />,
+      icon: (
+        <Image src={darkModeActive ? iconWallet : iconWalletB} alt="Logo" width={25} height={25} />
+      )
     }
   ]
 
@@ -119,29 +148,39 @@ const Account: React.FC<{
       </Main>
     )
   }
+  const handleToggle = () => {
+    setOpen(!open)
+  }
 
   return (
-    <Main fixed account>
+    <Main fixed account paddingLeft={isTablette ? drawerWidthCloseTablette : tabMarginLeft}>
       <Drawer
-        variant="permanent"
+        variant={isTablette && open ? undefined : 'permanent'}
+        anchor={isTablette ? 'left' : undefined}
+        open={open}
         sx={{
-          width: open ? drawerWidthOpen : drawerWidthClose,
-          flexShrink: 0
-          // '& .MuiDrawer-paper': {
-          //   width: open ? drawerWidthOpen : drawerWidthClose,
-          //   boxSizing: 'border-box'
-          // }
+          flexShrink: 0,
+          marginLeft
         }}
+        onClose={handleToggle}
         PaperProps={{
-          style: { top: 70, paddingTop: 80, zIndex: 0 }
+          style: {
+            top: isTablette ? 0 : 70,
+            paddingTop,
+            zIndex: 0,
+            width: menuWidth,
+            maxWidth: open ? undefined : maxWithClose,
+            backgroundImage: 'none',
+            backgroundColor: theme.palette.background.default
+          }
         }}
       >
-        <Box sx={{ overflow: 'auto' }}>
+        <Box sx={{ overflow: 'hidden' }}>
           <Divider />
           <FireNav>
             <Tooltip title={open ? 'Fermer le menu' : 'Ouvrir le menu'}>
               <ListItemButton onClick={() => setOpen(!open)} component="a" href="#customized-list">
-                <ListItemIcon sx={{ fontSize: 20 }}>
+                <ListItemIcon>
                   {' '}
                   <Image src={logo} alt="Logo" width={30} height={35} />
                 </ListItemIcon>
@@ -151,9 +190,7 @@ const Account: React.FC<{
                     sx={{ my: 0 }}
                     primary="Mon Compte"
                     primaryTypographyProps={{
-                      fontSize: 20,
-                      fontWeight: 'medium',
-                      letterSpacing: 0,
+                      fontSize: 16,
                       color: 'primary'
                     }}
                     // secondary="Mes Infos, Commandes, Adresses, Panier"
@@ -165,32 +202,30 @@ const Account: React.FC<{
             {open && (
               <ListItem component="div" disablePadding>
                 <ListItemButton
-                  onClick={() => setOpen(!open)}
+                  onClick={handleToggle}
                   sx={{
                     paddingTop: 0,
                     px: 3,
                     pt: 2.5,
                     height: 66,
-                    pb: open ? 0 : 2.5,
+                    pb: open ? 1 : 2.5,
                     '&:hover, &:focus': { '& svg': { opacity: open ? 1 : 0 } }
                   }}
                 >
-                  <ListItemText
-                    primary="Menu"
-                    primaryTypographyProps={{
-                      color: 'primary',
-                      fontWeight: 'medium',
-                      variant: 'body2'
-                    }}
-                    sx={{ my: 0 }}
-                  />
                   <KeyboardArrowDown
                     sx={{
-                      mr: -1,
+                      mr: 1,
                       opacity: 0,
                       transform: open ? 'rotate(-180deg)' : 'rotate(0)',
                       transition: '0.2s'
                     }}
+                  />
+                  <ListItemText
+                    primary="Menu"
+                    primaryTypographyProps={{
+                      color: 'primary'
+                    }}
+                    sx={{ my: 0 }}
                   />
                 </ListItemButton>
               </ListItem>
@@ -198,21 +233,45 @@ const Account: React.FC<{
             <Divider />
             <Box
               sx={{
-                bgcolor: open ? 'rgba(71, 98, 130, 0.2)' : null,
-                pb: open ? 2 : 0
+                bgcolor: 'rgba(71, 98, 130, 0.2)',
+                pb: 2,
+                textAlign: '-webkit-center'
               }}
             >
-              {open &&
-                componentMap.map((x, index) => (
+              {componentMap.map((x, index) => (
+                <Tooltip title={x.title}>
                   <ListItemButton
                     selected={componentSelected === index}
                     key={x.title}
-                    onClick={(event) => changeAccountComp(event, index)}
+                    sx={{
+                      paddingTop: 2.5,
+                      textAlign: '-webkit-center',
+                      paddingBottom: 2.5
+                    }}
+                    onClick={(event) => {
+                      changeAccountComp(event, index)
+                      if (isTablette && open) handleToggle()
+                    }}
                   >
-                    <ListItemIcon>{x.icon}</ListItemIcon>
-                    <ListItemText color="primary" className={classes.typo} primary={x.title} />
+                    <ListItemAvatar>
+                      <Avatar
+                        sx={{
+                          width: 30,
+                          height: 30,
+                          margin: 0,
+                          bgcolor: theme.palette.primary.main as any
+                        }}
+                      >
+                        {x.icon}
+                      </Avatar>
+                    </ListItemAvatar>
+
+                    {open && (
+                      <ListItemText color="primary" className={classes.typo} primary={x.title} />
+                    )}
                   </ListItemButton>
-                ))}
+                </Tooltip>
+              ))}
             </Box>
           </FireNav>
           <Divider />
@@ -220,28 +279,17 @@ const Account: React.FC<{
       </Drawer>
       <Grid
         style={{
-          width: open ? 'calc(100% - 290px)' : 'calc(100% - 130px)',
-          marginLeft: open ? 270 : 110,
-          paddingTop: 100,
-          paddingBottom: 100
+          width: '100%',
+          paddingLeft: isTablette ? drawerWidthCloseTablette : tabMarginLeft,
+          paddingTop: paddingTopCompo,
+          paddingBottom: 100,
+          backgroundColor: theme.palette.background.default
         }}
         justifyContent="center"
         alignItems="start"
         container
       >
-        <Grid
-          style={{
-            overflowX: 'hidden',
-            overflowY: 'auto',
-            maxHeight: '88vh',
-
-            borderRadius: 10,
-            backgroundColor: darkModeActive ? '#28252166' : '#d9d9d929'
-          }}
-          container
-        >
-          {userData && userData ? ComponentMemo : <Loading />}
-        </Grid>
+        {userData && userData ? ComponentMemo : <Loading />}
       </Grid>
     </Main>
   )

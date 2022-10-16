@@ -10,7 +10,7 @@ import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
 import { ImageObject } from '@/Modules/ProductItem/interfaces'
 import { Item } from '@/Main/interfaces'
-import Image from 'next/future/image'
+import Image from '@/Utils/MidgardImage'
 import StylesWrapper from './StylesWrapper'
 
 interface SwiperComponentProps {
@@ -30,7 +30,7 @@ const SwiperComponent: React.FC<SwiperComponentProps> = ({ items, backgroundColo
           // borderRadius: '20px 20px 0px 0px',
           // @ts-ignore
           '--swiper-navigation-color': '#CCBF90',
-          paddingBottom: 5
+          paddingBottom: 10
         }}
         loop
         spaceBetween={10}
@@ -46,8 +46,10 @@ const SwiperComponent: React.FC<SwiperComponentProps> = ({ items, backgroundColo
               onClick={onClick}
               sizes="40vw"
               fill
-              className="mySwiper2Img"
+              className="mySwiper2image"
               src={item.src}
+              placeholder={item.blur ? 'blur' : undefined}
+              blurDataURL={item.blur ? item.blur : undefined}
             />
           </SwiperSlide>
         ))}
@@ -55,7 +57,7 @@ const SwiperComponent: React.FC<SwiperComponentProps> = ({ items, backgroundColo
       <Swiper
         // @ts-ignore
         style={{
-          borderRadius: '0px 0px 20px 20px'
+          borderRadius: '20px 20px 20px 20px'
         }}
         onSwiper={setThumbsSwiper}
         loop
@@ -73,8 +75,10 @@ const SwiperComponent: React.FC<SwiperComponentProps> = ({ items, backgroundColo
               width={100}
               height={300}
               style={{ objectFit: 'cover' }}
-              className="mySwiperImg"
+              className="mySwiperimage"
               src={item.src}
+              placeholder={item.blur ? 'blur' : undefined}
+              blurDataURL={item.blur ? item.blur : undefined}
             />
           </SwiperSlide>
         ))}

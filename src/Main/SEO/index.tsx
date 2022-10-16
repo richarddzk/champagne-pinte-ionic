@@ -14,17 +14,17 @@ const settings = {
   },
   meta: {
     rootUrl: 'httpq://champagne-pinte.com',
-    title: 'Champagne-pinte App',
+    title: 'Maison Pinte Champagne',
     description:
       'Pinte est une Maison de champagne construite sur 3 générations. Située à Lisse-en-Champagne, le cépage chardonnay est la signature de la Maison Pinte. Son raisin, issu principalement du Vitryat et de la Côte des Blancs est au cœur de toutes ses cuvées.',
     social: {
-      graphic: 'https://cheatcode-assets.s3.amazonaws.com/default-social-graphic.png',
-      twitter: '@cheatcodetuts'
+      graphic: '/favicon.webp',
+      twitter: '@Champagne_Pinte'
     }
   },
   routes: {
     authenticated: {
-      pathAfterFailure: '/login'
+      pathAfterFailure: '/connexion'
     },
     public: {
       pathAfterFailure: '/documents'

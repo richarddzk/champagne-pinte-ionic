@@ -13,23 +13,13 @@ const useStyles = makeStyles<{ darkModeActive: boolean }>()((theme: Theme) => ({
   gridCartItem: {
     padding: 20,
     borderRadius: 10,
-    boxShadow:
-          '0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%);',
-    ':hover': {
-      backgroundColor:
-            theme.palette.mode === 'dark' ? '#121212b0' : '#ffffffc7',
-    },
+
   },
   paperCartItem: {
 
-    ':hover': {
-      borderRadius: 10,
-      backgroundColor: theme.palette.mode === 'dark' ? '#121212b0' : '#ffffffc7',
-      boxShadow:
-        '0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%);',
-    },
   },
   panierTextfield: {
+    maxWidth: 80,
     color: theme.palette.mode === 'light' ? '#000' : '#fff',
     '& .MuiInputBase-input': {
       padding: 5,
@@ -107,10 +97,12 @@ const useStyles = makeStyles<{ darkModeActive: boolean }>()((theme: Theme) => ({
   },
   CartGrid: {
     height: '100%',
+    backgroundColor: theme.palette.mode === 'light' ? '#fff' : '#0e121c',
   },
   typo: {
+    alignSelf: 'center',
     color: theme.palette.mode === 'light' ? '#000' : '#fff',
-    font: 'italic bold 1.2em "Fira Sans", serif',
+    font: ' 1.2em "Fira Sans", serif',
   },
   typoMaj: {
     color: theme.palette.mode === 'light' ? '#000' : '#fff',
@@ -131,12 +123,15 @@ const useStyles = makeStyles<{ darkModeActive: boolean }>()((theme: Theme) => ({
   typoButton: {
     color: theme.palette.mode === 'light' ? '#000' : '#fff',
 
-    font: ' italic 1.0em "Fira Sans", serif',
+    font: ' 1.0em "Fira Sans", serif',
     padding: 10,
   },
   gridCard: {
-    alignItems: 'center',
+    alignSelf: 'center',
+    margin: 20,
+    font: ' 1em "Fira Sans", serif',
   },
+
   gridCardEmpty: {
     alignItems: 'center',
     justifyContent: 'center',

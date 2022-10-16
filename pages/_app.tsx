@@ -49,8 +49,8 @@ const App = ({ Component, pageProps }: AppProps) => {
         <SEO
           url="www.champagne-pinte.com"
           schemaType="App"
-          title="The Fate of Empires"
-          description="The only thing we learn from history, it has been said, 'is that men never learn from history'..."
+          title="Pinte Champagne House"
+          description="The only direct storefront of the Pinte Champagne house"
           image="/favicon.webp"
         />
         {/* <meta name="theme-color" content={theme.primary?.main} /> */}

@@ -7,7 +7,7 @@ import getEnvBackend from '@/Utils/hooks/getEnvBackend'
 import { useAuth } from '@/Main/auth-provider/AuthProvider'
 import { useEffect, useState } from 'react'
 import { CREATE_ORDER, CREATE_LINE_ITEM } from './Request'
-import useI18n from '../../Utils/hooks/use-i18n'
+
 import { UsePaymentProps, UserAddress } from './interface'
 
 export const sameAdd = (address1: UserAddress, address2: UserAddress) => {
@@ -45,8 +45,7 @@ const usePaymentForm = (
   const { cleanProducts, Products } = useCart()
   const elements = useElements()
   const stripe = useStripe()
-  const i18n = useI18n()
-  const { activeLocale } = i18n
+
   const router = useRouter()
   const [createOrder] = useMutation(CREATE_ORDER)
   const [createLine] = useMutation(CREATE_LINE_ITEM)
@@ -112,7 +111,7 @@ const usePaymentForm = (
           },
           variant: 'success'
         })
-        router.push(`/${activeLocale}/account/${auth?.id}`)
+        router.push(`  /compte/${auth?.id}`)
       })
     }
   }, [idFacturation, idLivraison])

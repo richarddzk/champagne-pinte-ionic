@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Grid, Typography, Button, Divider } from '@mui/material'
-import { useDarkMode } from 'next-dark-mode'
 import { useRouter } from 'next/router'
 import { v4 as uuid } from 'uuid'
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn'
@@ -9,7 +8,7 @@ import { useCart } from '@/Main/Providers/CartProvider'
 import { PanierItem } from '@/Main/Cart/CartItem'
 import { AddressForm } from '@/Modules/account'
 import ShippingMethod from '@/Modules/account/ShippingMethod'
-import useI18n from '../../Utils/hooks/use-i18n'
+
 import CheckoutForm from './CheckoutForm'
 import usePaymentForm from './usePaymentForm'
 import RecapCheckout from './RecapCheckout'
@@ -36,15 +35,10 @@ const Checkout: React.FC<CheckoutProps> = (props) => {
 
   const { enqueueSnackbar } = useSnackbar()
 
-  const { darkModeActive } = useDarkMode()
-
-  const i18n = useI18n()
-
   const router = useRouter()
 
   const { Products, tt: nbProduit } = useCart()
 
-  const { activeLocale } = i18n
   const [sameFacturation, setSameFacturation] = useState(true)
 
   useEffect(() => {
@@ -80,44 +74,29 @@ const Checkout: React.FC<CheckoutProps> = (props) => {
       isFacturation: true
     }
   })
+
   return (
-    <form id="payment-form" onSubmit={handleSubmit}>
+    <form id="payment-form" className={classes.FormCheckout} onSubmit={handleSubmit}>
       <Grid
         // direction="row"
+        className={classes.GridContainer}
         justifyContent="center"
         alignItems="start"
         container
         item
       >
-        <Grid item xs={2}>
-          <Button
-            startIcon={<KeyboardReturnIcon />}
-            variant="outlined"
-            style={{ maxWidth: 100 }}
-            onClick={() => {
-              router.push(`/${activeLocale}/panier`)
-            }}
-          >
-            Retour
-          </Button>
-        </Grid>
-
-        <Grid
-          style={{
-            overflowX: 'hidden',
-            overflowY: 'auto',
-            maxHeight: '90vh',
-            paddingRight: 90,
-            paddingLeft: 90,
-            paddingBottom: 20,
-            minWidth: 500,
-            borderRadius: 10,
-            backgroundColor: darkModeActive ? '#28252166' : '#d9d9d929'
-          }}
-          item
-          xs={7}
-        >
+        <Grid className={classes.MainGrid} item xs>
           <Grid container direction="column">
+            <Button
+              startIcon={<KeyboardReturnIcon />}
+              variant="outlined"
+              style={{ marginTop: 10, maxWidth: 100 }}
+              onClick={() => {
+                router.push('  /panier')
+              }}
+            >
+              Retour
+            </Button>
             <AddressForm
               props={{
                 addresses,
@@ -253,7 +232,7 @@ const Checkout: React.FC<CheckoutProps> = (props) => {
             </div>
           </Grid>
         </Grid>
-        <Grid style={{ minWidth: 400, padding: 50, paddingTop: 10 }} item xs={3}>
+        <Grid item>
           <RecapCheckout
             props={{
               isLoading,

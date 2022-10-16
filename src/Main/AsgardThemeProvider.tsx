@@ -18,11 +18,12 @@ export const theme = {
   primary: {
     main: '#CCBF90',
     amber: amber[200],
-    blueGrey
+    blueGrey,
+    dark: '#050203'
   },
   secondary: {
-    main: '#19857b',
-    dark: '#fff'
+    main: '#010510',
+    dark: '#050203'
   },
   error: {
     main: red.A400,
@@ -49,15 +50,17 @@ const AsgardThemeProvider: React.FC<AsgardThemeProviderProps> = ({ children }) =
           primary: {
             ...theme.primary,
             main: '#CCBF90',
-            principal: darkModeActive ? '#000' : '#fff'
+            principal: !darkModeActive ? '#000' : '#fff'
           } as PaletteColorOptions,
           secondary: {
             ...theme.secondary,
-            main: darkModeActive ? '#000' : '#fff'
+            principal: !darkModeActive ? '#000' : '#fff'
           } as PaletteColorOptions,
           background: {
-            default: darkModeActive ? '#121212' : '#fff',
-            second: darkModeActive ? '#233132' : '#d9eff1'
+            default: darkModeActive ? '#010510' : '#f6f6f6',
+            second: darkModeActive ? '#0e121c' : '#fff',
+            light: '#f9f9f9',
+            dark: '#0e0e0e'
           } as Partial<TypeBackground>
         },
         breakpoints: {

@@ -12,7 +12,9 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
-          <meta name='description' content="Author: Richard Duzanski, Web application for Pinte Champagne store front"/>
+          <meta name='description' content="Née en 1990, la maison de Champagne Pinte est le produit d'un travail construit sur 3
+                  générations. Située à Lisse-en-Champagne, le cépage chardonnay est la signature de
+                  la Maison."/>
         </Head>
         <body>
           <Main />

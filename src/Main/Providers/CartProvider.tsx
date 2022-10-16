@@ -50,10 +50,9 @@ const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
       })
     return localtt
   }
+
   const majLocalItem = useCallback(
-    (items: {
-      [x: string]: Product;
-    }) => {
+    (items: { [x: string]: Product }) => {
       items &&
         Object.keys(items).length !== 0 &&
         localStorage.setItem(

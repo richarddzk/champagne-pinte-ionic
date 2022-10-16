@@ -1,3 +1,4 @@
+import useScreen from '@/Utils/hooks/useScreen'
 import { Grid, Typography, Divider } from '@mui/material'
 import React from 'react'
 import useStyles from '../../style'
@@ -6,13 +7,14 @@ import { InfosProps } from './interfaces'
 
 const Infos: React.FC<InfosProps> = () => {
   const { classes } = useStyles()
+  const { isTablette } = useScreen()
 
   return (
     <Grid container direction="column">
       <Grid
-        style={{ textAlign: 'start', width: '100%' }}
-        justifyContent="flex-start"
-        alignItems="flex-start"
+        style={{ textAlign: 'center', width: '100%' }}
+        justifyContent="center"
+        alignItems="center"
       >
         <Typography className={classes.typoHeader} color="primary">
           Informations du compte
@@ -21,7 +23,11 @@ const Infos: React.FC<InfosProps> = () => {
           <Divider
             textAlign="center"
             variant="middle"
-            style={{ marginTop: 50, marginBottom: 50, width: '95%' }}
+            style={{
+              marginTop: isTablette ? 5 : 50,
+              marginBottom: 50,
+              width: isTablette ? '98%' : '95%'
+            }}
           />
         </Grid>
         <InfosForm />

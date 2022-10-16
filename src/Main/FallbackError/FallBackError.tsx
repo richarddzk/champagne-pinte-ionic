@@ -69,7 +69,7 @@ export default FallBackError
 //         style={{
 //           color: 'white',
 //           // fontWeight: 'bold',
-//           font: '1.3em "Fira Sans", serif'
+//           font: '1.3em Times New Roman, serif'
 //         }}
 //       >
 //         ERROR 404 Vous vous etes perdu on dirait

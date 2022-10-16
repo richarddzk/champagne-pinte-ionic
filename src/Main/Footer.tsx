@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Image from 'next/future/image'
+import Image from '@/Utils/MidgardImage'
 import { Grid, Paper, Button, Typography, Divider, InputBase } from '@mui/material'
 import { v4 as uuid } from 'uuid'
 import { useDarkMode } from 'next-dark-mode'
@@ -8,17 +8,19 @@ import { useMutation } from '@apollo/client'
 import * as Yup from 'yup'
 import { useSnackbar } from 'notistack'
 import EmailIcon from '@mui/icons-material/Email'
-import { useMedia } from 'react-use'
 import dynamic from 'next/dynamic'
+import useScreen from '@/Utils/hooks/useScreen'
 import useStyles from './style'
 import Copyright from './Copyright'
-import backgroundFooter from '../../public/img/cave/cave2.webp'
-import mainLogoB from '../../public/img/logo/MainLogoChampBlack.webp'
-import mainLogoW from '../../public/img/logo/MainLogoChampWhite.webp'
-import logo2 from '../../public/img/logo/pintechamplisse2Or.webp'
-import useI18n from '../Utils/hooks/use-i18n'
+import backgroundFooter from '../../public/image/cave/cave2.webp'
+import mainLogoB from '../../public/image/logo/MainLogoChampBlack.webp'
+import mainLogoW from '../../public/image/logo/MainLogoChampWhite.webp'
+import logo2 from '../../public/image/logo/pintechamplisse2Or.webp'
 import SEND_NEWSLETTER_CONFIRMATION from './requests'
 import actionSnack, { PageMap, MediaMap } from './Menu/interfaces'
+import stripeB from '../../public/image/utils/checkout/stripe1.webp'
+import stripeW from '../../public/image/utils/checkout/stripe2.webp'
+import legal from '../../public/image/logo/fr-legal.webp'
 
 const UseAnimations = dynamic(() => import('react-useanimations'), {
   loading: () => <>...</>
@@ -26,14 +28,13 @@ const UseAnimations = dynamic(() => import('react-useanimations'), {
 
 interface FooterProps {
   account?: boolean
+  paddingLeft?: number | string
 }
 
-const Footer: React.FC<FooterProps> = ({ account }) => {
+const Footer: React.FC<FooterProps> = ({ account, paddingLeft }) => {
   const [emailLocal, setEmailLocal] = useState<string | undefined>(undefined)
   const { classes, css } = useStyles()
 
-  const i18n = useI18n()
-  const { t, activeLocale } = i18n
   const router = useRouter()
 
   const { darkModeActive } = useDarkMode()
@@ -85,14 +86,10 @@ const Footer: React.FC<FooterProps> = ({ account }) => {
 
     return true
   }
-  const isWide = useMedia('(min-width: 750px)', false)
+  const { isWide } = useScreen()
+
   return (
-    <Grid
-      className={classes.gridFooter}
-      style={{ maxWidth: account ? 'calc(100% - 248px)' : '100%', marginLeft: account ? 248 : 0 }}
-      container
-      direction="column"
-    >
+    <Grid className={classes.gridFooter} style={{ maxWidth: '100%' }} container direction="column">
       <Grid container>
         <Grid
           className={css({
@@ -104,6 +101,7 @@ const Footer: React.FC<FooterProps> = ({ account }) => {
           item
         >
           <Image
+            placeholder="blur"
             src={backgroundFooter}
             alt="Logo"
             style={{
@@ -120,6 +118,7 @@ const Footer: React.FC<FooterProps> = ({ account }) => {
             <Paper className={classes.paperNewsletter} elevation={10}>
               <Grid container justifyContent="center" item>
                 <Image
+                  placeholder="blur"
                   className={classes.homeLogo}
                   alt="mainLogoB"
                   style={{ width: 85.5, height: 60.75 }}
@@ -185,7 +184,7 @@ const Footer: React.FC<FooterProps> = ({ account }) => {
       <Grid className={classes.Footer} item>
         <footer>
           <Grid
-            style={{ paddingTop: account ? 50 : 100 }}
+            style={{ paddingTop: account ? 50 : 100, paddingLeft }}
             container
             justifyContent="space-evenly"
             direction="column"
@@ -195,29 +194,35 @@ const Footer: React.FC<FooterProps> = ({ account }) => {
                 <Button
                   key={uuid()}
                   onClick={() => {
-                    router.push(`/${activeLocale}${page}`)
+                    router.push(`/${page}`)
                   }}
                 >
                   <Grid
                     style={{
-                      font: 'italic 1.2em "Fira Sans", serif',
+                      font: 'italic 1.2em Times New Roman, serif',
                       paddingTop: 5
                     }}
                   >
-                    {t(`${name}`)}
+                    {name}
                   </Grid>
                 </Button>
               ))}
-              <Image alt="shiny" id="shiny" style={{ width: 150, height: 80 }} src={logo2} />
+              <Image
+                alt="shiny"
+                placeholder="blur"
+                id="shiny"
+                style={{ width: 150, height: 80 }}
+                src={logo2}
+              />
             </Grid>
 
             <Grid container justifyContent="center" direction="row">
               {MediaMap.map((compo) => (
                 <Button
                   key={uuid()}
-                  // onClick={() => {
-                  //   router.push(`/${activeLocale}${compo.page}`)
-                  // }}
+                  onClick={() => {
+                    window.open(compo.page, '_blank')
+                  }}
                 >
                   {compo.name}
 
@@ -245,7 +250,7 @@ const Footer: React.FC<FooterProps> = ({ account }) => {
                 <Button
                   key={uuid()}
                   onClick={() => {
-                    router.push(`/${activeLocale}/charte`)
+                    router.push('/charte')
                   }}
                 >
                   Charte données personnelles & cookies
@@ -255,7 +260,7 @@ const Footer: React.FC<FooterProps> = ({ account }) => {
                 <Button
                   key={uuid()}
                   onClick={() => {
-                    router.push(`/${activeLocale}/conditions`)
+                    router.push('/conditions')
                   }}
                 >
                   Conditions générales d’utilisation
@@ -270,6 +275,57 @@ const Footer: React.FC<FooterProps> = ({ account }) => {
               justifyContent="center"
               direction="row"
             >
+              <Grid
+                style={{
+                  width: '100%',
+                  height: '10vh',
+                  position: 'relative',
+                  overflow: ' auto'
+                }}
+                container
+                alignContent="center"
+                justifyContent="center"
+                direction="row"
+              >
+                <Grid
+                  style={{
+                    width: '50%',
+                    height: '10vh',
+                    position: 'relative',
+                    overflow: ' auto'
+                  }}
+                  justifyContent="center"
+                  alignItems="center"
+                  item
+                >
+                  <Image
+                    src={darkModeActive ? stripeB : stripeW}
+                    alt="Stripe"
+                    style={{ objectFit: 'contain' }}
+                    fill
+                    sizes="100vw"
+                  />
+                </Grid>
+                <Grid
+                  style={{
+                    width: '50%',
+                    height: '10vh',
+                    position: 'relative',
+                    overflow: ' auto'
+                  }}
+                  justifyContent="center"
+                  alignItems="center"
+                  item
+                >
+                  <Image
+                    src={legal}
+                    alt="Stripe"
+                    style={{ objectFit: 'contain' }}
+                    fill
+                    sizes="100vw"
+                  />
+                </Grid>
+              </Grid>
               <Typography
                 color="primary"
                 style={{
@@ -283,6 +339,7 @@ const Footer: React.FC<FooterProps> = ({ account }) => {
                 L’abus d’alcool est dangereux pour la santé. À consommer avec modération
               </Typography>
             </Grid>
+
             <Divider variant="middle" />
             <Grid container alignContent="center" justifyContent="center" direction="row">
               <Copyright />

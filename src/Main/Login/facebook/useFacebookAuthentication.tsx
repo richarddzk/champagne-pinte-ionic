@@ -1,13 +1,10 @@
 import Router from 'next/router'
 import { useSnackbar } from 'notistack'
 import { useAuth } from '../../auth-provider/AuthProvider'
-import useI18n from '../../../Utils/hooks/use-i18n'
 
 function useFacebookAuthentication() {
   const { facebookAuthentification, checkRegistred } = useAuth()
   const { enqueueSnackbar } = useSnackbar()
-  const i18n = useI18n()
-  const { activeLocale } = i18n
 
   const failureRegister = () => {
     enqueueSnackbar('Vous etes déja inscrit 😅', {
@@ -35,7 +32,7 @@ function useFacebookAuthentication() {
       },
       variant: 'success'
     })
-    Router.push(`/${activeLocale ?? 'fr'}/`)
+    Router.push(' /')
   }
   const handleConnexion = async (result: any) => {
     const registred = await checkRegistred(result.id)

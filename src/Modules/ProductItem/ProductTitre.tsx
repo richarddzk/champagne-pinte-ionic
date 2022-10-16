@@ -2,8 +2,12 @@ import { Grid, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { useCart } from '@/Main/Providers/CartProvider'
 import ButtonStyled from '@/Main/ButtonStyled'
+import useScreen from '@/Utils/hooks/useScreen'
+import Image from '@/Utils/MidgardImage'
+import { useDarkMode } from 'next-dark-mode'
 import { TitreProduitProps } from './interfaces'
-
+import stripeW from '../../../public/image/utils/checkout/stripe2.webp'
+import stripeB from '../../../public/image/utils/checkout/stripe1.webp'
 /**
  *
  * @param TitreProduitProps
@@ -16,17 +20,23 @@ import { TitreProduitProps } from './interfaces'
 const TitreRose: React.FC<TitreProduitProps> = (props) => {
   const { product, classes } = props
   const [qtyProduct, setQtyProduct] = useState<number>()
+  const { isMob } = useScreen()
+  const { darkModeActive } = useDarkMode()
 
-  const { addProduct, setCartOpen, Products, cartOpen } = useCart()
+  const { addProduct, setCartOpen, cartOpen } = useCart()
   const handleToggle = () => {
     setCartOpen(!cartOpen)
   }
+  const tarif = parseFloat(product.price.toString())
+  const price = (qtyProduct ?? 0) * tarif
+  const prix = ` - ${price}€`
+
   return (
-    <Grid>
-      <Typography className={classes.typo} variant="h2">
+    <Grid className={classes.GridTitre}>
+      <Typography className={classes.typoTitre} color="primary" variant={isMob ? 'h4' : 'h2'}>
         Champagne
       </Typography>
-      <Typography className={classes.typo} variant="h1">
+      <Typography className={classes.typoTitre} color="primary" variant={isMob ? 'h3' : 'h1'}>
         Brut Rosé
       </Typography>
 
@@ -45,8 +55,8 @@ const TitreRose: React.FC<TitreProduitProps> = (props) => {
       </Typography>
 
       <>
-        <Typography className={classes.typo} variant="h4" color="primary">
-          {product.price} €
+        <Typography className={classes.typo} variant="h5" color="primary">
+          {product.price} € Bouteille - 75 cL
         </Typography>
         <Grid>
           <TextField
@@ -64,18 +74,38 @@ const TitreRose: React.FC<TitreProduitProps> = (props) => {
             }}
             value={qtyProduct}
           />
+        </Grid>
+        <Grid>
           <ButtonStyled
+            width={(qtyProduct ?? 0) > 0 ? 350 : 200}
             onClick={() => {
-              if (!Products || (Products && !Products.keys && Object.keys(Products).length === 0)) {
-                handleToggle()
-              }
-
               if (qtyProduct && qtyProduct > 0) {
                 addProduct(product, qtyProduct)
               }
+              handleToggle()
             }}
-            title="Commander"
+            title={`Ajouter au panier ${(qtyProduct ?? 0) > 0 ? prix : ''}`}
             height={55}
+          />
+        </Grid>
+        <Grid
+          style={{
+            width: '100%',
+            height: '10vh',
+            position: 'relative',
+            overflow: ' auto'
+          }}
+          justifyContent="center"
+          alignItems="center"
+          item
+          xs={12}
+        >
+          <Image
+            src={darkModeActive ? stripeB : stripeW}
+            alt="Stripe"
+            style={{ objectFit: 'contain' }}
+            fill
+            sizes="100vw"
           />
         </Grid>
       </>
@@ -95,22 +125,29 @@ const TitreRose: React.FC<TitreProduitProps> = (props) => {
 const TitreBrut: React.FC<TitreProduitProps> = (props) => {
   const { product, classes } = props
   const [qtyProduct, setQtyProduct] = useState<number>()
+  const { isMob } = useScreen()
+  const { darkModeActive } = useDarkMode()
 
-  const { addProduct, setCartOpen, Products, cartOpen } = useCart()
+  const { addProduct, setCartOpen, cartOpen } = useCart()
   const handleToggle = () => {
     setCartOpen(!cartOpen)
   }
+  const tarif = parseFloat(product.price.toString())
+  const price = (qtyProduct ?? 0) * tarif
+  const prix = ` - ${price}€`
+
   return (
-    <Grid>
-      <Typography className={classes.typo} variant="h2">
+    <Grid className={classes.GridTitre}>
+      <Typography className={classes.typoTitre} color="primary" variant={isMob ? 'h4' : 'h2'}>
         Champagne
       </Typography>
-      <Typography className={classes.typo} variant="h1">
+      <Typography className={classes.typoTitre} color="primary" variant={isMob ? 'h3' : 'h1'}>
         Brut
       </Typography>
       <Typography className={classes.typo} variant="h4" color="primary">
         L'HARMONIE PARFAITE
       </Typography>
+
       <Typography align="justify" className={classes.typo} variant="body1">
         Son raisin, issu principalement du Vytryat, de la Côte des Blancs et de la Vallée de la
         marne, est au cœur de toutes ses cuvées. Le cépage Chardonnay est l'âme de la Maison Pinte.
@@ -121,8 +158,8 @@ const TitreBrut: React.FC<TitreProduitProps> = (props) => {
       </Typography>
 
       <>
-        <Typography className={classes.typo} variant="h4" color="primary">
-          {product.price} €
+        <Typography className={classes.typo} variant="h6" color="primary">
+          {product.price} € Bouteille - 75 cL
         </Typography>
         <Grid>
           <TextField
@@ -139,19 +176,39 @@ const TitreBrut: React.FC<TitreProduitProps> = (props) => {
             }}
             value={qtyProduct}
           />
+        </Grid>
+        <Grid>
           <ButtonStyled
+            width={(qtyProduct ?? 0) > 0 ? 350 : 200}
             onClick={() => {
-              if (!Products || (Products && !Products.keys && Object.keys(Products).length === 0)) {
-                handleToggle()
-              }
-
               if (qtyProduct && qtyProduct > 0) {
                 addProduct(product, qtyProduct)
               }
+              handleToggle()
             }}
-            title="Commander"
+            title={`Ajouter au panier ${(qtyProduct ?? 0) > 0 ? prix : ''}`}
             height={55}
           />{' '}
+        </Grid>
+        <Grid
+          style={{
+            width: '100%',
+            height: '10vh',
+            position: 'relative',
+            overflow: ' auto'
+          }}
+          justifyContent="center"
+          alignItems="center"
+          item
+          xs={12}
+        >
+          <Image
+            src={darkModeActive ? stripeB : stripeW}
+            alt="Stripe"
+            style={{ objectFit: 'contain' }}
+            fill
+            sizes="100vw"
+          />
         </Grid>
       </>
     </Grid>

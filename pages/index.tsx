@@ -5,10 +5,10 @@ const Loading = dynamic(() => import('@/Utils/Loading'), {
   loading: () => <>...</>
 })
 
-const Home = dynamic(() => import('@/Modules/home'), {
+const Intro = dynamic(() => import('@/Modules/intro'), {
   loading: () => <Loading />
 })
 
 export default function index() {
-  return <Home />
+  return <Intro />
 }

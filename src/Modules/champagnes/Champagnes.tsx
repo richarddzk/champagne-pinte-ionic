@@ -1,5 +1,8 @@
 import React from 'react'
-import { Grid } from '@mui/material'
+import { Grid, Paper, Typography } from '@mui/material'
+import Image from '@/Utils/MidgardImage'
+import useScreen from '@/Utils/hooks/useScreen'
+
 import { useQuery } from '@apollo/client'
 import { Main } from '@/Main'
 import PathLink from '@/Main/PathLink'
@@ -7,19 +10,65 @@ import { GET_PRODUCTS as GET_PRODUCTS_TYPE } from './__generated__/GET_PRODUCTS'
 import useStyles from './style'
 import { GET_PRODUCTS } from '../home/Home'
 import HomeProduct from '../home/HomeProduct'
+import futBrutAndRose from '../../../public/image/produit/futBrutAndRose.webp'
+import produitTable3 from '../../../public/image/table/produitTable3.webp'
+import logo from '../../../public/image/logo/LogoSansFond.webp'
 
 const Champagnes: React.FC = () => {
-  const { classes, theme } = useStyles()
+  const { classes } = useStyles()
   const { loading, data } = useQuery<GET_PRODUCTS_TYPE>(GET_PRODUCTS, {
     fetchPolicy: 'network-only'
   })
   const { products } = data ?? { products: [] }
-
+  const { isMob } = useScreen()
   return (
     <Main>
       <Grid className={classes.gridProduct}>
-        <PathLink />
+        <Grid style={{ justifyContent: 'center' }} container item xs={12}>
+          <PathLink />
 
+          <Grid item xs={12}>
+            <Typography color="primary" className={classes.typoTitre} variant="h5">
+              Nos Champagnes
+            </Typography>
+          </Grid>
+        </Grid>
+        <Grid className={classes.GridPaperVigne} container item xs={12}>
+          <Paper className={classes.paperImage} elevation={5}>
+            <Image
+              style={{
+                objectFit: 'cover'
+              }}
+              fill
+              sizes="100vw"
+              src={isMob ? produitTable3 : futBrutAndRose}
+              alt="Logo"
+              placeholder="blur"
+              // blurDataURL={isMob ? vignefamMobBlur : vignefamBlur}
+            />
+          </Paper>
+
+          <Paper className={classes.paperText} elevation={5}>
+            <Grid item xs={12}>
+              <Image src={logo} alt="Logo" width={60} height={70} />
+            </Grid>{' '}
+            <Grid item xs>
+              <Typography color="primary" className={classes.typoText} variant="h5">
+                Nos Cuvées
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography align="justify" className={classes.typoText} variant="h6">
+                Notre champagne est caractérisé par le cépage chardonnay qui est la signature de la
+                Maison et la partie principale de toutes nos cuvées.
+              </Typography>
+              <Typography align="justify" className={classes.typoText} variant="h6">
+                Son raisin, issu principalement du Vitryat et de la Côte des Blancs est au cœur de
+                toutes ses cuvées.
+              </Typography>
+            </Grid>
+          </Paper>
+        </Grid>
         <Grid
           container
           justifyContent="space-evenly"
@@ -29,7 +78,8 @@ const Champagnes: React.FC = () => {
           <HomeProduct
             loading={loading}
             products={products}
-            backgroundColor={theme.palette.mode !== 'dark' ? 'antiquewhite' : '#a39a8e'}
+            description
+            backgroundColor="transparent"
           />
         </Grid>
       </Grid>

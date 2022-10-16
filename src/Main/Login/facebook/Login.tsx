@@ -1,23 +1,22 @@
 import React, { useEffect } from 'react'
 import { Button, Grid } from '@mui/material'
 import Router from 'next/router'
-import useI18n from '@/Utils/hooks/use-i18n'
+
 import { useSnackbar } from 'notistack'
 import { useAuth } from '@/Main/auth-provider/AuthProvider'
-import Image from 'next/future/image'
+import Image from '@/Utils/MidgardImage'
 import { TData } from '@/Main/auth-provider/interfaces'
 import useStyles from '../styles'
 import initFacebookSdk from './helpers'
 import { LoginProps } from './interfaces'
 import { useFacebook } from './provider/FacebookProvider'
-import facebook from '../../../../public/img/utils/facebook.webp'
+import facebook from '../../../../public/image/utils/facebook.webp'
 
 const Login: React.FC<LoginProps> = () => {
   const { classes } = useStyles()
   const { login } = useFacebook()
   const { enqueueSnackbar } = useSnackbar()
-  const i18n = useI18n()
-  const { activeLocale } = i18n
+
   const { auth } = useAuth()
 
   const onSuccess = (res: TData) => {
@@ -28,7 +27,7 @@ const Login: React.FC<LoginProps> = () => {
       },
       variant: 'success'
     })
-    Router.push(`/${activeLocale ?? 'fr'}/`)
+    Router.push(' /')
   }
 
   useEffect(() => {

@@ -1,9 +1,9 @@
 import React from 'react'
 import { Grid, Button } from '@mui/material'
 import { useGoogleLogin } from 'react-google-login'
-import Image from 'next/future/image'
+import Image from '@/Utils/MidgardImage'
 import { useSnackbar } from 'notistack'
-import google from '../../../../public/img/utils/google.webp'
+import google from '../../../../public/image/utils/google.webp'
 import useGoogleAuthentication from './useGoogleAuthentification'
 import useStyles from '../styles'
 

@@ -7,7 +7,7 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 import Link from '@mui/material/Link'
 import Grid from '@mui/material/Grid'
-import Image from 'next/future/image'
+import Image from '@/Utils/MidgardImage'
 import { useDarkMode } from 'next-dark-mode'
 import { useSnackbar } from 'notistack'
 import Router from 'next/router'
@@ -31,15 +31,18 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import { VisibilityOff, Visibility } from '@mui/icons-material'
 import Encrypt from '@/Utils/Encrypt'
+import useScreen from '@/Utils/hooks/useScreen'
 import { useAuth } from '../auth-provider/AuthProvider'
-import useI18n from '../../Utils/hooks/use-i18n'
-import mainLogoW from '../../../public/img/logo/MainLogoChampWhite.webp'
-import mainLogoB from '../../../public/img/logo/MainLogoChampBlack.webp'
-import tableChamp from '../../../public/img/table/tableChamp1.webp'
+
+import mainLogoW from '../../../public/image/logo/MainLogoChampWhite.webp'
+import mainLogoB from '../../../public/image/logo/MainLogoChampBlack.webp'
+import tableChamp from '../../../public/image/table/tableChamp1.webp'
+import tableChamp1Mob from '../../../public/image/table/tableChamp1Mob.webp'
 import LoginGoogle from './google'
 import LoginFacebook from './facebook'
 import useStyles from './styles'
 import Copyright from '../Copyright'
+import PasswordResend from './PasswordResend'
 
 const steps = [
   { label: 'Connectez-vous', icon: <InputOutlinedIcon /> },
@@ -59,14 +62,21 @@ interface MyForm {
 
 const Login: React.FC = () => {
   const { classes } = useStyles()
-  const i18n = useI18n()
-  const { activeLocale } = i18n
+
   const { darkModeActive } = useDarkMode()
   const { login, Register } = useAuth()
   const { enqueueSnackbar } = useSnackbar()
   const [activeStep, setActiveStep] = useState(0)
   const handleStep = (step: number) => () => {
     setActiveStep(step)
+  }
+  const [openMail, setOpenMail] = React.useState(false)
+
+  const handleClickOpen = () => {
+    setOpenMail(true)
+  }
+  const handleClose = () => {
+    setOpenMail(!openMail)
   }
 
   const formSchema = Yup.object().shape({
@@ -139,6 +149,7 @@ const Login: React.FC = () => {
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword)
   }
+  const { isMob } = useScreen()
 
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
@@ -156,15 +167,21 @@ const Login: React.FC = () => {
   return (
     <Grid container component="main" className={classes.container}>
       <CssBaseline />
-
+      <PasswordResend open={openMail} onClose={handleClose} />
       <Grid item xs={12} className={classes.gridImage}>
-        <Image fill className={classes.Image} src={tableChamp} alt="tableChamp" />
+        <Image
+          fill
+          className={classes.Image}
+          src={isMob ? tableChamp1Mob : tableChamp}
+          alt="tableChamp"
+          placeholder="blur"
+        />
       </Grid>
 
       <Grid className={classes.gridForm} item xs={4}>
         <Button
           onClick={() => {
-            Router.push(`/${activeLocale ?? 'fr'}/`)
+            Router.push(' /')
           }}
           className={classes.button}
         >
@@ -195,48 +212,59 @@ const Login: React.FC = () => {
           onSubmit={handleSubmit(onSubmit)}
         >
           {activeStep === 0 ? (
-            <>
+            <Grid>
               {' '}
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                color="primary"
-                error={Boolean(errors.email)}
-                helperText={(errors.email ? errors.email.message : ' ') as any}
-                id="email"
-                label="Adresse E-Mail"
-                autoComplete="email"
-                autoFocus
-                {...register('email')}
-              />
-              <FormControl fullWidth variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password">Mot de passe</InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-password"
-                  type={showPassword ? 'text' : 'password'}
+              <Grid>
+                <TextField
                   required
-                  error={Boolean(errors.password)}
-                  label="Mot de passe"
-                  autoComplete="password"
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  {...register('password')}
+                  fullWidth
+                  margin="dense"
+                  className={classes.TextField}
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  color="primary"
+                  error={Boolean(errors.email)}
+                  helperText={(errors.email ? errors.email.message : ' ') as any}
+                  id="email"
+                  label="Adresse E-Mail"
+                  autoComplete="email"
+                  autoFocus
+                  {...register('email')}
                 />
-                <FormHelperText id="component-helper-text">
-                  {(errors.password ? errors.password.message : ' ') as any}
-                </FormHelperText>
-              </FormControl>
+              </Grid>
+              <Grid>
+                <FormControl className={classes.TextField} fullWidth>
+                  <InputLabel shrink htmlFor="outlined-adornment-password">
+                    Mot de passe
+                  </InputLabel>
+                  <OutlinedInput
+                    id="outlined-adornment-password"
+                    type={showPassword ? 'text' : 'password'}
+                    required
+                    margin="dense"
+                    error={Boolean(errors.password)}
+                    label="Mot de passe"
+                    autoComplete="password"
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    {...register('password')}
+                  />
+                  <FormHelperText id="component-helper-text">
+                    {(errors.password ? errors.password.message : ' ') as any}
+                  </FormHelperText>
+                </FormControl>
+              </Grid>
               <Grid container direction="row" justifyContent="space-around" alignItems="center">
                 <Grid>
                   <FormControlLabel
@@ -244,7 +272,8 @@ const Login: React.FC = () => {
                       <Checkbox value="remember" color="primary" {...register('remember')} />
                     }
                     style={{
-                      font: ' italic 1.2em "Fira Sans", serif'
+                      color: '#CCBF90',
+                      font: ' italic 1.2em Times New Roman, serif'
                     }}
                     label="Se souvenir de moi"
                   />
@@ -252,9 +281,12 @@ const Login: React.FC = () => {
                 <Grid>
                   <Link
                     style={{
-                      font: 'italic  1.2em "Fira Sans", serif'
+                      font: 'italic  1.2em Times New Roman, serif',
+                      cursor: 'pointer'
                     }}
-                    href="#"
+                    onClick={() => {
+                      handleClickOpen()
+                    }}
                     variant="body2"
                   >
                     Mot de passe oublié
@@ -278,7 +310,7 @@ const Login: React.FC = () => {
                 type="submit"
                 variant="outlined"
                 style={{
-                  font: 'italic bold 1.2em "Fira Sans", serif',
+                  font: 'italic bold 1.2em Times New Roman, serif',
                   borderRadius: 24
                 }}
                 sx={{ mt: 3, mb: 2 }}
@@ -299,7 +331,7 @@ const Login: React.FC = () => {
                   <LoginFacebook register={false} />
                 </Grid>
               </Grid>
-            </>
+            </Grid>
           ) : (
             // @ts-ignore
             <>
@@ -307,6 +339,10 @@ const Login: React.FC = () => {
                 <Grid direction="row" container>
                   <TextField
                     margin="dense"
+                    className={classes.TextField}
+                    InputLabelProps={{
+                      shrink: true
+                    }}
                     required
                     fullWidth
                     id="firstName"
@@ -318,6 +354,10 @@ const Login: React.FC = () => {
 
                   <TextField
                     margin="dense"
+                    className={classes.TextField}
+                    InputLabelProps={{
+                      shrink: true
+                    }}
                     required
                     fullWidth
                     id="lastName"
@@ -329,6 +369,10 @@ const Login: React.FC = () => {
                 <Grid direction="row" container>
                   <TextField
                     margin="dense"
+                    className={classes.TextField}
+                    InputLabelProps={{
+                      shrink: true
+                    }}
                     required
                     fullWidth
                     error={Boolean(errors.email)}
@@ -341,6 +385,10 @@ const Login: React.FC = () => {
 
                   <TextField
                     margin="dense"
+                    className={classes.TextField}
+                    InputLabelProps={{
+                      shrink: true
+                    }}
                     required
                     fullWidth
                     error={Boolean(errors.confirmEmail)}
@@ -353,8 +401,10 @@ const Login: React.FC = () => {
                 </Grid>
                 <Grid direction="row" justifyContent="space-between" container spacing={1}>
                   <Grid item>
-                    <FormControl variant="outlined">
-                      <InputLabel htmlFor="outlined-password">Mot de passe</InputLabel>
+                    <FormControl className={classes.TextField}>
+                      <InputLabel shrink htmlFor="outlined-password">
+                        Mot de passe
+                      </InputLabel>
                       <OutlinedInput
                         required
                         id="outlined-password"
@@ -384,8 +434,8 @@ const Login: React.FC = () => {
                     </FormControl>
                   </Grid>
                   <Grid item>
-                    <FormControl variant="outlined">
-                      <InputLabel htmlFor="outlined-adornment-confirmPwd">
+                    <FormControl className={classes.TextField}>
+                      <InputLabel shrink htmlFor="outlined-adornment-confirmPwd">
                         Confirmer Mot de passe
                       </InputLabel>
                       <OutlinedInput
@@ -435,7 +485,7 @@ const Login: React.FC = () => {
                     type="submit"
                     variant="outlined"
                     style={{
-                      font: 'italic bold 1.2em "Fira Sans", serif',
+                      font: 'italic bold 1.2em Times New Roman, serif',
                       borderRadius: 24
                     }}
                     sx={{ mt: 3, mb: 2 }}

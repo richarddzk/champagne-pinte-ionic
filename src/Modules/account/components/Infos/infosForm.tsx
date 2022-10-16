@@ -170,7 +170,7 @@ const InfosForm: React.FC<InfosProps> = () => {
 
   const localCustomer = localUser && localUser.customers && localUser.customers[0]
   return (
-    <Grid direction="column" container>
+    <Grid direction="column" justifyContent="center" alignItems="center" container>
       <InfosFormDialog
         email={localUser.email !== userData.email}
         open={openMail}
@@ -182,7 +182,7 @@ const InfosForm: React.FC<InfosProps> = () => {
         SendMailChangePassword={SendMailChangePassword}
         resendEmail={resendEmailMutation}
       />
-      <Grid direction="row" container>
+      <Grid direction="row" justifyContent="center" alignItems="center" container>
         <Grid item className={classes.gridTextfield}>
           <TextField
             id="firstName"
@@ -213,7 +213,7 @@ const InfosForm: React.FC<InfosProps> = () => {
           />
         </Grid>
       </Grid>
-      <Grid direction="row" container>
+      <Grid direction="row" justifyContent="center" alignItems="center" container>
         <Grid item className={classes.gridTextfield}>
           <TextField
             id="Email"
@@ -246,7 +246,7 @@ const InfosForm: React.FC<InfosProps> = () => {
           />
         </Grid>
       </Grid>
-      <Grid direction="row" container>
+      <Grid direction="row" justifyContent="center" alignItems="center" container>
         <Grid item className={classes.gridButton}>
           <ButtonStyled
             width={200}

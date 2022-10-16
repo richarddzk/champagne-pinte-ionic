@@ -11,8 +11,10 @@ const getEnvBackend = () => {
     uri = process.env.DEV_API_URL
     prefix = 'https'
   }
+  // idk why process.env.GOOGLE_MAP_API doesnt works
+  const apiGoogleMap = 'AIzaSyAOgtMMMx_NJZ51nrb5mdBVM9WMSXfMBw4'
   const url = `${prefix}://${uri}/`
-  return { uri, prefix, url }
+  return { uri, prefix, url, apiGoogleMap }
 }
 
 export default getEnvBackend

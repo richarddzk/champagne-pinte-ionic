@@ -3,7 +3,7 @@ import { ImageObject } from '@/Modules/ProductItem/interfaces'
 
 export interface SlideshowProps {
   height?: number | string
-  items: (classes: any) => (Item | ImageObject)[]
+  items: (classes: any, isWide: boolean) => (Item | ImageObject)[]
   itemsToShow?: number
   classes: any
   speed: number

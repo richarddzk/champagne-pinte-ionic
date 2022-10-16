@@ -1,70 +1,104 @@
 import { makeStyles } from '@/makeStyles'
+import { Theme } from '@mui/system'
 
 const drawerWidth = 410
 
-const useStyles = makeStyles()((theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   gridTitle: {
     textAlign: 'center',
-    // backgroundColor: theme.palette.background.default,
-
-    // marginTop: 30,
   },
   typo: {
-    font: 'italic 1.2em "Fira Sans", serif',
+    font: 'italic 1.2em Times New Roman, serif',
   },
   accountMenuSwitch: {
     marginRight: 20,
     marginTop: '34%',
   },
+  accountMenuAccount: {
+    marginRight: 20,
+    marginTop: '40%',
+  },
   DarkModeSwitch: {
     marginTop: 22,
   },
   gridAccount: {
+
     textAlign: 'center',
-    height: 0,
-    marginLeft: 30,
+    justifyContent: 'center',
+    height: 70,
+    zIndex: 2,
+    opacity: 1
   },
   gridApp: {
     padding: 0,
     alignItems: 'center',
   },
   gridItemsLogo: {
-    paddingTop: 40,
+    paddingTop: 60,
     textAlignLast: 'center',
-    [theme.breakpoints.down(501)]: {
-      paddingTop: 5,
-    },
+    placeContent: 'center',
   },
   gridItemsMedia: {
-    paddingTop: 80,
-    [theme.breakpoints.down(501)]: {
-      paddingTop: 0,
-    },
+    paddingTop: '10hv',
+
   },
   gridItemMenu: {
-    font: 'italic 1.2em "Fira Sans", serif',
+    font: 'italic 1.2em Times New Roman, serif',
     paddingTop: 5,
     cursor: 'pointer',
-    [theme.breakpoints.down(501)]: {
-      font: 'italic 0.8em "Fira Sans", serif',
+    height: 55
+
+  },
+  fullGridMenu: {
+    placeContent: 'center',
+    alignItems: 'center',
+    marginRight: 80,
+    [theme.breakpoints.down(1610)]: {
+      marginRight: 0,
+
     },
   },
-  gridItemsMenu: {
+  fullGridItemMenu: {
+    font: 'italic 0.9rem Times New Roman, serif',
+
+    cursor: 'pointer',
+    paddingTop: 10,
+    paddingLeft: 5,
+    paddingRight: 5,
+    [theme.breakpoints.down(1460)]: {
+      paddingLeft: 5,
+      paddingRight: 3,
+
+    },
+  },
+  fullLogoMenu: {
+    marginRight: 35,
+    cursor: 'pointer',
+
+  },
+  gridItemMenuGrid: {
     height: 55,
-    [theme.breakpoints.down(501)]: {
-      height: 35,
+    width: '100%',
+    marginLeft: 40,
+
+    [theme.breakpoints.down(1200)]: {
+      placeContent: 'center',
+      marginLeft: 0,
+
+    },
+    [theme.breakpoints.down(400)]: {
+
+      fontSize: '1.2rem',
     },
   },
+
   gridAppAfterScroll: {
     padding: 0,
     // backgroundColor: darkModeActive ? theme.palette.background.dark : 'white',
   },
   homeLogo: {
     zIndex: 99,
-    opacity: 1,
-    ':hover': {
-      background: 'none',
-    },
+    opacity: 1
   },
   champIcon: { zIndex: 999 },
   title: {
@@ -74,8 +108,9 @@ const useStyles = makeStyles()((theme) => ({
     fontStyle: 'italic',
   },
   gridButton: {
-    textAlign: 'end',
-    marginLeft: '10%',
+    textAlign: 'center',
+    minWidth: 60,
+
   },
   menuButton: {
     // marginTop: 4,
@@ -96,31 +131,17 @@ const useStyles = makeStyles()((theme) => ({
     marginLeft: 100,
     padding: 5,
   },
-  root: {},
+  container: {
+    height: '100%',
+    width: '100%',
+  },
   appBar: {
-    height: 70,
-    backgroundColor: theme.palette.background.default,
-
-    opacity: 0.75,
-    [theme.breakpoints.down(501)]: {
+    backgroundImage: 'none',
+    backgroundColor: theme.palette.background.second,
+    [theme.breakpoints.down(1200)]: {
       top: 'auto',
       bottom: 0,
-      opacity: 1,
     },
-  },
-
-  accountAppBar: {
-    marginRight: '10%',
-    height: 70,
-    zIndex: 2,
-    opacity: 1,
-  },
-  appBarAfterScroll: {
-    height: 60,
-    zIndex: 2,
-    backgroundColor: theme.palette.background.default,
-
-    opacity: 0.75,
   },
 
   hide: {
@@ -133,22 +154,31 @@ const useStyles = makeStyles()((theme) => ({
     width: drawerWidth,
     opacity: 0.95,
     top: 150,
-    borderTopRightRadius: 10,
-    [theme.breakpoints.down(400)]: {
+    overflow: 'hidden',
+    backgroundImage: 'none',
+    backgroundColor: theme.palette.background.second,
+    [theme.breakpoints.down(1200)]: {
       top: 0,
       opacity: 1,
       width: '100%',
       borderTopRightRadius: 0,
+
     },
   },
   drawerHeader: {
     display: 'flex',
     alignItems: 'center',
     // necessary for content to be below app bar
-    minHeight: 50,
+    height: 50,
     justifyContent: 'flex-end',
   },
-
+  drawerContent: {
+    display: 'flex',
+    alignItems: 'center',
+    // necessary for content to be below app bar
+    height: '95%',
+    justifyContent: 'flex-end',
+  },
   body: {
     backgroundColor: theme.palette.background.default,
   },
@@ -168,5 +198,6 @@ const useStyles = makeStyles()((theme) => ({
     border: 'none',
     padding: ' 0.5rem 1rem',
   },
+
 }))
 export default useStyles

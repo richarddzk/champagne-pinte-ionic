@@ -2,7 +2,8 @@ import { Theme } from '@mui/material'
 import { makeStyles } from '@/makeStyles'
 
 const useStyles = makeStyles()((theme: Theme) => ({
-  imgSlider: {
+  imageSlider: {
+    maxHeight: 938,
     height: '100%',
     width: '100%',
     ':hover': {
@@ -15,18 +16,45 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
   maisonHome: {
     marginTop: '20%',
-
+    // to do : viré ça par du grid auto
     [theme.breakpoints.down(1595)]: {
-      marginBottom: 250
-    },
-    [theme.breakpoints.down(500)]: {
       marginBottom: 350
     },
-    [theme.breakpoints.down(360)]: {
+    [theme.breakpoints.down(900)]: {
+      marginBottom: 400
+    },
+    [theme.breakpoints.down(810)]: {
+      marginBottom: 425
+    },
+    [theme.breakpoints.down(750)]: {
       marginBottom: 450
     },
-    [theme.breakpoints.down(310)]: {
+    [theme.breakpoints.down(610)]: {
       marginBottom: 550
+    },
+    [theme.breakpoints.down(480)]: {
+      marginBottom: 720
+    },
+    [theme.breakpoints.down(420)]: {
+      marginBottom: 780
+    },
+    [theme.breakpoints.down(390)]: {
+      marginBottom: 830
+    },
+    [theme.breakpoints.down(360)]: {
+      marginBottom: 950
+    },
+    [theme.breakpoints.down(310)]: {
+      marginBottom: 1050
+    },
+    [theme.breakpoints.down(298)]: {
+      marginBottom: 1250
+    },
+    [theme.breakpoints.down(250)]: {
+      marginBottom: 1550
+    },
+    [theme.breakpoints.down(200)]: {
+      marginBottom: 1750
     }
   },
   containerPaper: {
@@ -64,13 +92,13 @@ const useStyles = makeStyles()((theme: Theme) => ({
     height: 0,
     // width: 0,
     zIndex: 999,
-    bottom: 200,
+    bottom: 250,
     position: 'relative',
     opacity: 0,
     transition: '.5s ease',
     textAlign: 'center',
     backgroundColor: 'transparent',
-    [theme.breakpoints.down(501)]: {
+    [theme.breakpoints.down(700)]: {
       opacity: 1,
       visibility: 'visible'
     },
@@ -88,30 +116,17 @@ const useStyles = makeStyles()((theme: Theme) => ({
   mapLisse: {
     width: '100%',
     height: 700,
-    marginBottom: 200,
-    ':hover': {
-      backgroundColor: theme.palette.mode === 'dark' ? 'black' : 'white',
-      boxShadow:
-        '0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%);'
-    }
+    marginBottom: 200
   },
   gridMap: {
-    width: '70%',
+    width: '100%',
     height: 700,
-    marginBottom: 20,
-    ':hover': {
-      backgroundColor: theme.palette.mode === 'dark' ? 'black' : 'white'
-    }
+    marginBottom: 20
   },
   gridMapLisse: {
-    width: '70%',
+    width: '100%',
     height: 700,
-    marginBottom: 200,
-    ':hover': {
-      backgroundColor: theme.palette.mode === 'dark' ? 'black' : 'white',
-      boxShadow:
-        '0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%);'
-    }
+    marginBottom: 200
   },
   MapDiv: {
     zIndex: 0,
@@ -124,11 +139,11 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
   decouvrirButton: {
     marginTop: 100,
-    font: ' italic 1.2em "Fira Sans", serif',
+    font: ' italic 1.2em Times New Roman, serif',
     width: '10%',
     minWidth: 120,
+    backgroundColor: theme.palette.background.default,
     ':hover': {
-      backgroundColor: theme.palette.mode === 'dark' ? 'black' : 'white',
       boxShadow:
         '0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%);'
     },
@@ -146,7 +161,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
       marginTop: 100
     }
   },
-  img: {
+  image: {
     height: '100vh',
     width: '99.4vw',
     objectFit: 'cover'
@@ -156,26 +171,19 @@ const useStyles = makeStyles()((theme: Theme) => ({
     zIndex: 999,
     bottom: 1000,
     position: 'relative',
-    font: ' italic 1.2em "Fira Sans", serif',
+    font: ' italic 1.2em Times New Roman, serif',
     height: 0
   },
-  // slideContainer: {
-  //   textAlign: '-webkit-center' as any,
-  //   display: 'block',
-  //   justifyItems: 'center',
-  //   height: '100vh',
-  //   justifyContent: 'center',
-  // },
   gridProduct: {
     paddingTop: 200,
     paddingBottom: 200,
-    backgroundColor: 'antiquewhite'
+    backgroundColor: 'whitewhite'
   },
   button: {
     // backgroundColor: '#000',
   },
   typo: {
-    font: 'italic 1.2em "Fira Sans", serif'
+    font: 'italic 1.2em Times New Roman, serif'
   },
   gridButton: {
     height: 200,
@@ -186,68 +194,68 @@ const useStyles = makeStyles()((theme: Theme) => ({
     left: '50%'
   },
   paperTextLeft: {
-    textAlign: 'center',
-    bottom: 400,
+    textAlign: '-webkit-center' as any,
+    bottom: 480,
     position: 'relative',
     zIndex: 9,
     maxWidth: 450,
     padding: 20,
     color: theme.palette.mode === 'dark' ? 'white' : 'black',
-    backgroundColor: theme.palette.mode === 'dark' ? '#121212b0' : '#ffffffc7',
-    ':hover': {
-      backgroundColor: theme.palette.mode === 'dark' ? 'black' : 'white'
-    },
+    backgroundColor: theme.palette.background.default,
+
     // left: 'max(-35vw,)',
     marginLeft: '5em',
-    [theme.breakpoints.down(1100)]: {
-      bottom: 200,
-      maxWidth: '100%',
-      marginLeft: 0,
-      margin: '5%'
+    [theme.breakpoints.down(501)]: {
+      bottom: 0,
+
+      marginBottom: 350
     },
-    [theme.breakpoints.down(270)]: {
-      bottom: 350
+
+    [theme.breakpoints.down(1580)]: {
+      marginLeft: '1em',
+      marginRight: '2%',
+      maxWidth: '100%',
+      bottom: -40
     }
   },
   paperTextRight: {
-    textAlign: 'center',
-    bottom: 400,
+    textAlign: '-webkit-center' as any,
+    bottom: 500,
     position: 'relative',
     zIndex: 9,
     maxWidth: 450,
     padding: 20,
     color: theme.palette.mode === 'dark' ? 'white' : 'black',
-    backgroundColor: theme.palette.mode === 'dark' ? '#121212b0' : '#ffffffc7',
+    backgroundColor: theme.palette.background.default,
     ':hover': {
-      backgroundColor: theme.palette.mode === 'dark' ? 'black' : 'white'
+      boxShadow:
+        '0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%);'
+    },
+    [theme.breakpoints.down(501)]: {
+      backgroundColor: theme.palette.mode === 'dark' ? 'black' : 'white',
+      marginBottom: 350
     },
     // left: 'max(-35vw,)',
     marginLeft: '65%',
-    [theme.breakpoints.down(1100)]: {
-      bottom: 200,
+
+    [theme.breakpoints.down(1580)]: {
+      marginLeft: '2%',
+      marginRight: '2%',
       maxWidth: '100%',
-      marginLeft: 0,
-      margin: '5%'
-    },
-    [theme.breakpoints.down(270)]: {
-      bottom: 350
-    },
-    [theme.breakpoints.down(250)]: {
-      bottom: 400
+      bottom: -40
     }
   },
   typoText: {
-    textAlign: 'center',
+    // textAlign: '-webkit-center' as any,
     paddingBottom: 20,
     fontFamily: 'Fira Sans , serif',
     color: theme.palette.mode !== 'dark' ? 'black' : 'white'
   },
   typoAdresse: {
-    textAlign: 'center',
+    textAlign: '-webkit-center' as any,
     marginBottom: 10,
     marginTop: 10,
     fontFamily: 'Fira Sans , serif',
-    fontStyle: 'italic',
     color: theme.palette.mode !== 'dark' ? 'black' : 'white'
   }
 }))

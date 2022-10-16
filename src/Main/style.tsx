@@ -1,5 +1,5 @@
-import { Theme } from '@mui/material'
 import { makeStyles } from '@/makeStyles'
+import { Theme } from '@mui/system'
 
 const useStyles = makeStyles()((theme: Theme) => ({
   slideContainer: {
@@ -24,11 +24,19 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
   typoTitle: {
     paddingBottom: 10,
-    font: '1.1em bold, serif'
+    font: '1.1em bold, serif',
+
+    [theme.breakpoints.down(400)]: {
+      font: ' 0.8em '
+    }
   },
   typoBody1: {
     paddingBottom: 25,
-    font: ' 1.2em '
+    font: ' 1.2em ',
+
+    [theme.breakpoints.down(400)]: {
+      font: ' 1.0em '
+    }
   },
   typoBody2: {
     textAlign: 'left'
@@ -36,7 +44,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
   container: {
     height: '100%',
     width: '100%',
-    backgroundColor: theme.palette.mode !== 'dark' ? '#fefefe' : '#a39a8e'
+    backgroundColor: theme.palette.background.default
   },
   title: {
     flexGrow: 1,
@@ -44,7 +52,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
     color: '#CCBF90',
     fontStyle: 'bold'
   },
-  img: {
+  image: {
     maxWidth: '100%'
   },
   gridTitle: {
@@ -77,6 +85,8 @@ const useStyles = makeStyles()((theme: Theme) => ({
     zIndex: 4,
     bottom: 300,
     minWidth: 300,
+    backgroundImage: 'none',
+    backgroundColor: theme.palette.background.second,
     [theme.breakpoints.down(320)]: {
       padding: 5,
       minWidth: 200
@@ -91,8 +101,11 @@ const useStyles = makeStyles()((theme: Theme) => ({
   gridFooter: {},
   Footer: {
     paddingTop: 150,
+    [theme.breakpoints.down(1200)]: {
+      paddingBottom: 100
+    },
     color: 'white',
-    backgroundColor: theme.palette.mode === 'dark' ? '#000' : 'white'
+    backgroundColor: theme.palette.background.default
   },
   homeLogo: {},
 

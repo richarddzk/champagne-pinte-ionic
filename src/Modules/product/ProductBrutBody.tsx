@@ -18,7 +18,7 @@ const ProductBrutBody: React.FC<ProductBodyProps> = (props) => {
     else if (image.src.includes('background')) background2 = image
   })
   return (
-    <Grid direction="row" container xs={12} className={classes.gridMainDescription} spacing={2}>
+    <Grid direction="row" container className={classes.gridMainDescription} spacing={2}>
       <Grid direction="row" style={{ justifyContent: 'center' }} container>
         <Paper
           style={{
@@ -26,9 +26,7 @@ const ProductBrutBody: React.FC<ProductBodyProps> = (props) => {
             height: '90vh',
             backgroundImage: `url(${background2?.src ?? ''})`,
             backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            maxHeight: '100%',
-            overflow: 'hidden'
+            backgroundPosition: 'center'
           }}
           elevation={5}
         >
@@ -76,13 +74,11 @@ const ProductBrutBody: React.FC<ProductBodyProps> = (props) => {
             height: '90vh',
             backgroundImage: `url(${background1?.src ?? ''})`,
             backgroundSize: 'cover',
-            backgroundPosition: 'bottom',
-            maxHeight: '100%',
-            overflow: 'hidden'
+            backgroundPosition: 'bottom'
           }}
           elevation={5}
         >
-          <Paper className={classes.paperTextRight} style={{}} elevation={5}>
+          <Paper className={classes.paperTextRight} elevation={5}>
             <Typography className={classes.typo} variant="h5">
               NOTES DE DÉGUSTATION
             </Typography>

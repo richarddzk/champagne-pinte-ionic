@@ -1,7 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import Image from 'next/future/image'
+import React, { Suspense, useEffect, useState } from 'react'
+import Image from '@/Utils/MidgardImage'
 import { makeStyles } from '@/makeStyles'
-import Box from '@mui/system/Box'
+import dynamic from 'next/dynamic'
+
+const Loading = dynamic(() => import('@/Utils/Loading'), {
+  loading: () => <></>
+})
+
+const Box = dynamic(() => import('@mui/system/Box'), {
+  loading: () => <Loading />
+})
 
 const useStyles = makeStyles()(() => ({
   box: {
@@ -45,14 +53,17 @@ const BackgroundImage: React.FC<{ image: string }> = ({ image }) => {
   if (width && height) {
     return (
       <Box className={classes.box}>
-        <Image
-          priority
-          src={image}
-          style={{ objectFit: 'cover' }}
-          alt="Introduction BackGround"
-          width={width}
-          height={height}
-        />
+        <Suspense fallback={<Loading />}>
+          <Image
+            priority
+            src={image}
+            style={{ objectFit: 'cover' }}
+            alt="Introduction BackGround"
+            width={width}
+            height={height}
+            placeholder="blur"
+          />
+        </Suspense>
       </Box>
     )
   }

@@ -8,13 +8,7 @@ import Checkbox from '@mui/material/Checkbox'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
 import BookmarkIcon from '@mui/icons-material/Bookmark'
 import BootstrapInput from '@/Utils/BootstapInput'
-import {
-  Typography,
-  FormControl,
-  InputLabel,
-  NativeSelect,
-  Divider,
-} from '@mui/material'
+import { Typography, FormControl, InputLabel, NativeSelect, Divider } from '@mui/material'
 import { v4 as uuid } from 'uuid'
 import CountrySelect from '../../Utils/CountrySelect'
 import { UserAddress } from '../checkout/interface'
@@ -50,7 +44,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ props }) => {
       lastName: '',
       phone: '',
       state: '',
-      zip: '',
+      zip: ''
     },
     setAddress,
     isSubmitting,
@@ -58,9 +52,9 @@ const AddressForm: React.FC<AddressFormProps> = ({ props }) => {
     isFacturation = false,
     sameFacturation,
     addresses,
-    account,
+    account
   } = props
-  const { classes } = useStyles()
+  const { classes, theme } = useStyles()
   const handleChange = (
     event: { target: { value: string } },
     facturation: boolean | undefined = false
@@ -89,18 +83,14 @@ const AddressForm: React.FC<AddressFormProps> = ({ props }) => {
           <Typography className={classes.typoHeader} color="primary">
             {
               // eslint-disable-next-line no-nested-ternary
-              !account
-                ? `Adresse de ${isFacturation ? 'Facturation' : 'Livraison'}`
-                : ' '
+              !account ? `Adresse de ${isFacturation ? 'Facturation' : 'Livraison'}` : ' '
             }
           </Typography>
         </Grid>
         <Grid style={{ minWidth: 130 }} item>
           {!account && (
             <FormControl variant="standard">
-              <InputLabel htmlFor="Choisissez une adresse">
-                Choisissez une adresse
-              </InputLabel>
+              <InputLabel htmlFor="Choisissez une adresse">Choisissez une adresse</InputLabel>
               <NativeSelect
                 id="select-adresse"
                 color="primary"
@@ -133,7 +123,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ props }) => {
             onChange={(res) => {
               setAddress({
                 ...adresse,
-                firstName: res.target.value,
+                firstName: res.target.value
               })
             }}
           />
@@ -152,7 +142,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ props }) => {
             onChange={(res) => {
               setAddress({
                 ...adresse,
-                lastName: res.target.value,
+                lastName: res.target.value
               })
             }}
           />
@@ -171,7 +161,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ props }) => {
             onChange={(res) => {
               setAddress({
                 ...adresse,
-                address_1: res.target.value,
+                address_1: res.target.value
               })
             }}
           />
@@ -189,7 +179,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ props }) => {
             onChange={(res) => {
               setAddress({
                 ...adresse,
-                address_2: res.target.value,
+                address_2: res.target.value
               })
             }}
           />
@@ -208,7 +198,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ props }) => {
             onChange={(res) => {
               setAddress({
                 ...adresse,
-                city: res.target.value,
+                city: res.target.value
               })
             }}
           />
@@ -227,7 +217,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ props }) => {
             onChange={(res) => {
               setAddress({
                 ...adresse,
-                state: res.target.value,
+                state: res.target.value
               })
             }}
           />
@@ -246,7 +236,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ props }) => {
             onChange={(res) => {
               setAddress({
                 ...adresse,
-                zip: res.target.value,
+                zip: res.target.value
               })
             }}
           />
@@ -257,7 +247,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ props }) => {
             setCountry={(value) => {
               setAddress({
                 ...adresse,
-                country: value.label,
+                country: value.label
               })
             }}
           />
@@ -277,7 +267,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ props }) => {
                 onChange={(res) => {
                   setAddress({
                     ...adresse,
-                    phone: res.target.value,
+                    phone: res.target.value
                   })
                 }}
               />
@@ -285,6 +275,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ props }) => {
             {setSameFacturation && (
               <Grid item>
                 <FormControlLabel
+                  sx={{ color: theme.palette.mode === 'light' ? 'black' : 'white' }}
                   control={
                     <Checkbox
                       color="primary"
@@ -301,6 +292,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ props }) => {
             )}
             <Grid item>
               <FormControlLabel
+                sx={{ color: theme.palette.mode === 'light' ? 'black' : 'white' }}
                 control={
                   <Checkbox
                     color="primary"
@@ -311,7 +303,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ props }) => {
                     onChange={(res) => {
                       setAddress({
                         ...adresse,
-                        isDefault: res.target.checked ?? true,
+                        isDefault: res.target.checked ?? true
                       })
                     }}
                   />

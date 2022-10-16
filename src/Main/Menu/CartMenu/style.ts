@@ -2,12 +2,13 @@ import { makeStyles } from '@/makeStyles';
 
 const drawerWidth = 450;
 
-const useStyles = makeStyles<{ darkModeActive: boolean }>()(
-  (theme, { darkModeActive }) => ({
+const useStyles = makeStyles()(
+  (theme) => ({
     drawerPaper: {
       width: drawerWidth,
-      backgroundColor: darkModeActive ? '#121212e0' : '#ffffffeb',
-      [theme.breakpoints.down(400)]: {
+      backgroundImage: 'none',
+      backgroundColor: theme.palette.background.default,
+      [theme.breakpoints.down(1200)]: {
 
         opacity: 1,
         width: '100%',
@@ -21,16 +22,17 @@ const useStyles = makeStyles<{ darkModeActive: boolean }>()(
     CartGrid: {
       padding: 10,
       height: '80%',
+      backgroundColor: theme.palette.mode === 'light' ? '#fff' : '#0e121c',
     },
     mainPaper: {
       height: '100%',
       width: '95%',
     },
     typo: {
-      font: 'italic 1.2em "Fira Sans", serif',
+      font: 'italic 1.2em Times New Roman, serif',
     },
     typoTitre: {
-      font: 'italic 1.6em "Fira Sans", serif',
+      font: 'italic 1.6em Times New Roman, serif',
     },
   }),
 );

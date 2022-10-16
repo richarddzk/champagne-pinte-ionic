@@ -1,27 +1,27 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect } from 'react'
-import Image from 'next/future/image'
+import Image from '@/Utils/MidgardImage'
 import { Grid, Typography, Paper, Link } from '@mui/material'
 import { motion, useAnimation } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { useDarkMode } from 'next-dark-mode'
 import { v4 as uuid } from 'uuid'
 import { useSnackbar } from 'notistack'
+import useScreen from '@/Utils/hooks/useScreen'
+
 import PathLink from '@/Main/PathLink'
 import actionSnack from '@/Main/Menu/interfaces'
-import vendange2 from '../../../public/img/vigne/vendange2.webp'
-import cave1 from '../../../public/img/cave/cave6.webp'
-// import cave2 from '../../../public/img/cave/cave4.webp'
-import vigne from '../../../public/img/vigne/vigneExtrait1.webp'
-import pinteOr from '../../../public/img/logo/logoViergeAvecFleur14.webp'
-import bottle from '../../../public/img/logo/champBottle2.webp'
+import vendange2 from '../../../public/image/vigne/vendange2.webp'
+import vendange2Mob from '../../../public/image/vigne/vendange2Mob.webp'
+
+import cave1 from '../../../public/image/cave/cave6.webp'
+import pinteOr from '../../../public/image/logo/logoViergeAvecFleur14.webp'
+import bottle from '../../../public/image/logo/champBottleLogo.webp'
 import useStyles from './style'
 
-function HomeActu() {
+const HomeActu: React.FC = () => {
   const { classes } = useStyles()
-  const { darkModeActive } = useDarkMode()
   const { enqueueSnackbar, closeSnackbar } = useSnackbar()
-
+  const { isMob, isTablette } = useScreen()
   const comingSoon = () =>
     enqueueSnackbar('    Coming soon...!', {
       anchorOrigin: {
@@ -57,7 +57,7 @@ function HomeActu() {
       style={{
         maxWidth: '100%',
         textAlign: 'center',
-        paddingTop: 70
+        paddingTop: !isTablette ? 70 : 0
       }}
       justifyContent="center"
       direction="row"
@@ -65,7 +65,7 @@ function HomeActu() {
       <PathLink />
       <Grid style={{ justifyContent: 'center' }} container item xs={12}>
         <Grid item xs={12}>
-          <Typography className={classes.typoTitre} variant="h5">
+          <Typography color="primary" className={classes.typoTitre} variant="h5">
             Actualités de la Maison
           </Typography>
         </Grid>
@@ -85,32 +85,36 @@ function HomeActu() {
           }}
           elevation={5}
         >
-          <Image style={{ objectFit: 'cover' }} fill sizes="100vw" src={vendange2} alt="Logo" />
+          <Image
+            style={{ objectFit: 'cover' }}
+            fill
+            sizes="100vw"
+            src={isMob ? vendange2Mob : vendange2}
+            alt="Logo"
+            placeholder="blur"
+          />
         </Paper>
 
         <Grid className={classes.gridPaperText2}>
           <Paper className={classes.paperText2}>
             <Grid item xs={12}>
-              <Typography className={classes.typoTextBold} variant="h5">
+              <Typography className={classes.typoTitre} variant="h5">
                 Découvrir les vendanges
               </Typography>
             </Grid>
             <Grid item xs={12}>
               <Typography align="justify" className={classes.typoText} variant="h6">
-                À l'occasion des vendanges 2022, la Maison Pinte vous invite de fin août à
-                mi-septembre. les vendanges durent en général de 8 à 15 jours , nos vendanges sont
-                réalisées à la main et donc prennent plus de temps que les vendanges mécaniques, car
-                les grappes sont sélectionnées avec précaution pour l’élaboration des grands
-                champagnes.
+                À l'occasion des vendanges 2023, la Maison Pinte vous invite de fin août à
+                mi-septembre. La periode des vendanges est d'environ de 8 à 15 jours en fonction des
+                saison. Nos vendanges sont réalisées à la main et prennent par consequent plus de
+                temps que les vendanges mécaniques.
               </Typography>
-            </Grid>
-            <Grid item xs={12}>
               <Typography align="justify" className={classes.typoText} variant="h6">
-                Pour l’anecdote, ce ne sont pas les viticulteurs qui décident du début des
-                vendanges. Ils doivent attendre d’obtenir une autorisation préfectorale pour
-                commencer à vendanger leurs parcelles. Cela s’appelle "le ban des vendanges".
+                Primordial à l'élaboration de grand champagne, cette cueillette artisanale
+                selectionne les meilleures grappes avec précaution et preserve leurs arômes.
               </Typography>
             </Grid>
+
             <Grid item xs={12}>
               <Typography align="justify" className={classes.typoTextBold} variant="h6">
                 Venez (re)découvrir les vendanges de Champagne, prendre le déjeuner de vendanges,
@@ -119,9 +123,7 @@ function HomeActu() {
               </Typography>
 
               <Link
-                style={{
-                  color: darkModeActive ? '#fff' : '#000'
-                }}
+                color="primary"
                 className={classes.typoTextBold}
                 component="button"
                 variant="h5"
@@ -169,8 +171,7 @@ function HomeActu() {
                 </Grid>
                 <Grid item xs={12}>
                   <Typography align="justify" className={classes.typoTitreRaisin} variant="h5">
-                    Mise en place de certificat d'authenticité numérique (NFT) Plus d'infos,
-                    Tokenomics et NFTs à venir...
+                    <strong> Mise en place de certificat d'authenticité numérique (NFT) </strong>
                   </Typography>
                 </Grid>
               </Grid>
@@ -179,7 +180,7 @@ function HomeActu() {
           <Grid className={classes.gridNftContainer} item xs={8}>
             <motion.div key={uuid()} whileHover={{ scale: 1.05 }}>
               <Grid className={classes.gridNFT}>
-                <Typography className={classes.typoNftTitre} variant="h5">
+                <Typography className={classes.typoTitre} variant="h5">
                   Pourquoi avoir un NFT pour chaque bouteille de champagne
                 </Typography>
                 <Typography align="justify" className={classes.typoNftText} variant="h6">
@@ -194,16 +195,24 @@ function HomeActu() {
                   <strong>certification d’un produit ou d'un objet </strong>: nom du produit, nom du
                   producteur, nombre de bouteilles, taille, volume, support, etc.
                 </Typography>
+                <Typography align="justify" className={classes.typoTitre} variant="h6">
+                  Pourquoi avoir un NFT pour chaque bouteille de champagne ?
+                </Typography>
                 <Typography align="justify" className={classes.typoNftText} variant="h6">
-                  Pourquoi avoir un NFT pour chaque bouteille de champagne ? Afin de permettre à
-                  toutes personnes de certifier et d'identifier nos bouteilles de champagnes. C'est
-                  un <strong> certificat d’authenticité </strong>. Un certificat d’authenticité
-                  physique ne pouvant être identifié que par les personnes qui l’ont édité ou par
-                  des experts, dans le cas des NFT, tous les maillons de la chaîne (producteur,
-                  consommateur, revendeur, public, expert, etc.) peuvent{' '}
-                  <strong>vérifier l’authenticité de ce certificat</strong> dans la blockchain. Avec
-                  les NFT, la source de l’information est totalement fiable et l’information
-                  elle-même est certaine.
+                  Afin de permettre à toutes personnes de certifier et d'identifier nos bouteilles
+                  de champagnes. C'est un <strong>certificat d’authenticité</strong>. Les certificat
+                  physique ne pouvant être identifié que par les personnes qui l’ont édité, créé ou
+                  des expert, le NFT ne recquiert pas de 3 ème partie.
+                </Typography>
+                <Typography align="justify" className={classes.typoNftText} variant="h6">
+                  Tous les maillons de la chaîne (producteur, consommateur, revendeur, public,
+                  expert, etc.) peuvent <strong>vérifier l’authenticité de ce certificat</strong>{' '}
+                  grace au propriété du regisrtre distribué qui constitue la blockchain sur laquelle
+                  il est contruit.
+                </Typography>
+                <Typography align="justify" className={classes.typoNftText} variant="h6">
+                  Avec les NFT, le certificat est totalement <strong>immuable</strong>, vérifiable
+                  par le propriétaire et permet de prouver l'identité du propriété.
                 </Typography>
               </Grid>
             </motion.div>
@@ -239,7 +248,7 @@ function HomeActu() {
                   objectFit: 'cover'
                 }}
               >
-                <source src="/img/cave/cave4.mp4" type="video/mp4" />
+                <source src="/image/cave/cave4.mp4" type="video/mp4" />
               </video>
             </Grid>
           </Grid>
@@ -250,21 +259,34 @@ function HomeActu() {
             }}
             xs
           >
-            <Grid className={classes.gridImage} item xs>
-              <Image style={{ objectFit: 'cover' }} fill sizes="60vw" src={vigne} alt="Logo" />
-            </Grid>
-
+            {!isMob && (
+              <Grid className={classes.gridImage} item xs>
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  style={{
+                    width: '100%',
+                    height: 800,
+                    objectFit: 'cover'
+                  }}
+                >
+                  <source src="/image/vigne/videoVigne1.mp4" type="video/mp4" />
+                </video>
+              </Grid>
+            )}
             <Grid
               className={classes.gridRaisin}
               style={{
                 alignSelf: 'center',
-                padding: 25
+                padding: 25,
+                margin: 30
               }}
               item
               xs
             >
               <Grid item xs={12}>
-                <Typography className={classes.typoTextBold} variant="h5">
+                <Typography color="primary" className={classes.typoTitre} variant="h5">
                   Venez visiter notre Maison
                 </Typography>
               </Grid>
@@ -272,18 +294,15 @@ function HomeActu() {
               <Grid item xs={12}>
                 <Typography align="justify" className={classes.typoText} variant="h6">
                   La Maison Pinte ouvre ces portes et vous invite à déguster une coupe de champagne
-                  dans notre établissements et (re)découvrir toute la richesse des terroirs de
-                  Champagne, et le savoir-faire unique de notre Maison.
+                  dans notre établissements.
                 </Typography>{' '}
                 <Typography align="justify" className={classes.typoText} variant="h6">
-                  Pour accéder à cette offre, Pour acceder a cette offre vous devez être client ou
-                  le devenir en achetant une bouteille de Champagne AOC Pinte sur notre site
-                  internet ou directement chez nous à Lisse en Champagne.
+                  Pour accéder à cette offre, vous devez être client (ou le devenir) en achetant une
+                  bouteille de Champagne AOC Pinte sur notre site internet ou directement à un point
+                  de vente de notre maison.
                 </Typography>
                 <Link
-                  style={{
-                    color: darkModeActive ? '#fff' : '#000'
-                  }}
+                  color="primary"
                   className={classes.typoTextBold}
                   component="button"
                   variant="h5"

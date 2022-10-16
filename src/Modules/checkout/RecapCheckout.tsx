@@ -1,16 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import React, { useState } from 'react'
 import Grid from '@mui/material/Grid'
-import {
-  Button,
-  Divider,
-  Paper,
-  Step,
-  StepButton,
-  Stepper,
-  Typography,
-} from '@mui/material'
-import { useDarkMode } from 'next-dark-mode'
+import { Button, Divider, Paper, Step, StepButton, Stepper, Typography } from '@mui/material'
 import dynamic from 'next/dynamic'
 import { v4 as uuid } from 'uuid'
 import { useStripe, useElements } from '@stripe/react-stripe-js'
@@ -18,29 +9,26 @@ import LocalShippingIcon from '@mui/icons-material/LocalShipping'
 import LocalPostOfficeIcon from '@mui/icons-material/LocalPostOffice'
 import { useCart } from '@/Main/Providers/CartProvider'
 import loading2 from 'react-useanimations/lib/loading2'
+import Image from '@/Utils/MidgardImage'
+import { useDarkMode } from 'next-dark-mode'
 import useStyles from './style'
 import { RecapCheckoutProps } from './interface'
+import stripeW from '../../../public/image/utils/checkout/stripe2.webp'
+import stripeB from '../../../public/image/utils/checkout/stripe1.webp'
 
 const UseAnimations = dynamic(() => import('react-useanimations'), {
-  loading: () => <>...</>,
+  loading: () => <>...</>
 })
 
 const steps = [
   { label: 'Livraison', icon: <LocalShippingIcon /> },
-  { label: 'Facturation', icon: <LocalPostOfficeIcon /> },
+  { label: 'Facturation', icon: <LocalPostOfficeIcon /> }
 ]
 
 const RecapCheckout: React.FC<RecapCheckoutProps> = ({ props }) => {
-  const {
-    isLoading,
-    shippingMethod,
-    total,
-    addressLivraison,
-    addressFacturation,
-  } = props
+  const { isLoading, shippingMethod, total, addressLivraison, addressFacturation } = props
 
   const [activeStep, setActiveStep] = useState(0)
-
   const { darkModeActive } = useDarkMode()
 
   const stripe = useStripe()
@@ -52,18 +40,8 @@ const RecapCheckout: React.FC<RecapCheckoutProps> = ({ props }) => {
   const { Products } = useCart()
 
   return (
-    <Paper
-      style={{
-        padding: 10,
-        backgroundColor: darkModeActive ? '#28252166' : '#d9d9d929',
-        textAlign: 'center',
-      }}
-    >
-      <Grid
-        style={{ textAlign: 'end' }}
-        justifyContent="flex-end"
-        alignItems="flex-end"
-      >
+    <Paper className={classes.PaperRecapCheckout}>
+      <Grid style={{ textAlign: 'end' }} justifyContent="flex-end" alignItems="flex-end">
         <Typography className={classes.typoHeader} color="primary" variant="h5">
           Recapitulatif de la commande
         </Typography>
@@ -86,44 +64,32 @@ const RecapCheckout: React.FC<RecapCheckoutProps> = ({ props }) => {
             <Grid direction="row" justifyContent="space-between" container>
               <Grid item>
                 <Typography className={classes.typo} variant="h6">
-                  {activeStep === 0
-                    ? addressLivraison.firstName
-                    : addressFacturation.firstName}
+                  {activeStep === 0 ? addressLivraison.firstName : addressFacturation.firstName}
                 </Typography>
               </Grid>
               <Grid item>
                 <Typography className={classes.typo} variant="h6">
-                  {activeStep === 0
-                    ? addressLivraison.lastName
-                    : addressFacturation.lastName}
+                  {activeStep === 0 ? addressLivraison.lastName : addressFacturation.lastName}
                 </Typography>
               </Grid>
             </Grid>
             <Grid direction="row" justifyContent="space-between" container>
               <Grid item>
                 <Typography className={classes.typo} variant="h6">
-                  {activeStep === 0
-                    ? addressLivraison.address_1
-                    : addressFacturation.address_1}
+                  {activeStep === 0 ? addressLivraison.address_1 : addressFacturation.address_1}
                 </Typography>
               </Grid>
               <Grid item>
                 <Typography className={classes.typo} variant="h6">
-                  {activeStep === 0
-                    ? addressLivraison.address_2
-                    : addressFacturation.address_2}
+                  {activeStep === 0 ? addressLivraison.address_2 : addressFacturation.address_2}
                 </Typography>
               </Grid>
             </Grid>
             <Grid direction="row" justifyContent="space-between" container>
               <Grid item>
                 <Typography className={classes.typo} variant="h6">
-                  {activeStep === 0
-                    ? addressLivraison.state
-                    : addressFacturation.state}{' '}
-                  {activeStep === 0
-                    ? addressLivraison.zip
-                    : addressFacturation.zip}
+                  {activeStep === 0 ? addressLivraison.state : addressFacturation.state}{' '}
+                  {activeStep === 0 ? addressLivraison.zip : addressFacturation.zip}
                 </Typography>
               </Grid>
               <Grid item>
@@ -131,9 +97,7 @@ const RecapCheckout: React.FC<RecapCheckoutProps> = ({ props }) => {
                   <Typography className={classes.typo} variant="h6">
                     {
                       // eslint-disable-next-line no-nested-ternary
-                      activeStep === 0
-                        ? addressLivraison.country
-                        : addressFacturation.country
+                      activeStep === 0 ? addressLivraison.country : addressFacturation.country
                     }
                   </Typography>
                 )}
@@ -141,13 +105,7 @@ const RecapCheckout: React.FC<RecapCheckoutProps> = ({ props }) => {
             </Grid>
           </Grid>
         )}
-        <Grid
-          className={classes.center}
-          justifyContent="center"
-          alignItems="center"
-          item
-          xs={12}
-        >
+        <Grid className={classes.center} justifyContent="center" alignItems="center" item xs={12}>
           <Divider
             textAlign="center"
             variant="middle"
@@ -163,12 +121,7 @@ const RecapCheckout: React.FC<RecapCheckoutProps> = ({ props }) => {
             </Grid>
             {Products &&
               Object.keys(Products).map((product) => (
-                <Grid
-                  key={uuid()}
-                  direction="row"
-                  justifyContent="space-between"
-                  container
-                >
+                <Grid key={uuid()} direction="row" justifyContent="space-between" container>
                   <Grid item>
                     <Typography className={classes.typo} variant="h6">
                       {
@@ -213,13 +166,7 @@ const RecapCheckout: React.FC<RecapCheckoutProps> = ({ props }) => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid
-          className={classes.center}
-          justifyContent="center"
-          alignItems="center"
-          item
-          xs={12}
-        >
+        <Grid className={classes.center} justifyContent="center" alignItems="center" item xs={12}>
           <Divider
             textAlign="center"
             variant="middle"
@@ -249,10 +196,7 @@ const RecapCheckout: React.FC<RecapCheckoutProps> = ({ props }) => {
             </Grid>
             <Grid item>
               <Typography className={classes.typo} variant="h6">
-                {typeof total === 'string'
-                  ? (parseFloat(total) * 0.196).toFixed(2)
-                  : 0}{' '}
-                €
+                {typeof total === 'string' ? (parseFloat(total) * 0.196).toFixed(2) : 0} €
               </Typography>
             </Grid>
           </Grid>
@@ -274,13 +218,7 @@ const RecapCheckout: React.FC<RecapCheckoutProps> = ({ props }) => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid
-        className={classes.center}
-        justifyContent="center"
-        alignItems="center"
-        item
-        xs={12}
-      >
+      <Grid className={classes.center} justifyContent="center" alignItems="center" item xs={12}>
         <Divider
           textAlign="center"
           variant="middle"
@@ -309,14 +247,30 @@ const RecapCheckout: React.FC<RecapCheckoutProps> = ({ props }) => {
           )}
         </Button>
       ) : (
-        <Button
-          className={classes.typoButtonCommander}
-          variant="outlined"
-          disabled
-        >
+        <Button className={classes.typoButtonCommander} variant="outlined" disabled>
           Selectionnez un mode de livraison
         </Button>
       )}
+      <Grid
+        style={{
+          width: '100%',
+          height: '10vh',
+          position: 'relative',
+          overflow: ' auto'
+        }}
+        justifyContent="center"
+        alignItems="center"
+        item
+        xs={12}
+      >
+        <Image
+          src={darkModeActive ? stripeB : stripeW}
+          alt="Stripe"
+          style={{ objectFit: 'contain' }}
+          fill
+          sizes="100vw"
+        />
+      </Grid>
     </Paper>
   )
 }

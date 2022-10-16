@@ -2,7 +2,7 @@ import React from 'react'
 import { v4 as uuid } from 'uuid'
 import { Product } from '@/Modules/ProductItem/interfaces'
 import dynamic from 'next/dynamic'
-import { Grid, Skeleton } from '@mui/material'
+import { Grid, Skeleton, Typography } from '@mui/material'
 import { GET_PRODUCTS_products } from '../champagnes/__generated__/GET_PRODUCTS'
 import useStylesProduct from './stylesProduct'
 
@@ -22,11 +22,18 @@ export interface HomeProductProps {
   products?: GET_PRODUCTS_products[]
   backgroundColor?: string
   buttonPanier?: boolean
+  description?: boolean
 }
 
+const descriptionBrut = `Cuvée emblématique de la Maison depuis sa création, elle en est l'expression
+la plus accomplie et la plus aboutie.`
+const descriptionRose =
+  'Integration parfaite de toute la diversité des cépages révélant la complexité qui les caractérises.'
+
 const HomeProduct: React.FC<HomeProductProps> = React.memo(
-  ({ loading, products, backgroundColor, buttonPanier }) => {
+  ({ loading, products, backgroundColor, buttonPanier, description }) => {
     const { classes, theme } = useStylesProduct()
+    let descriptionElmt: JSX.Element | undefined
 
     return loading ? (
       <>
@@ -39,21 +46,31 @@ const HomeProduct: React.FC<HomeProductProps> = React.memo(
     ) : (
       <>
         {products &&
-          products.map((product) => (
-            <Grid key={uuid()} className={classes.gridImage} item>
-              <ProductComponentSwiper
-                product={product as unknown as Product}
-                classes={classes}
-                noProduct={!product}
-                height={600}
-                elevation={2}
-                theme={theme}
-                noTitle
-                backgroundColor={backgroundColor}
-                buttonPanier={buttonPanier}
-              />
-            </Grid>
-          ))}
+          products.map((product) => {
+            if (description) {
+              descriptionElmt = (
+                <Typography align="justify" className={classes.typoJust} variant="h5">
+                  {product.title?.toLowerCase() === 'brut' ? descriptionBrut : descriptionRose}
+                </Typography>
+              )
+            }
+            return (
+              <Grid key={uuid()} className={classes.gridImage} item>
+                <ProductComponentSwiper
+                  product={product as unknown as Product}
+                  classes={classes}
+                  noProduct={!product}
+                  height={600}
+                  elevation={2}
+                  theme={theme}
+                  noTitle
+                  backgroundColor={backgroundColor}
+                  description={descriptionElmt}
+                  buttonPanier={buttonPanier}
+                />
+              </Grid>
+            )
+          })}
       </>
     )
   }

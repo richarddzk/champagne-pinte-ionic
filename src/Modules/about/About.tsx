@@ -1,35 +1,42 @@
 import React, { useEffect } from 'react'
-import Image from 'next/future/image'
-import { Grid, Typography, Paper, Button } from '@mui/material'
-import { useDarkMode } from 'next-dark-mode'
+import Image from '@/Utils/MidgardImage'
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
+import Paper from '@mui/material/Paper'
+import Button from '@mui/material/Button'
 import { motion, useAnimation } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { v4 as uuid } from 'uuid'
 import PathLink from '@/Main/PathLink'
 import Map from '@/Utils/Map'
-import Main from '../../Main/Main'
-import chardonnay from '../../../public/img/utils/chardonnay.webp'
-import pinotNoir from '../../../public/img/utils/pinotNoir.webp'
-import pinotMeunier from '../../../public/img/utils/pinotMeunier.webp'
-import map from '../../../public/img/utils/cartes/mapFinal.webp'
-import pinteWhite from '../../../public/img/logo/pinteWhite.webp'
-import vignefam from '../../../public/img/vigne/vignefam10.webp'
-import france from '../../../public/img/utils/cartes/france.webp'
-import brutTable1 from '../../../public/img/table/brutTable1.webp'
-import pinteBlack from '../../../public/img/logo/pinteBlack.webp'
+import useScreen from '@/Utils/hooks/useScreen'
+import Loading from '@/Utils/Loading'
+import dynamic from 'next/dynamic'
 import useStyles from './style'
+
+import chardonnay from '../../../public/image/utils/chardonnay.webp'
+import pinotNoir from '../../../public/image/utils/pinotNoir.webp'
+import pinotMeunier from '../../../public/image/utils/pinotMeunier.webp'
+import map from '../../../public/image/utils/cartes/mapFinal.webp'
+import vignefam from '../../../public/image/vigne/vignefam10.webp'
+import vignefamMobile from '../../../public/image/vigne/vignefam11.webp'
+import france from '../../../public/image/utils/cartes/france.webp'
+import franceMob from '../../../public/image/utils/cartes/franceMob.webp'
+import brutTable1 from '../../../public/image/table/brutTable1.webp'
+import brutTable1Mobile from '../../../public/image/table/brutTable1Mobile.webp'
+import logo from '../../../public/image/logo/LogoSansFond.webp'
+
+const Main = dynamic(() => import('@/Main/Main'), {
+  loading: () => <Loading />
+})
 
 const About: React.FC = () => {
   const { classes } = useStyles()
-  const { darkModeActive } = useDarkMode()
   const { ref, inView } = useInView({
-    /* Optional options */
     threshold: 0
   })
-  // const { ref: refGrid1, inView: inView1 } = useInView({
-  //   /* Optional options */
-  //   threshold: 0,
-  // })
+  const { isWide, isMob, isTablette } = useScreen()
+
   const controls = useAnimation()
   useEffect(() => {
     if (inView) {
@@ -43,7 +50,7 @@ const About: React.FC = () => {
         style={{
           maxWidth: '100%',
           textAlign: 'center',
-          paddingTop: 70
+          paddingTop: !isTablette ? 70 : 0
         }}
         justifyContent="center"
         direction="row"
@@ -60,17 +67,26 @@ const About: React.FC = () => {
             }}
             elevation={5}
           >
-            <Image style={{ objectFit: 'cover' }} fill sizes="100vw" src={vignefam} alt="Logo" />
+            <Image
+              style={{ objectFit: 'cover' }}
+              fill
+              sizes="100vw"
+              src={isMob ? vignefamMobile : vignefam}
+              alt="Logo"
+              placeholder="blur"
+              // blurDataURL={isMob ? vignefamMobBlur : vignefamBlur}
+            />
           </Paper>
           <Grid
             style={{
               height: 0,
-              marginRight: 'auto'
+              padding: 0,
+              marginRight: !isMob ? 0 : 'auto'
             }}
           >
             <Paper className={classes.paperText} elevation={5}>
               <Grid item xs={12}>
-                <Typography className={classes.typoText} variant="h5">
+                <Typography className={classes.typoTitreRaisin} variant="h4">
                   Découvrir la Maison
                 </Typography>
               </Grid>
@@ -82,19 +98,17 @@ const About: React.FC = () => {
                 item
                 xs={12}
               >
-                <Image
-                  width={342 * 0.8}
-                  height={108 * 0.8}
-                  src={!darkModeActive ? pinteBlack : pinteWhite}
-                  alt="Logo"
-                />
+                <Image src={logo} alt="Logo" width={60} height={70} />
               </Grid>
               <Grid item xs={12}>
                 <Typography align="justify" className={classes.typoText} variant="h6">
-                  Née en 1990, Pinte est une Maison de champagne construite sur 3 générations.
-                  Située à Lisse-en-Champagne, le cépage chardonnay est la signature de la Maison
-                  Pinte. Son raisin, issu principalement du Vitryat et de la Côte des Blancs est au
-                  cœur de toutes ses cuvées.
+                  Née en 1990, la maison Pinte est le produit d'un travail construit sur 3
+                  générations. Située à Lisse-en-Champagne, le cépage chardonnay est la signature de
+                  la Maison.
+                </Typography>
+                <Typography align="justify" className={classes.typoText} variant="h6">
+                  Son raisin, issu principalement du Vitryat et de la Côte des Blancs est au cœur de
+                  toutes ses cuvées.
                 </Typography>
               </Grid>
             </Paper>
@@ -111,17 +125,25 @@ const About: React.FC = () => {
             }}
             elevation={5}
           >
-            <Image style={{ objectFit: 'cover' }} fill sizes="60vw" src={brutTable1} alt="Logo" />
+            <Image
+              style={{ objectFit: 'cover' }}
+              fill
+              sizes="60vw"
+              src={isTablette ? brutTable1Mobile : brutTable1}
+              alt="Logo"
+              placeholder="blur"
+              // blurDataURL={brutTable1Blur}
+            />
           </Paper>{' '}
           <Grid
             style={{
               height: 0,
-              marginLeft: 'auto'
+              marginLeft: isMob ? 'auto' : 0
             }}
           >
             <Paper className={classes.paperTextRight} elevation={5}>
               <Grid item xs={12}>
-                <Typography className={classes.typoText} variant="h5">
+                <Typography className={classes.typoTitreRaisin} variant="h4">
                   LA GRANDEUR EST UNE RICHESSE
                 </Typography>
               </Grid>
@@ -129,9 +151,12 @@ const About: React.FC = () => {
               <Grid item xs={12}>
                 <Typography align="justify" className={classes.typoText} variant="h6">
                   Assemblés à partir des trois cépages majoritaires de la Champagne, le Pinot Noir,
-                  le Pinot Meunier et le Chardonnay, nos champagnes sont issus des plus grands
-                  vignobles présents dans les 3 zones principales de la région. Leur richesse et
-                  leur abondance nous permettent donc de choisir ce qu'il y a de meilleur.
+                  le Pinot Meunier et le Chardonnay.
+                </Typography>
+                <Typography align="justify" className={classes.typoText} variant="h6">
+                  Nos champagnes sont issus des plus grands vignobles, présents dans les 3 zones
+                  principales de la Champagne. Leurs richesses et fertilité nous permettent de
+                  choisir ce qu'il y a de meilleur.
                 </Typography>
               </Grid>
             </Paper>
@@ -148,24 +173,47 @@ const About: React.FC = () => {
             }}
             elevation={5}
           >
-            <Image style={{ objectFit: 'cover' }} fill sizes="40vw" src={france} alt="Logo" />
+            <Image
+              style={{ objectFit: 'cover' }}
+              fill
+              sizes="40vw"
+              src={isTablette ? franceMob : france}
+              alt="Logo"
+            />
           </Paper>
           <Grid className={classes.paperImage}>
-            <Image src={map} alt="map" />
+            <Image
+              style={{
+                borderRadius: 10,
+                width: '100%',
+                height: 'auto'
+              }}
+              sizes="100vw"
+              src={map}
+              alt="map"
+            />
           </Grid>
-          <Grid className={classes.gridtextMap}>
+          <Grid
+            style={{
+              height: 0,
+              position: 'relative'
+            }}
+          >
             <Paper className={classes.paperTextRight2} elevation={5}>
               <Grid item xs={12}>
-                <Typography className={classes.typoText} variant="h5">
-                  3 cépages majoritaires de la Champagne,
+                <Typography className={classes.typoTitreRaisin} variant="h4">
+                  3 cépages majoritaires de la Champagne
                 </Typography>
               </Grid>
               <Grid item xs={12}>
                 <Typography align="justify" className={classes.typoText} variant="h6">
                   Terroir du Vitryat, de la Côte des Blancs et de la Vallée de la marne: Ces
                   vignobles reposent sur la craie que l’on distingue à l’œil nu et qui a donné son
-                  nom à ce terroir. Le Chardonnay emblamtique de notre maison, est comme un roi, il
-                  exprime ici tout son potentiel et donne des vins d’une grande tenue.
+                  nom à ce terroir.
+                </Typography>
+                <Typography align="justify" className={classes.typoText} variant="h6">
+                  Le Chardonnay emblématique de notre maison, y est comme un roi, il exprime ici
+                  tout son potentiel et donne des vins d’exception.
                 </Typography>
               </Grid>
             </Paper>
@@ -187,11 +235,19 @@ const About: React.FC = () => {
           <Grid
             className={classes.gridtextRaisin}
             container
-            direction="row"
+            direction={!isTablette ? 'row' : 'column'}
             justifyContent="space-around"
+            rowSpacing={5}
           >
-            <Grid className={classes.gridRaisin} item xs>
-              <motion.div key={uuid()} whileHover={{ scale: 1.05 }}>
+            <Grid
+              className={classes.gridRaisin}
+              style={{
+                maxWidth: 530
+              }}
+              item
+              xs
+            >
+              <motion.div key={uuid()} whileHover={{ scale: isWide ? 1.05 : 1 }}>
                 <Grid>
                   <Grid
                     style={{
@@ -202,7 +258,7 @@ const About: React.FC = () => {
                     item
                   >
                     <Image
-                      style={{ objectFit: 'cover' }}
+                      style={{ borderRadius: 10, objectFit: 'cover' }}
                       fill
                       sizes="20vw"
                       src={chardonnay}
@@ -215,18 +271,24 @@ const About: React.FC = () => {
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
-                    <Typography align="justify" className={classes.typoRaisin} variant="h5">
-                      Le Chardonnay représente 90% de notre vignoble et est utilisé pour son
-                      élégance, son acidité et sa fraîcheur, révélant des notes d’agrumes et de
-                      fleurs blanches.
+                    <Typography textAlign="justify" className={classes.typoRaisin} variant="h5">
+                      Le Chardonnay représente 90% de notre vignoble, utilisé pour son élégance, se
+                      caractérisent par des arômes délicats.
                     </Typography>
                   </Grid>
                 </Grid>
               </motion.div>
             </Grid>
 
-            <Grid className={classes.gridRaisin} item xs>
-              <motion.div key={uuid()} whileHover={{ scale: 1.05 }}>
+            <Grid
+              className={classes.gridRaisin}
+              style={{
+                maxWidth: 530
+              }}
+              item
+              xs
+            >
+              <motion.div key={uuid()} whileHover={{ scale: isWide ? 1.05 : 1 }}>
                 <Grid>
                   <Grid
                     style={{
@@ -237,7 +299,7 @@ const About: React.FC = () => {
                     item
                   >
                     <Image
-                      style={{ objectFit: 'cover' }}
+                      style={{ borderRadius: 10, objectFit: 'cover' }}
                       fill
                       sizes="20vw"
                       src={pinotNoir}
@@ -250,17 +312,24 @@ const About: React.FC = () => {
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
-                    <Typography align="justify" className={classes.typoRaisin} variant="h5">
-                      Le Pinot Noir est utilisé pour son corps, sa structure et son intensité,
-                      révélant des notes de fruits rouges.
+                    <Typography textAlign="justify" className={classes.typoRaisin} variant="h5">
+                      Le Pinot Noir est utilisé pour son corps, donnant des notes de fruits rouges
+                      et une structure marquée.
                     </Typography>
                   </Grid>
                 </Grid>
               </motion.div>
             </Grid>
 
-            <Grid className={classes.gridRaisin} item xs>
-              <motion.div key={uuid()} whileHover={{ scale: 1.05 }}>
+            <Grid
+              className={classes.gridRaisin}
+              style={{
+                maxWidth: 530
+              }}
+              item
+              xs
+            >
+              <motion.div key={uuid()} whileHover={{ scale: isWide ? 1.05 : 1 }}>
                 <Grid>
                   <Grid
                     style={{
@@ -271,7 +340,7 @@ const About: React.FC = () => {
                     item
                   >
                     <Image
-                      style={{ objectFit: 'cover' }}
+                      style={{ borderRadius: 10, objectFit: 'cover' }}
                       fill
                       sizes="20vw"
                       src={pinotMeunier}
@@ -284,9 +353,9 @@ const About: React.FC = () => {
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
-                    <Typography align="justify" className={classes.typoRaisin} variant="h5">
-                      Le Pinot Meunier est utilisé pour sa souplesse, sa rondeur et son charnu,
-                      révélant des notes de fruits à chair blanche.
+                    <Typography textAlign="justify" className={classes.typoRaisin} variant="h5">
+                      Le Pinot Meunier que nous utilisons ici pour sa rondeur et son charnu. Il
+                      donne des vins souples révélant des notes de fruits à chair blanche.
                     </Typography>
                   </Grid>
                 </Grid>
@@ -294,28 +363,20 @@ const About: React.FC = () => {
             </Grid>
           </Grid>
         </motion.div>
-        <Grid
-          style={{
-            paddingTop: 150
-          }}
-          container
-          alignItems="center"
-          justifyContent="center"
-          direction="row"
-        >
+        <Grid container alignItems="center" justifyContent="center" direction="row">
           <Grid style={{ marginTop: '10%' }} item xs={12}>
-            <Typography className={classes.typoTextBold} variant="h4">
+            <Typography className={classes.typoAdresse} variant="h4">
               Où nous trouver ?
             </Typography>
           </Grid>
           <Grid item className={classes.gridMapLisse}>
             <Grid className={classes.mapLisse} item>
-              <Map layer={1} />
+              <Map />
             </Grid>
           </Grid>
           <Grid item xs={12}>
             <Typography className={classes.typoAdresse} variant="h4">
-              1 Grand Rue, Lisse-en-Champagne, 51300 Champagne
+              6 Grand Rue, Lisse-en-Champagne, 51300 Champagne
             </Typography>
           </Grid>
           <Grid container justifyContent="center" className={classes.mapButton}>

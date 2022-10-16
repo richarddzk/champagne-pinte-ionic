@@ -1,15 +1,13 @@
 import React from 'react'
-import Image from 'next/future/image'
+import Image from '@/Utils/MidgardImage'
 import dynamic from 'next/dynamic'
 import Box from '@mui/material/Box'
 
 import Loading from '@/Utils/Loading'
 
 import countries from 'i18n-iso-countries'
-import enLocale from 'i18n-iso-countries/langs/en.json'
 import frLocale from 'i18n-iso-countries/langs/fr.json'
 import Autocomplete from '@mui/material/Autocomplete'
-import useI18n from './hooks/use-i18n'
 
 const TextField = dynamic(() => import('@mui/material/TextField'), {
   loading: () => <Loading />
@@ -26,11 +24,9 @@ interface CountrySelectProps {
 }
 
 const CountrySelect: React.FC<CountrySelectProps> = ({ country, setCountry }) => {
-  const i18n = useI18n()
-  const { activeLocale } = i18n
-  countries.registerLocale(activeLocale === 'fr' ? frLocale : enLocale)
+  countries.registerLocale(frLocale)
 
-  const countryObj = countries.getNames(activeLocale, { select: 'official' })
+  const countryObj = countries.getNames('fr', { select: 'official' })
   const tmp: { label: string; value: string }[] = []
   let countryArr: { label: string; value: string }[] = Object.entries(countryObj).reduce(
     (acc: { label: string; value: string }[], [key, value]) => {
@@ -51,6 +47,7 @@ const CountrySelect: React.FC<CountrySelectProps> = ({ country, setCountry }) =>
   )
 
   countryArr = [...tmp, ...countryArr]
+
   return (
     <Autocomplete
       aria-label="CountrySelect"
@@ -58,6 +55,7 @@ const CountrySelect: React.FC<CountrySelectProps> = ({ country, setCountry }) =>
       fullWidth
       options={countryArr}
       autoHighlight
+      disablePortal
       disableClearable
       getOptionLabel={(option) => option.label ?? 'Aucun Pays selectionné'}
       value={country}
@@ -75,7 +73,7 @@ const CountrySelect: React.FC<CountrySelectProps> = ({ country, setCountry }) =>
         return true
       }}
       renderOption={(props, option) => (
-        <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+        <Box component="li" sx={{ '& > image': { mr: 2, flexShrink: 0 } }} {...props}>
           <Image
             width="20"
             height="15"
@@ -91,8 +89,7 @@ const CountrySelect: React.FC<CountrySelectProps> = ({ country, setCountry }) =>
           aria-label="CountrySelect"
           label="Pays"
           inputProps={{
-            ...params.inputProps,
-            autoComplete: 'new-password' // disable autocomplete and autofill
+            ...params.inputProps
           }}
         />
       )}

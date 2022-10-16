@@ -1,14 +1,13 @@
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
-import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasketOutlined'
 import { Button, Grid, Typography } from '@mui/material'
 import { useDarkMode } from 'next-dark-mode'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { useCart } from '@/Main/Providers/CartProvider'
 import { v4 as uuid } from 'uuid'
-import useI18n from '../../Utils/hooks/use-i18n'
 import CartItem from './CartItem'
 import useStyles from './style'
+import ButtonStyled from '../ButtonStyled'
 
 interface ImageObject {
   src: string
@@ -51,8 +50,6 @@ interface CartProps {
 
 const Cart: React.FC<CartProps> = () => {
   const { Products, tt, cartOpen, setCartOpen } = useCart()
-  const i18n = useI18n()
-  const { activeLocale } = i18n
   const router = useRouter()
   const { darkModeActive } = useDarkMode()
 
@@ -63,7 +60,7 @@ const Cart: React.FC<CartProps> = () => {
   }
   const handleProduct = () => {
     handleToggle()
-    router.push(`/${activeLocale}/champagnes`)
+    router.push('/champagnes')
   }
 
   return (
@@ -88,6 +85,9 @@ const Cart: React.FC<CartProps> = () => {
         </Grid>
       ) : (
         <Grid justifyContent="center" alignItems="center">
+          <Typography className={classes.typo} variant="h6">
+            Votre Panier ({tt} Article{tt !== 1 && 's'})
+          </Typography>
           {Products &&
             Object.keys(Products).map((item) => {
               // @ts-ignore
@@ -99,10 +99,8 @@ const Cart: React.FC<CartProps> = () => {
 
       <Grid
         item
-        container
-        justifyContent="space-between"
+        justifyContent="justify"
         alignContent="center"
-        direction="row"
         className={tt !== 0 ? classes.gridCard : classes.gridCardEmpty}
       >
         {tt !== 0 && (
@@ -110,16 +108,44 @@ const Cart: React.FC<CartProps> = () => {
             Total: {calculateTotal(Products ?? []).toFixed(2)} €
           </Typography>
         )}
-        <Button
-          startIcon={<ShoppingBasketIcon sx={{ fontSize: 40 }} color="primary" />}
+      </Grid>
+
+      <Grid
+        item
+        justifyContent="center"
+        alignContent="center"
+        className={tt !== 0 ? classes.gridCard : classes.gridCardEmpty}
+      >
+        {tt > 0 &&
+        <ButtonStyled
+          width={200}
+          title="Voir le panier"
+          fullybackground={1}
           onClick={() => {
             handleToggle()
-            router.push(`/${activeLocale}/panier`)
+            router.push('/panier')
           }}
-          className={classes.typo}
-        >
-          Panier
-        </Button>
+          // startIcon={<ShoppingBasketIcon sx={{ fontSize: 40 }} color="primary" />}
+        />}
+      </Grid>
+      <Grid
+        item
+        justifyContent="center"
+        alignContent="center"
+        className={tt !== 0 ? classes.gridCard : classes.gridCardEmpty}
+      >
+        {tt > 0 &&
+        <ButtonStyled
+          width={200}
+          title="Commander"
+          fullybackground={1}
+          onClick={() => {
+            handleToggle()
+            router.push('/paiement')
+          }}
+          // startIcon={<ShoppingBasketIcon sx={{ fontSize: 40 }} color="primary" />}
+        />}
+
       </Grid>
     </Grid>
   )

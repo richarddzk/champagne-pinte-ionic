@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useRouter } from 'next/router'
-import Image from 'next/future/image'
+import Image from '@/Utils/MidgardImage'
 import dynamic from 'next/dynamic'
 import { useSnackbar } from 'notistack'
 
@@ -11,8 +11,6 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import ButtonStyled from '@/Main/ButtonStyled'
 import useStyles from '@/Main/style'
 import AlcoolLegalList from '@/Utils/AlcoolLegalList'
-
-import useMediaQuery from '@mui/material/useMediaQuery'
 import Dialog from '@mui/material/Dialog'
 import DialogTitle from '@mui/material/DialogTitle'
 import Grid from '@mui/material/Grid'
@@ -20,9 +18,13 @@ import Typography from '@mui/material/Typography'
 import DialogContent from '@mui/material/DialogContent'
 import Link from '@mui/material/Link'
 
-import infoTriLogo from '../../../public/img/logo/infoTri.webp'
-import infoCaloriesLogoW from '../../../public/img/logo/infoCalories.webp'
-import mainLogoB from '../../../public/img/logo/MainLogoChampBlack.webp'
+import { useDarkMode } from 'next-dark-mode'
+import CountrySelect from '@/Utils/CountrySelect'
+import { GlobalStyles } from 'tss-react'
+import useScreen from '@/Utils/hooks/useScreen'
+import infoTriLogo from '../../../public/image/logo/infoTri.webp'
+import infoCaloriesLogoW from '../../../public/image/logo/infoCalories.webp'
+import mainLogoB from '../../../public/image/logo/MainLogoChampBlack.webp'
 
 export const ACCEPT_CONDITIONS = 'ACCEPT_CONDITIONS_CHAMPAGNE_PINTE'
 
@@ -34,9 +36,6 @@ const SkeletonFallBack = dynamic(() => import('./SkeletonFallBack'), {
   loading: () => <Loading />
 })
 
-const CountrySelect = dynamic(() => import('@/Utils/CountrySelect'), {
-  loading: () => <Loading />
-})
 const TextField = dynamic(() => import('@mui/material/TextField'), {
   loading: () => <Loading />
 })
@@ -57,10 +56,13 @@ const ConditionsDialog: React.FC<ConditionsDialogProps> = ({ conditionsAccepted 
 
   const { enqueueSnackbar } = useSnackbar()
   const router = useRouter()
+  const { darkModeActive, switchToLightMode } = useDarkMode()
+  React.useEffect(() => {
+    if (darkModeActive) switchToLightMode()
+  }, [])
+  const { classes } = useStyles()
 
-  const { classes, theme } = useStyles()
-
-  const fullScreen = useMediaQuery(theme.breakpoints.down('md'))
+  const { isMob } = useScreen()
 
   const StoreConditionAccepted = () => {
     const current = new Date().getFullYear()
@@ -75,7 +77,7 @@ const ConditionsDialog: React.FC<ConditionsDialogProps> = ({ conditionsAccepted 
         ACCEPT_CONDITIONS,
         JSON.stringify({ alcool: { allow: true }, cookies: { allow: true } })
       )
-      router.push('/home')
+      router.push('/accueil')
     } else {
       enqueueSnackbar('Vous n etes pas autorisé légalement à acceder à ce site', {
         anchorOrigin: {
@@ -88,7 +90,25 @@ const ConditionsDialog: React.FC<ConditionsDialogProps> = ({ conditionsAccepted 
   }
 
   return (
-    <Dialog fullScreen={fullScreen} open aria-labelledby="responsive-dialog-title">
+    <Dialog
+      fullScreen={isMob ? true : undefined}
+      open
+      aria-labelledby="responsive-dialog-title"
+      PaperProps={{
+        sx: {
+          borderRadius: 20,
+          borderStyle: 'solid',
+          overflow: 'hidden'
+        }
+      }}
+    >
+      <GlobalStyles
+        styles={{
+          '.MuiAutocomplete-listbox': {
+            height: 300
+          }
+        }}
+      />
       <DialogTitle id="responsive-dialog-title">
         <Grid item style={{ textAlign: 'center' }} xs={12}>
           <Image
@@ -105,11 +125,11 @@ const ConditionsDialog: React.FC<ConditionsDialogProps> = ({ conditionsAccepted 
         ) : (
           <>
             <Typography className={classes.typoBody1}>
-              Pour visiter notre site, vous devez être en âge de consommer de l'alcool dans votre
-              pays/région. S'il n'y a pas d'âge légal de consommation, vous devez avoir plus de 21
-              ans.
+              L’abus d’alcool est dangereux pour la santé. À consommer avec modération
             </Typography>
-            <Typography className={classes.typoTitle}>PAYS / RÉGION & DATE DE NAISSANCE</Typography>
+            <Typography className={classes.typoTitle} variant="body2">
+              PAYS / RÉGION & DATE DE NAISSANCE
+            </Typography>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <CountrySelect country={country_local} setCountry={setCountry_local} noTitle />
@@ -131,8 +151,8 @@ const ConditionsDialog: React.FC<ConditionsDialogProps> = ({ conditionsAccepted 
 
               <Grid item style={{ textAlign: 'center' }} xs={12}>
                 <ButtonStyled
-                  height={50}
-                  width={150}
+                  height={!isMob ? 50 : 25}
+                  width={!isMob ? 150 : 75}
                   title="Valider"
                   onClick={() => StoreConditionAccepted()}
                 />
@@ -156,10 +176,13 @@ const ConditionsDialog: React.FC<ConditionsDialogProps> = ({ conditionsAccepted 
                       priority
                       className={classes.infoCalories}
                       onClick={() => {
-                        window.location.href = 'https://info-calories-alcool.org/'
+                        window.open('https://info-calories-alcool.org/', '_blank')
                       }}
                       alt="infoCaloriesLogoB"
-                      style={{ width: 225 * 0.32, height: 193 * 0.32 }}
+                      style={{
+                        width: !isMob ? 225 * 0.32 : 225 * 0.2,
+                        height: !isMob ? 193 * 0.32 : 193 * 0.2
+                      }}
                       src={infoCaloriesLogoW}
                     />
                   </Grid>
@@ -172,7 +195,7 @@ const ConditionsDialog: React.FC<ConditionsDialogProps> = ({ conditionsAccepted 
                   <Grid item className={classes.typoBody2} xs={10}>
                     <Typography
                       onClick={() => {
-                        window.location.href = 'https://www.triercestdonner.fr/guide-du-tri'
+                        window.open('https://www.triercestdonner.fr/guide-du-tri', '_blank')
                       }}
                       variant="body2"
                       gutterBottom
@@ -183,10 +206,13 @@ const ConditionsDialog: React.FC<ConditionsDialogProps> = ({ conditionsAccepted 
                   <Grid item xs={2}>
                     <Image
                       onClick={() => {
-                        window.location.href = 'https://www.triercestdonner.fr/guide-du-tri'
+                        window.open('https://www.triercestdonner.fr/guide-du-tri', '_blank')
                       }}
                       alt="mainLogoB"
-                      style={{ width: 180 * 0.25, height: 178 * 0.25 }}
+                      style={{
+                        width: !isMob ? 178 * 0.25 : 178 * 0.2,
+                        height: !isMob ? 180 * 0.25 : 180 * 0.2
+                      }}
                       src={infoTriLogo}
                     />
                   </Grid>

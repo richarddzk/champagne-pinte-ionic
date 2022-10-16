@@ -2,11 +2,11 @@ import { encode } from 'blurhash'
 
 export const loadImage = async (src: string) =>
   new Promise<HTMLImageElement>((resolve, reject) => {
-    const img = new Image()
-    img.onload = () => resolve(img)
-    img.onerror = (...args) => reject(args)
-    img.src = src
-    return img
+    const image = new Image()
+    image.onload = () => resolve(image)
+    image.onerror = (...args) => reject(args)
+    image.src = src
+    return image
   })
 
 export const getImageData = (image: HTMLImageElement) => {

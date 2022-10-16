@@ -3,7 +3,7 @@ import Loading from '@/Utils/Loading'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { ACCEPT_CONDITIONS } from './ConditionsDialog'
-import sceauChampBlur from '../../../public/img/table/sceauChampBlur.webp'
+import sceauChampBlur from '../../../public/image/table/sceauChampBlur.webp'
 
 const ConditionsDialog = dynamic(() => import('./ConditionsDialog'), {
   loading: () => <Loading />
@@ -35,7 +35,7 @@ const Intro: React.FC = () => {
   }, [])
   if (conditionsAccepted) {
     if (conditionsAccepted && conditionsAccepted.alcool.allow && conditionsAccepted.cookies.allow) {
-      router.push('/home')
+      router.push('/accueil')
     }
   }
   if (conditionsAccepted === false) {
