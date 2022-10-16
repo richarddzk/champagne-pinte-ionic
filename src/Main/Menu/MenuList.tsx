@@ -31,7 +31,7 @@ const MenuList: React.FC<MenuListProps> = () => {
         <Image
           priority
           onClick={() => {
-            router.push('/')
+            router.push('/accueil')
           }}
           className={classes.homeLogo}
           alt="mainLogoB"

@@ -119,9 +119,12 @@ const Footer: React.FC<FooterProps> = ({ account, paddingLeft }) => {
               <Grid container justifyContent="center" item>
                 <Image
                   placeholder="blur"
+                  onClick={() => {
+                    router.push('/accueil')
+                  }}
                   className={classes.homeLogo}
                   alt="mainLogoB"
-                  style={{ width: 85.5, height: 60.75 }}
+                  style={{ width: 85.5, height: 60.75, cursor: 'pointer' }}
                   src={!darkModeActive ? mainLogoB : mainLogoW}
                 />
               </Grid>
@@ -211,7 +214,10 @@ const Footer: React.FC<FooterProps> = ({ account, paddingLeft }) => {
                 alt="shiny"
                 placeholder="blur"
                 id="shiny"
-                style={{ width: 150, height: 80 }}
+                onClick={() => {
+                  router.push('/accueil')
+                }}
+                style={{ width: 150, height: 80, cursor: 'pointer' }}
                 src={logo2}
               />
             </Grid>
@@ -299,9 +305,12 @@ const Footer: React.FC<FooterProps> = ({ account, paddingLeft }) => {
                   item
                 >
                   <Image
+                    onClick={() => {
+                      window.open('https://stripe.com/', '_blank')
+                    }}
                     src={darkModeActive ? stripeB : stripeW}
                     alt="Stripe"
-                    style={{ objectFit: 'contain' }}
+                    style={{ objectFit: 'contain', cursor: 'pointer' }}
                     fill
                     sizes="100vw"
                   />
@@ -319,8 +328,14 @@ const Footer: React.FC<FooterProps> = ({ account, paddingLeft }) => {
                 >
                   <Image
                     src={legal}
-                    alt="Stripe"
-                    style={{ objectFit: 'contain' }}
+                    onClick={() => {
+                      window.open(
+                        'https://www.permis-de-exploitation.com/394-l-alcool-au-mineur.html',
+                        '_blank'
+                      )
+                    }}
+                    alt="legal"
+                    style={{ objectFit: 'contain', cursor: 'pointer' }}
                     fill
                     sizes="100vw"
                   />

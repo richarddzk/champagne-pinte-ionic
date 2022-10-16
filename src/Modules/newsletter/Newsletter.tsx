@@ -9,7 +9,7 @@ import * as Yup from 'yup'
 import SEND_NEWSLETTER_CONFIRMATION from '@/Main/requests'
 import PathLink from '@/Main/PathLink'
 import LoginIcon from '@mui/icons-material/Login'
-import Router from 'next/router'
+import Router, { useRouter } from 'next/router'
 import { useAuth } from '@/Main/auth-provider/AuthProvider'
 
 import { Main } from '../../Main'
@@ -21,6 +21,7 @@ const Newsletter: React.FC = () => {
   const [emailLocal, setEmailLocal] = useState<string | undefined>(undefined)
 
   const { classes } = useStyles()
+  const router = useRouter()
 
   const { darkModeActive } = useDarkMode()
 
@@ -76,6 +77,9 @@ const Newsletter: React.FC = () => {
               <Image
                 alt="mainLogoB"
                 className={classes.homeLogo}
+                onClick={() => {
+                  router.push('/accueil')
+                }}
                 width={85.5}
                 height={60.75}
                 src={!darkModeActive ? mainLogoB : mainLogoW}

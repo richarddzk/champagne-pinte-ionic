@@ -15,7 +15,7 @@ import vendange2Mob from '../../../public/image/vigne/vendange2Mob.webp'
 
 import cave1 from '../../../public/image/cave/cave6.webp'
 import pinteOr from '../../../public/image/logo/logoViergeAvecFleur14.webp'
-import bottle from '../../../public/image/logo/champBottleLogo.webp'
+import bottle from '../../../public/image/logo/champBottleLogo2.webp'
 import useStyles from './style'
 
 const HomeActu: React.FC = () => {

@@ -11,12 +11,16 @@ import { GlobalStyles } from 'tss-react'
 
 const referential = {
   '/actualites': { name: 'Actualités ', path: 'actualites' },
-  '/lamaison': { name: 'Notre Maison ', path: 'about' },
-  '/champagnes': { name: 'Nos Champagnes', path: 'champagnes' },
-  '/produit/[id]': { name: 'Nos Champagnes ', path: 'champagnes' },
-  '/panier': { name: 'Votre Panier ', path: 'Panier' },
-  '/savoirfaire': { name: 'Savoir Faire ', path: 'savoirfaire' },
-  '/newsletter': { name: 'Newsletter ', path: 'newsletter' }
+  '/lamaison': { name: 'Notre maison ', path: 'about' },
+  '/champagnes': { name: 'Nos champagnes', path: 'champagnes' },
+  '/produit/[id]': { name: 'Nos champagnes ', path: 'champagnes' },
+  '/panier': { name: 'Votre panier ', path: 'Panier' },
+  '/notresavoirfaire': { name: 'Notre savoir faire ', path: 'notresavoirfaire' },
+  '/newsletter': { name: 'Newsletter ', path: 'newsletter' },
+  '/charte': { name: 'Charte données personnelles & cookies ', path: 'charte' },
+  '/conditions': { name: 'Conditions générales d’utilisation ', path: 'conditions' },
+  '/confirmEmail': { name: 'Email de confirmation ', path: 'confirmEmail' },
+  '/changePassword': { name: 'Changer votre mot de passe ', path: 'changePassword' }
 }
 
 const PathLink: React.FC = () => {
@@ -46,7 +50,7 @@ const PathLink: React.FC = () => {
           component="button"
           variant="body2"
           onClick={() => {
-            router.push('  /accueil')
+            router.push('/accueil')
           }}
         >
           <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
