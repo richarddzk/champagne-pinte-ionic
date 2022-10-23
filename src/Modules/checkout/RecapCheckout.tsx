@@ -39,6 +39,11 @@ const RecapCheckout: React.FC<RecapCheckoutProps> = ({ props }) => {
   }
   const { Products } = useCart()
 
+  const TT = total ? parseFloat(total) : 0
+  const TVA = TT * 0.196
+  const SHIPPING = shippingMethod ? shippingMethod.price : 0
+  const TTC = TT + TVA + SHIPPING
+
   return (
     <Paper className={classes.PaperRecapCheckout}>
       <Grid style={{ textAlign: 'end' }} justifyContent="flex-end" alignItems="flex-end">
@@ -138,17 +143,6 @@ const RecapCheckout: React.FC<RecapCheckoutProps> = ({ props }) => {
                       }
                     </Typography>
                   </Grid>
-                  <Grid item>
-                    <Typography className={classes.typo} variant="h6">
-                      {
-                        // @ts-ignore
-                        Products[`${product}`].amount *
-                          // @ts-ignore
-                          parseInt(Products[`${product}`].price, 10)
-                      }{' '}
-                      €
-                    </Typography>
-                  </Grid>
                 </Grid>
               ))}
           </Grid>
@@ -161,7 +155,7 @@ const RecapCheckout: React.FC<RecapCheckoutProps> = ({ props }) => {
             </Grid>
             <Grid item>
               <Typography className={classes.typo} variant="h6">
-                {shippingMethod ? shippingMethod.price : 0} €
+                {SHIPPING} €
               </Typography>
             </Grid>
           </Grid>
@@ -182,7 +176,7 @@ const RecapCheckout: React.FC<RecapCheckoutProps> = ({ props }) => {
             </Grid>
             <Grid item>
               <Typography className={classes.typo} variant="h6">
-                {typeof total === 'string' ? parseFloat(total) : 0} €
+                {TT.toFixed(2)} €
               </Typography>
             </Grid>
           </Grid>
@@ -196,7 +190,7 @@ const RecapCheckout: React.FC<RecapCheckoutProps> = ({ props }) => {
             </Grid>
             <Grid item>
               <Typography className={classes.typo} variant="h6">
-                {typeof total === 'string' ? (parseFloat(total) * 0.196).toFixed(2) : 0} €
+                {TVA.toFixed(2)} €
               </Typography>
             </Grid>
           </Grid>
@@ -210,9 +204,7 @@ const RecapCheckout: React.FC<RecapCheckoutProps> = ({ props }) => {
             </Grid>
             <Grid item>
               <Typography className={classes.typo} variant="h6">
-                {(shippingMethod ? shippingMethod.price : 0) +
-                  (typeof total === 'string' ? parseInt(total, 10) : 0)}{' '}
-                €
+                {TTC.toFixed(2)} €
               </Typography>
             </Grid>
           </Grid>

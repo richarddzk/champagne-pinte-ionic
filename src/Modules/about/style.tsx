@@ -1,5 +1,5 @@
-import { Theme } from '@mui/material/styles'
 import { makeStyles } from '@/makeStyles'
+import { Theme } from '@mui/system'
 
 const useStyles = makeStyles()((theme: Theme) => ({
   container: {
@@ -22,6 +22,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
   GridPaperVigne: {
     paddingLeft: '10%',
     justifyContent: 'center',
+    paddingBottom: 50,
     [theme.breakpoints.down(1501)]: {
       padding: 0,
       margin: 80,
@@ -220,8 +221,11 @@ const useStyles = makeStyles()((theme: Theme) => ({
     }
   },
   GridPaperChamp: {
-    paddingTop: 100,
+    paddingTop: 50,
     paddingRight: '10%',
+    backgroundColor: theme.palette.background.second,
+    paddingBottom: 50,
+
     justifyContent: 'center',
     [theme.breakpoints.down(1501)]: {
       padding: 0,
@@ -278,7 +282,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
     marginBottom: 50,
 
     color: theme.palette.mode === 'dark' ? 'white' : 'black',
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: theme.palette.background.second,
     ':hover': {
       boxShadow:
         '0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%);'
@@ -314,8 +318,10 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
   GridPaperMap: {
     paddingLeft: '10%',
-    paddingTop: 100,
+    paddingTop: 50,
     justifyContent: 'center',
+    paddingBottom: 50,
+
     [theme.breakpoints.down(1600)]: {
       padding: 0,
       margin: 80,
@@ -358,15 +364,10 @@ const useStyles = makeStyles()((theme: Theme) => ({
     }
   },
   gridtextRaisin: {
+    width: '100%',
     alignItems: 'center',
-    maxWidth: '100%',
-    padding: 100,
-
-    [theme.breakpoints.down('xl')]: {
-      padding: 0,
-      paddingBottom: 100,
-      paddingTop: 100
-    }
+    paddingBottom: 50,
+    backgroundColor: theme.palette.background.second
   },
 
   gridPaperRight: {

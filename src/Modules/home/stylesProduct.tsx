@@ -32,29 +32,25 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
   gridImage: {
     maxWidth: '30%',
-    minWidth: 300,
+    minWidth: 500,
 
     borderBottomRightRadius: 10,
     borderBottomLeftRadius: 10,
     [theme.breakpoints.down(850)]: {
       minWidth: 500,
-      paddingBottom: 280
+      paddingBottom: 100
     },
     [theme.breakpoints.down(520)]: {
-      minWidth: 400,
-      paddingBottom: 280
+      minWidth: 400
     },
     [theme.breakpoints.down(420)]: {
-      minWidth: 300,
-      paddingBottom: 280
+      minWidth: 300
     },
     [theme.breakpoints.down(320)]: {
-      minWidth: 200,
-      paddingBottom: 280
+      minWidth: 200
     },
     [theme.breakpoints.down(220)]: {
-      minWidth: 150,
-      paddingBottom: 280
+      minWidth: 150
     }
   },
   gridProductContainer: {

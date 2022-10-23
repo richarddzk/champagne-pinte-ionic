@@ -177,7 +177,7 @@ const Checkout: React.FC<CheckoutProps> = (props) => {
               </Grid>
             </Grid>
             <Typography className={classes.typoHeader} color="primary" variant="h6">
-              Verifier et valider votre commande
+              Votre commande
             </Typography>
             <Grid justifyContent="center" alignItems="center">
               {Products &&

@@ -116,17 +116,18 @@ const Cart: React.FC<CartProps> = () => {
         alignContent="center"
         className={tt !== 0 ? classes.gridCard : classes.gridCardEmpty}
       >
-        {tt > 0 &&
-        <ButtonStyled
-          width={200}
-          title="Voir le panier"
-          fullybackground={1}
-          onClick={() => {
-            handleToggle()
-            router.push('/panier')
-          }}
-          // startIcon={<ShoppingBasketIcon sx={{ fontSize: 40 }} color="primary" />}
-        />}
+        {tt > 0 && (
+          <ButtonStyled
+            width={200}
+            title="Voir le panier"
+            fullybackground
+            onClick={() => {
+              handleToggle()
+              router.push('/panier')
+            }}
+            // startIcon={<ShoppingBasketIcon sx={{ fontSize: 40 }} color="primary" />}
+          />
+        )}
       </Grid>
       <Grid
         item
@@ -134,18 +135,18 @@ const Cart: React.FC<CartProps> = () => {
         alignContent="center"
         className={tt !== 0 ? classes.gridCard : classes.gridCardEmpty}
       >
-        {tt > 0 &&
-        <ButtonStyled
-          width={200}
-          title="Commander"
-          fullybackground={1}
-          onClick={() => {
-            handleToggle()
-            router.push('/paiement')
-          }}
-          // startIcon={<ShoppingBasketIcon sx={{ fontSize: 40 }} color="primary" />}
-        />}
-
+        {tt > 0 && (
+          <ButtonStyled
+            width={200}
+            title="Commander"
+            fullybackground
+            onClick={() => {
+              handleToggle()
+              router.push('/paiement')
+            }}
+            // startIcon={<ShoppingBasketIcon sx={{ fontSize: 40 }} color="primary" />}
+          />
+        )}
       </Grid>
     </Grid>
   )

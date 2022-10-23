@@ -51,7 +51,7 @@ const Menu: React.FC<MenuProps> = (props) => {
   const direction = !isTablette ? 'down' : 'up'
 
   const lock = fixed || isTablette
-
+  const backgroundColor = darkModeActive ? '#010510!important' : '#f6f6f6!important'
   return (
     <>
       <GlobalStyles
@@ -60,16 +60,16 @@ const Menu: React.FC<MenuProps> = (props) => {
             color: '#bd9f57'
           },
           '& .SnackbarItem-variantInfo': {
-            backgroundColor: darkModeActive ? '#12121291!important' : '#ffffffd9 !important'
+            backgroundColor
           },
           '& .SnackbarItem-variantSuccess': {
-            backgroundColor: !darkModeActive ? '#c2ffb3 !important' : '#268d0d !important'
+            backgroundColor
           },
           '& .SnackbarItem-variantError': {
-            backgroundColor: !darkModeActive ? '#ffc6c6 !important' : '#930f0f !important'
+            backgroundColor
           },
           '& .SnackbarItem-variantWarning': {
-            backgroundColor: !darkModeActive ? '#fbf8d0 !important' : '#fff144 !important'
+            backgroundColor
           },
           '*': {
             scrollbarWidth: 'thin',
@@ -178,7 +178,7 @@ const Menu: React.FC<MenuProps> = (props) => {
                 ) : (
                   <Grid
                     style={{
-                      placeContent: 'center',
+                      placeContent: 'center'
                     }}
                     direction="row"
                     container

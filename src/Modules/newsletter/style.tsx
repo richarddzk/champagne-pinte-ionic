@@ -29,11 +29,10 @@ const useStyles = makeStyles()((theme: Theme) => ({
     bottom: 300,
     color: theme.palette.mode === 'dark' ? 'white' : 'black',
     backgroundColor: theme.palette.background.second,
-    ':hover': {
-      boxShadow:
-        '0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%);'
-    },
-    marginBottom: 100
+    boxShadow:
+      '0px 6px 6px -3px rgb(0 0 0 / 20%), 0px 10px 14px 1px rgb(0 0 0 / 14%), 0px 4px 18px 3px rgb(0 0 0 / 12%);',
+    marginBottom: 100,
+    marginTop: 100
   }
 }))
 export default useStyles

@@ -17,7 +17,6 @@ const SwitchLang: React.FC<SwitchLangProps> = ({ onClick, css }) => {
     onClick()
   }
   const router = useRouter()
-  const defaultLang = router.locale === 'default'
 
   const height = 15
   const width = 25
@@ -25,13 +24,14 @@ const SwitchLang: React.FC<SwitchLangProps> = ({ onClick, css }) => {
     <Select
       labelId="select-lang"
       id="select"
-      value={defaultLang ? 'fr' : router.locale}
+      value="fr"
       onChange={handleChange}
       variant="outlined"
       className={css({
         marginLeft: 10,
         maxHeight: 30,
-        maxWidth: 70
+        maxWidth: 70,
+        paddingTop: 5
       })}
       inputProps={{
         classe: {
@@ -41,14 +41,24 @@ const SwitchLang: React.FC<SwitchLangProps> = ({ onClick, css }) => {
         }
       }}
     >
-      <MenuItem value="fr">
+      <MenuItem
+        className={css({
+          paddingTop: 10
+        })}
+        value="fr"
+      >
         <Link href={`${router.pathname}`} locale="fr">
           <ListItemIcon>
             <Image height={height} width={width} src={fr} alt="fr" />
           </ListItemIcon>
         </Link>
       </MenuItem>
-      <MenuItem value="en">
+      <MenuItem
+        className={css({
+          marginTop: 10
+        })}
+        value="en"
+      >
         <Link href={`/${router.pathname}`} locale="en">
           <ListItemIcon>
             <Image height={height} width={width} src={en} alt="en" />

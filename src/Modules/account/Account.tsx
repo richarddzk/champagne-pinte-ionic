@@ -180,7 +180,11 @@ const Account: React.FC<{
           <FireNav>
             <Tooltip title={open ? 'Fermer le menu' : 'Ouvrir le menu'}>
               <ListItemButton onClick={() => setOpen(!open)} component="a" href="#customized-list">
-                <ListItemIcon>
+                <ListItemIcon
+                  sx={{
+                    paddingLeft: open ? 3 : 0
+                  }}
+                >
                   {' '}
                   <Image src={logo} alt="Logo" width={30} height={35} />
                 </ListItemIcon>
@@ -221,7 +225,6 @@ const Account: React.FC<{
                     }}
                   />
                   <ListItemText
-                    primary="Menu"
                     primaryTypographyProps={{
                       color: 'primary'
                     }}

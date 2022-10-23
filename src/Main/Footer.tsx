@@ -17,10 +17,11 @@ import mainLogoB from '../../public/image/logo/MainLogoChampBlack.webp'
 import mainLogoW from '../../public/image/logo/MainLogoChampWhite.webp'
 import logo2 from '../../public/image/logo/pintechamplisse2Or.webp'
 import SEND_NEWSLETTER_CONFIRMATION from './requests'
-import actionSnack, { PageMap, MediaMap } from './Menu/interfaces'
+import { PageMap, MediaMap } from './Menu/interfaces'
 import stripeB from '../../public/image/utils/checkout/stripe1.webp'
 import stripeW from '../../public/image/utils/checkout/stripe2.webp'
 import legal from '../../public/image/logo/fr-legal.webp'
+import ButtonStyled from './ButtonStyled'
 
 const UseAnimations = dynamic(() => import('react-useanimations'), {
   loading: () => <>...</>
@@ -41,16 +42,8 @@ const Footer: React.FC<FooterProps> = ({ account, paddingLeft }) => {
 
   const [sendNewsletterConfirmation] = useMutation(SEND_NEWSLETTER_CONFIRMATION)
 
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar()
-  const comingSoon = () =>
-    enqueueSnackbar('    Coming soon...!', {
-      anchorOrigin: {
-        vertical: 'bottom',
-        horizontal: 'center'
-      },
-      variant: 'info',
-      action: (key) => actionSnack(key, closeSnackbar)
-    })
+  const { enqueueSnackbar } = useSnackbar()
+
   const SendNewsletterConfirmation = async () => {
     const schema = Yup.object().shape({
       email: Yup.string().email().required()
@@ -86,7 +79,7 @@ const Footer: React.FC<FooterProps> = ({ account, paddingLeft }) => {
 
     return true
   }
-  const { isWide } = useScreen()
+  const { isWide, isTablette } = useScreen()
 
   return (
     <Grid className={classes.gridFooter} style={{ maxWidth: '100%' }} container direction="column">
@@ -143,8 +136,8 @@ const Footer: React.FC<FooterProps> = ({ account, paddingLeft }) => {
                   Ne rien manquer de l'actualité de la Maison !
                 </Typography>
                 <Typography style={{ maxWidth: '100%', padding: 10 }} variant="body1">
-                  Inscrivez vous à la Newsletter afin de découvrir le monde de la maison Pinte et
-                  rester informé de nos lancements et événements futurs.
+                  Inscrivez-vous à la Newsletter afin de découvrir le monde de la maison Pinte et
+                  rester informé de nos lancements et évènements futurs.
                 </Typography>
 
                 <Paper
@@ -176,7 +169,7 @@ const Footer: React.FC<FooterProps> = ({ account, paddingLeft }) => {
                     }}
                   >
                     {' '}
-                    {isWide && 'Soumettre'}
+                    {!isTablette && 'Soumettre'}
                   </Button>
                 </Paper>
               </Grid>
@@ -236,7 +229,6 @@ const Footer: React.FC<FooterProps> = ({ account, paddingLeft }) => {
                     key={uuid()}
                     strokeColor="#CCBF90"
                     size={45}
-                    onClick={comingSoon}
                     loop={compo.loop}
                     // wrapperStyle={{ marginTop: '5px' }}
                     animation={compo.icon}
@@ -284,7 +276,7 @@ const Footer: React.FC<FooterProps> = ({ account, paddingLeft }) => {
               <Grid
                 style={{
                   width: '100%',
-                  height: '10vh',
+                  height: '100%',
                   position: 'relative',
                   overflow: ' auto'
                 }}
@@ -295,38 +287,65 @@ const Footer: React.FC<FooterProps> = ({ account, paddingLeft }) => {
               >
                 <Grid
                   style={{
-                    width: '50%',
+                    width: '33%',
                     height: '10vh',
+                    minWidth: 180,
+
                     position: 'relative',
-                    overflow: ' auto'
+                    overflow: 'hidden',
+                    textAlign: 'right'
                   }}
                   justifyContent="center"
                   alignItems="center"
                   item
                 >
                   <Image
+                    width={300 * 0.6}
+                    height={168 * 0.6}
                     onClick={() => {
                       window.open('https://stripe.com/', '_blank')
                     }}
                     src={darkModeActive ? stripeB : stripeW}
                     alt="Stripe"
-                    style={{ objectFit: 'contain', cursor: 'pointer' }}
-                    fill
-                    sizes="100vw"
+                    style={{ cursor: 'pointer' }}
                   />
                 </Grid>
                 <Grid
                   style={{
-                    width: '50%',
+                    width: '33%',
+                    minWidth: 150,
                     height: '10vh',
                     position: 'relative',
-                    overflow: ' auto'
+                    overflow: 'hidden',
+                    textAlign: 'center'
+                  }}
+                  item
+                >
+                  {' '}
+                  <ButtonStyled
+                    title="Nous contacter"
+                    key={uuid()}
+                    onClick={() => {
+                      router.push('/nousContacter')
+                    }}
+                  />
+                </Grid>
+                <Grid
+                  style={{
+                    width: '33%',
+                    height: '10vh',
+                    minWidth: 189,
+                    position: 'relative',
+                    overflow: 'hidden',
+                    textAlign: 'left'
                   }}
                   justifyContent="center"
-                  alignItems="center"
+                  alignContent="center"
                   item
                 >
                   <Image
+                    width={315 * 0.6}
+                    height={151 * 0.6}
                     src={legal}
                     onClick={() => {
                       window.open(
@@ -335,9 +354,7 @@ const Footer: React.FC<FooterProps> = ({ account, paddingLeft }) => {
                       )
                     }}
                     alt="legal"
-                    style={{ objectFit: 'contain', cursor: 'pointer' }}
-                    fill
-                    sizes="100vw"
+                    style={{ cursor: 'pointer' }}
                   />
                 </Grid>
               </Grid>

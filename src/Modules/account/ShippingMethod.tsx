@@ -8,6 +8,7 @@ import { v4 as uuid } from 'uuid'
 import { SHIPPING_METHODS } from '@/Modules/checkout/Request'
 import dynamic from 'next/dynamic'
 import { SHIPPINGS_shippings, SHIPPINGS } from '../checkout/__generated__/SHIPPINGS'
+import useStyles from './style'
 
 const Loading = dynamic(() => import('@/Utils/Loading'), {
   loading: () => <>...</>
@@ -22,6 +23,7 @@ export interface ShippingMethodProps {
 
 const ShippingMethod: React.FC<ShippingMethodProps> = (props) => {
   const { shippingMethod, setShippingMethod, isSubmitting } = props
+  const { classes } = useStyles()
 
   const { loading, data } = useQuery<SHIPPINGS>(SHIPPING_METHODS, {
     fetchPolicy: 'network-only'
@@ -47,6 +49,7 @@ const ShippingMethod: React.FC<ShippingMethodProps> = (props) => {
           name="radio-buttons-group"
           value={shippingMethod.id ?? 0}
           onChange={handleChange}
+          className={classes.shippingRadioButton}
         >
           {shippings &&
             shippings.map((shipping) => (
@@ -57,7 +60,7 @@ const ShippingMethod: React.FC<ShippingMethodProps> = (props) => {
                 justifyContent="space-between"
                 spacing={2}
               >
-                <Grid item>
+                <Grid color="secondary" item>
                   <FormControlLabel
                     value={shipping.id}
                     control={

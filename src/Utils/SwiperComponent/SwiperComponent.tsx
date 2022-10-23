@@ -44,8 +44,9 @@ const SwiperComponent: React.FC<SwiperComponentProps> = ({ items, backgroundColo
             <Image
               alt={item.name}
               onClick={onClick}
-              sizes="40vw"
+              sizes="100vw"
               fill
+              style={{ objectFit: 'cover' }}
               className="mySwiper2image"
               src={item.src}
               placeholder={item.blur ? 'blur' : undefined}

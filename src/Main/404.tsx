@@ -24,7 +24,7 @@ const Error404Page = () => {
           <ButtonStyled
             width={250}
             height={50}
-            fullybackground={1}
+            fullybackground
             title="Page d'accueil"
             onClick={() => {
               push('/accueil')

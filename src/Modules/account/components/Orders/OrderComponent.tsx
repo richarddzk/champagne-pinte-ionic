@@ -18,6 +18,7 @@ import { Stepper, Step, StepButton, TypeBackground } from '@mui/material'
 import { steps } from '@/Modules/checkout/RecapCheckout'
 import { v4 as uuid } from 'uuid'
 import useScreen from '@/Utils/hooks/useScreen'
+import router from 'next/router'
 import { OrdersProps } from './interfaces'
 import useStyles from '../../style'
 
@@ -391,7 +392,7 @@ const OrderComponent: React.FC<OrdersProps> = (props) => {
                               <Grid direction="row" justifyContent="space-between" container>
                                 <Grid item>
                                   <Typography className={classes.typo} variant="h6">
-                                    {facturation.state} {facturation.zip}
+                                    {facturation.city} {facturation.zip}
                                   </Typography>
                                 </Grid>
                                 <Grid item>
@@ -406,7 +407,14 @@ const OrderComponent: React.FC<OrdersProps> = (props) => {
                     </Grid>
                   </>
                 )}
-                <Button className={classes.typoOrderLines}>Contacter Service Apres vente</Button>
+                <Button
+                  onClick={() => {
+                    router.push('/nousContacter')
+                  }}
+                  className={classes.typoOrderLines}
+                >
+                  Contacter Service Apres vente
+                </Button>
               </AccordionDetails>
             </Accordion>
           )

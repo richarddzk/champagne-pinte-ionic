@@ -19,7 +19,7 @@ const ConditionsGeneral: React.FC = () => {
     <Main>
       <Grid className={classes.grid}>
         <Typography className={classes.titre}>Conditions générales d’utilisation</Typography>
-        <Typography className={classes.titre3}>Dernière mise à jour : Janvier 2021</Typography>
+        <Typography className={classes.titre3}>Dernière mise à jour : Novembre 2022</Typography>
         <Typography className={classes.titre3}>1. EDITEUR – CONTACT</Typography>
         <Typography className={classes.body1}>
           Le site Internet www.champagne-pinte.com (ci-après le "Site") est édité par EARL Pinte,
@@ -163,9 +163,6 @@ const ConditionsGeneral: React.FC = () => {
         </Typography>
         <Typography className={classes.titre3}>1.3 COMPORTEMENT DES UTILISATEURS</Typography>
         <Typography className={classes.body1}>Chaque utilisateur du Site garantit :</Typography>
-        <Typography className={classes.body1}>
-          L’utilisateur doit notamment s’abstenir de :{' '}
-        </Typography>
 
         <List dense sx={{ width: '100%', bgcolor: 'background.paper' }}>
           <ListItem>
@@ -219,7 +216,7 @@ const ConditionsGeneral: React.FC = () => {
             </ListItemIcon>
             <ListItemText
               id="télécharger"
-              primary="télécharger vers le Site,
+              primary="Télécharger vers le Site,
               afficher, envoyer par courrier électronique ou transmettre par tout
               autre moyen tout élément contenant des virus logiciels, ou autres
               codes, fichiers ou programmes informatiques conçus pour interrompre,
@@ -233,7 +230,7 @@ const ConditionsGeneral: React.FC = () => {
             </ListItemIcon>
             <ListItemText
               id="perturber"
-              primary="perturber ou interrompre le fonctionnement du Site, des serveurs ou
+              primary="Perturber ou interrompre le fonctionnement du Site, des serveurs ou
               réseaux connectés au Site ou enfreindre les exigences, procédures,
               règles ou réglementations s’y rapportant ; "
             />
@@ -244,7 +241,7 @@ const ConditionsGeneral: React.FC = () => {
             </ListItemIcon>
             <ListItemText
               id="atteinte"
-              primary=" tenter de porter atteinte
+              primary="Tenter de porter atteinte
               au fonctionnement du Site , notamment en exposant le Site à un virus,
               en causant une surcharge de consultation (bande passante), en
               surchargeant le serveur, en envoyant des spams ou en surchargeant le
@@ -257,7 +254,7 @@ const ConditionsGeneral: React.FC = () => {
             </ListItemIcon>
             <ListItemText
               id="pas destinées"
-              primary="consulter des informations qui ne lui
+              primary="Consulter des informations qui ne lui
               sont pas destinées ou accéder à un serveur ou un compte auquel
               l’utilisateur n’est pas autorisé à accéder ; "
             />
@@ -268,7 +265,7 @@ const ConditionsGeneral: React.FC = () => {
             </ListItemIcon>
             <ListItemText
               id="chercher à évaluer"
-              primary=" chercher à évaluer, à
+              primary="Chercher à évaluer, à
               constater ou à tester la vulnérabilité du Site, ou enfreindre les
               mesures de sécurité ou d’authentification du Site sans l’accord écrit
               préalable de la Société; "
@@ -280,7 +277,7 @@ const ConditionsGeneral: React.FC = () => {
             </ListItemIcon>
             <ListItemText
               id="exercer une activité illégale"
-              primary="  exercer une activité illégale ou toute autre
+              primary=" Exercer une activité illégale ou toute autre
               activité susceptible de porter préjudice aux droits de la Société, de
               ses fournisseurs, prestataires, détaillants, annonceurs ou autres
               personnes, et s’abstenir d’y inciter des tiers ;"
@@ -292,7 +289,7 @@ const ConditionsGeneral: React.FC = () => {
             </ListItemIcon>
             <ListItemText
               id="junk mails, des spams, des chaînes de lettres"
-              primary=" télécharger vers le
+              primary="Télécharger vers le
               Site, transmettre, poster ou mettre par tout moyen à disposition des
               éléments publicitaires ou promotionnels non sollicités ou non
               autorisés, des junk mails, des spams, des chaînes de lettres ou
@@ -305,7 +302,7 @@ const ConditionsGeneral: React.FC = () => {
             </ListItemIcon>
             <ListItemText
               id="obscène, menaçant, violent,"
-              primary="  télécharger vers le Site,
+              primary="Télécharger vers le Site,
               afficher, envoyer par courrier électronique ou transmettre un contenu
               illégal, préjudiciable, diffamatoire, offensant, raciste, vulgaire,
               obscène, menaçant, violent, contraire aux bonnes mœurs, portant
@@ -319,7 +316,7 @@ const ConditionsGeneral: React.FC = () => {
             </ListItemIcon>
             <ListItemText
               id="donacheter de l’alcoolnées"
-              primary="envoyer par courrier
+              primary="Envoyer par courrier
               électronique ou transmettre par tout autre moyen tout contenu du Site
               à destination de personnes n’ayant pas l’âge légal pour consommer
               et/ou acheter de l’alcool dans leur lieu de résidence ou résidant dans
@@ -412,8 +409,8 @@ const ConditionsGeneral: React.FC = () => {
             </ListItemIcon>
             <ListItemText
               id="linterruption"
-              primary=" pour toute interruption du
-              Site ; "
+              primary="Pour toute interruption du
+              Site "
             />
           </ListItem>
           <ListItem>
@@ -422,8 +419,8 @@ const ConditionsGeneral: React.FC = () => {
             </ListItemIcon>
             <ListItemText
               id="survenance de bogues"
-              primary=" en cas de survenance de bogues, de virus informatiques,
-              d’erreurs d’affichage ou de téléchargement ;"
+              primary="En cas de survenance de bogues, de virus informatiques,
+              d’erreurs d’affichage ou de téléchargement"
             />
           </ListItem>
           <ListItem>
@@ -432,8 +429,8 @@ const ConditionsGeneral: React.FC = () => {
             </ListItemIcon>
             <ListItemText
               id="inexactitude"
-              primary=" pour toute inexactitude
-              ou omission portant sur le Contenu disponible sur le Site ;  "
+              primary="Pour toute inexactitude
+              ou omission portant sur le Contenu disponible sur le Site"
             />
           </ListItem>
           <ListItem>
@@ -442,8 +439,8 @@ const ConditionsGeneral: React.FC = () => {
             </ListItemIcon>
             <ListItemText
               id="intrusion"
-              primary=" pour tous
-              dommages résultant d'une intrusion frauduleuse d'un tiers ;  "
+              primary="Pour tous
+              dommages résultant d'une intrusion frauduleuse d'un tiers  "
             />
           </ListItem>
           <ListItem>
@@ -452,7 +449,7 @@ const ConditionsGeneral: React.FC = () => {
             </ListItemIcon>
             <ListItemText
               id="dommages directs"
-              primary=" et plus
+              primary="Plus
               généralement pour tous les dommages directs et indirects, quelles
               qu'en soient les causes ou conséquences, pouvant survenir à la suite
               de l'accès au Site et résultant d’une quelconque information provenant

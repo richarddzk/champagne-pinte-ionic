@@ -205,13 +205,13 @@ interface SvgCustomProps extends ButtonUnstyledProps {
   color?: string
   width: number
   height: number
-  fullybackground?: number
+  fullybackground?: boolean | undefined
 }
 
 const SvgButton = React.forwardRef((props: SvgCustomProps, ref: React.ForwardedRef<any>) => (
   <ButtonUnstyled
     {...props}
-    component={props.fullybackground === 1 ? CustomFullyButtonRoot : CustomButtonRoot}
+    component={props.fullybackground ? CustomFullyButtonRoot : CustomButtonRoot}
     ref={ref}
   />
 ))
@@ -224,8 +224,9 @@ interface ButtonCustom {
   color?: string
   width?: number
   height?: number
-  fullybackground?: number
+  fullybackground?: boolean | undefined
   startIcon?: any
+  type?: 'button' | 'reset' | 'submit' | undefined
 }
 export default function UnstyledButtonCustom(props: ButtonCustom) {
   const { image, title, style, onClick, color, width, height, fullybackground, startIcon } = props
@@ -238,6 +239,7 @@ export default function UnstyledButtonCustom(props: ButtonCustom) {
   return (
     <>
       <SvgButton
+        {...props}
         width={width ?? 150}
         height={height ?? 50}
         color={xcolor}

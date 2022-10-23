@@ -100,7 +100,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
   FormCheckout: {
     backgroundColor: theme.palette.background.default,
-    borderRadius: 'none',
+
     [theme.breakpoints.down(1200)]: {
       width: '100%'
     },

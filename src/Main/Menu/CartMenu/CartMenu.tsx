@@ -10,7 +10,6 @@ import {
   Drawer,
   Grid,
   IconButton,
-  ListItemIcon,
   Tooltip
 } from '@mui/material'
 import { v4 as uuid } from 'uuid'
@@ -30,7 +29,6 @@ import Cart from '@/Main/Cart'
 import { Product } from '@/Modules/ProductItem/interfaces'
 import { userVariables, user } from '@/Modules/account/__generated__/user'
 import { ApolloQueryResult } from '@apollo/client'
-import settings from 'react-useanimations/lib/settings'
 import { useCart } from '@/Main/Providers/CartProvider'
 import { useAuth } from '../../auth-provider/AuthProvider'
 import iconWallet from '../../../../public/image/crypto/iconWallet.webp'
@@ -39,9 +37,6 @@ import SwitchLang from '../SwitchLang'
 import actionSnack from '../interfaces'
 import useStyles from './style'
 
-const UseAnimations = dynamic(() => import('react-useanimations'), {
-  loading: () => <>...</>
-})
 const MenuIcon = dynamic(() => import('@/Utils/BButton'), {
   loading: () => <>...</>
 })
@@ -259,7 +254,13 @@ const CartMenu: React.FC<CartMenuProps> = ({ open, onClose }) => {
         <Grid direction="column" container>
           <Divider />
 
-          <Grid direction="row" justifyContent="space-between" alignItems="center" container>
+          <Grid
+            direction="row"
+            sx={{ paddingTop: 1 }}
+            justifyContent="space-between"
+            alignItems="center"
+            container
+          >
             <Grid item>
               <MenuIcon
                 isOpen={open}
@@ -272,17 +273,7 @@ const CartMenu: React.FC<CartMenuProps> = ({ open, onClose }) => {
                 style={menuButtonStyle}
               />
             </Grid>
-            <Grid item>
-              <ListItemIcon>
-                <UseAnimations
-                  strokeColor="#CCBF90"
-                  size={45}
-                  // wrapperStyle={{ marginTop: '5px' }}
-                  animation={settings}
-                  onClick={comingSoon}
-                />
-              </ListItemIcon>
-            </Grid>
+
             <Grid item>
               <DarkModeSwitch
                 checked={!darkModeActive}

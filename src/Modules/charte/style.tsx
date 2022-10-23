@@ -32,6 +32,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
   titre4: {
     textAlign: 'center',
+    paddingTop: 25,
     paddingBottom: 25,
     fontWeight: 'bold',
     font: ' 2em Times New Roman, serif'
@@ -42,6 +43,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
     font: ' 1.2em '
   },
   body1: {
+    paddingTop: 25,
     paddingBottom: 25,
     font: '1.2em ',
     textAlign: 'justify'

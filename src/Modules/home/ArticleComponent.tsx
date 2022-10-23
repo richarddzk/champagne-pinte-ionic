@@ -100,7 +100,7 @@ const ArticleComponent: React.FC<ArticleComponentProps> = React.memo(
                     <ButtonStyled
                       width={250}
                       height={50}
-                      fullybackground={1}
+                      fullybackground
                       title={buttonTitle ?? ''}
                       onClick={() => {
                         // eslint-disable-next-line @typescript-eslint/no-unused-expressions

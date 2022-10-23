@@ -193,6 +193,9 @@ const useStyles = makeStyles()((theme: Theme) => ({
     bottom: 300,
     left: '50%'
   },
+  center: {
+    textAlign: '-webkit-center' as any
+  },
   paperTextLeft: {
     textAlign: '-webkit-center' as any,
     bottom: 480,

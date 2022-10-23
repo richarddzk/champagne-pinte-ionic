@@ -26,12 +26,6 @@ const Champagnes: React.FC = () => {
       <Grid className={classes.gridProduct}>
         <Grid style={{ justifyContent: 'center' }} container item xs={12}>
           <PathLink />
-
-          <Grid item xs={12}>
-            <Typography color="primary" className={classes.typoTitre} variant="h5">
-              Nos Champagnes
-            </Typography>
-          </Grid>
         </Grid>
         <Grid className={classes.GridPaperVigne} container item xs={12}>
           <Paper className={classes.paperImage} elevation={5}>
@@ -68,6 +62,9 @@ const Champagnes: React.FC = () => {
               </Typography>
             </Grid>
           </Paper>
+        </Grid>
+        <Grid className={classes.center} justifyContent="center" alignItems="center" item xs={12}>
+          <Grid textAlign="center" style={{ marginTop: 50, marginBottom: 50, width: '50%' }} />
         </Grid>
         <Grid
           container

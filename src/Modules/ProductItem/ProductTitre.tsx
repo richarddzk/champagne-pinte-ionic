@@ -24,9 +24,7 @@ const TitreRose: React.FC<TitreProduitProps> = (props) => {
   const { darkModeActive } = useDarkMode()
 
   const { addProduct, setCartOpen, cartOpen } = useCart()
-  const handleToggle = () => {
-    setCartOpen(!cartOpen)
-  }
+
   const tarif = parseFloat(product.price.toString())
   const price = (qtyProduct ?? 0) * tarif
   const prix = ` - ${price}€`
@@ -80,9 +78,9 @@ const TitreRose: React.FC<TitreProduitProps> = (props) => {
             width={(qtyProduct ?? 0) > 0 ? 350 : 200}
             onClick={() => {
               if (qtyProduct && qtyProduct > 0) {
+                setCartOpen(!cartOpen)
                 addProduct(product, qtyProduct)
               }
-              handleToggle()
             }}
             title={`Ajouter au panier ${(qtyProduct ?? 0) > 0 ? prix : ''}`}
             height={55}
@@ -129,9 +127,7 @@ const TitreBrut: React.FC<TitreProduitProps> = (props) => {
   const { darkModeActive } = useDarkMode()
 
   const { addProduct, setCartOpen, cartOpen } = useCart()
-  const handleToggle = () => {
-    setCartOpen(!cartOpen)
-  }
+
   const tarif = parseFloat(product.price.toString())
   const price = (qtyProduct ?? 0) * tarif
   const prix = ` - ${price}€`
@@ -182,9 +178,9 @@ const TitreBrut: React.FC<TitreProduitProps> = (props) => {
             width={(qtyProduct ?? 0) > 0 ? 350 : 200}
             onClick={() => {
               if (qtyProduct && qtyProduct > 0) {
+                setCartOpen(!cartOpen)
                 addProduct(product, qtyProduct)
               }
-              handleToggle()
             }}
             title={`Ajouter au panier ${(qtyProduct ?? 0) > 0 ? prix : ''}`}
             height={55}

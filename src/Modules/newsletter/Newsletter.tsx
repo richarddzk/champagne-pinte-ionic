@@ -100,8 +100,8 @@ const Newsletter: React.FC = () => {
                 Ne rien manquer de l'actualité de la Maison !
               </Typography>
               <Typography style={{ maxWidth: '100%', padding: 10 }} variant="body1">
-                Inscrivez vous à la Newsletter afin de découvrir le monde de la maison Pinte et
-                rester informé de nos lancements et événements futurs.
+                Inscrivez-vous à la Newsletter afin de découvrir le monde de la maison Pinte et
+                rester informé de nos lancements et évènements futurs.
               </Typography>
 
               <Paper
@@ -154,8 +154,8 @@ const Newsletter: React.FC = () => {
 
                 <Grid item style={{ maxWidth: '100%', marginTop: 50 }} xs>
                   <Typography style={{ padding: 10 }} variant="body1">
-                    Vous pouvez également vous creer un compte afin de faciliter vos prochaines
-                    commandes, et de vous inscrire à notre Newsletter
+                    Vous pouvez également vous créer un compte afin de faciliter vos prochaines
+                    commandes, et de vous inscrire à notre Newsletter.
                   </Typography>
                 </Grid>
                 <Grid item xs>

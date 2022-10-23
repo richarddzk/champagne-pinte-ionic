@@ -64,12 +64,6 @@ const HomeActu: React.FC = () => {
     >
       <PathLink />
       <Grid style={{ justifyContent: 'center' }} container item xs={12}>
-        <Grid item xs={12}>
-          <Typography color="primary" className={classes.typoTitre} variant="h5">
-            Actualités de la Maison
-          </Typography>
-        </Grid>
-
         <Grid className={classes.imageGrid} item xs={12}>
           <Image width={367 * 0.5} height={246 * 0.5} src={pinteOr} alt="Logo" />
         </Grid>

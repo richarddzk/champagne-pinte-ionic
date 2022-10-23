@@ -8,7 +8,6 @@ import { ButtonStyled } from '@/Main'
 import router from 'next/router'
 import { useDarkMode } from 'next-dark-mode'
 
-import { calculateTotal } from '@/Main/Cart/Cart'
 import Image from '@/Utils/MidgardImage'
 import useStyles from './style'
 import { RecapPanierProps } from './interface'
@@ -22,10 +21,15 @@ const RecapPanier: React.FC<RecapPanierProps> = () => {
 
   const { Products, getTotalPrice, tt: nbProduit } = useCart()
   const total = getTotalPrice()
-
+  const TVA = total * 0.196
+  const TTC = total + TVA
   return (
     <Paper className={classes.RecapPanier}>
-      <Grid style={{ textAlign: 'end', paddingTop: 5 }} justifyContent="flex-end" alignItems="flex-end">
+      <Grid
+        style={{ textAlign: 'end', paddingTop: 5 }}
+        justifyContent="flex-end"
+        alignItems="flex-end"
+      >
         <Typography className={classes.typoHeader} color="primary" variant="h5">
           RÉSUMÉ DE LA COMMANDE
         </Typography>
@@ -43,13 +47,7 @@ const RecapPanier: React.FC<RecapPanierProps> = () => {
               <Grid direction="row" justifyContent="space-between" container>
                 <Grid item>
                   <Typography color="primary" className={classes.typo} variant="h6">
-                    Articles ({nbProduit} {nbProduit === 1 ? 'bouteille' : 'bouteilles'}
-                    ):
-                  </Typography>
-                </Grid>
-                <Grid item>
-                  <Typography color="primary" className={classes.typo} variant="h6">
-                    {calculateTotal(Products ?? []).toFixed(2)} €
+                    {nbProduit === 1 ? 'Article:' : 'Articles:'}
                   </Typography>
                 </Grid>
               </Grid>
@@ -105,7 +103,7 @@ const RecapPanier: React.FC<RecapPanierProps> = () => {
             </Grid>
             <Grid item>
               <Typography className={classes.typo} variant="h6">
-                {(total * 0.196).toFixed(2)} €
+                {TVA.toFixed(2)} €
               </Typography>
             </Grid>
           </Grid>
@@ -119,7 +117,7 @@ const RecapPanier: React.FC<RecapPanierProps> = () => {
             </Grid>
             <Grid item>
               <Typography className={classes.typo} variant="h6">
-                {total}€
+                {TTC.toFixed(2)}€
               </Typography>
             </Grid>
           </Grid>

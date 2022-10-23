@@ -231,7 +231,7 @@ const InfosForm: React.FC<InfosProps> = () => {
         <Grid item className={classes.gridTextfield}>
           <TextField
             id="Phone"
-            label="Phone"
+            label="Téléphone"
             className={classes.panierTextfield}
             onChange={(res: { target: { value: string } }) => {
               setLocalUser({

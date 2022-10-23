@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import React, { useEffect, useState } from 'react'
 import Image from '@/Utils/MidgardImage'
-import { Button, Grid, Typography } from '@mui/material'
+import { Button, Divider, Grid, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
 import { GlobalStyles } from 'tss-react'
 import { StaticImageData } from 'next/future/image'
@@ -13,7 +13,7 @@ import Slideshow from '@/Utils/Slideshow'
 import dynamic from 'next/dynamic'
 import useScreen from '@/Utils/hooks/useScreen'
 import raisinCoupe3 from '../../../public/image/vigne/raisinCoupe3.webp'
-import { ButtonStyled, Main } from '../../Main'
+import { Main } from '../../Main'
 import logoChampLisse from '../../../public/image/logo/pintechamplisse2Or.webp'
 import serviceVigne2 from '../../../public/image/vigne/serviceVigne2.webp'
 import tableChamp3 from '../../../public/image/table/tableChamp3.webp'
@@ -148,14 +148,24 @@ const Home: React.FC = () => {
             objectFit="cover"
           />
         </Grid>
-        <Grid className={classes.ButtonCuve} item>
+        {/* <Grid className={classes.ButtonCuve} item>
           <ButtonStyled
             width={250}
             height={50}
-            fullybackground={1}
+            fullybackground
             title="Découvrez nos cuvées"
             onClick={() => {
               push('/champagnes')
+            }}
+          />
+        </Grid> */}
+        <Grid className={classes.center} justifyContent="center" alignItems="center" item xs={12}>
+          <Divider
+            textAlign="center"
+            variant="middle"
+            style={{
+              marginTop: 100,
+              width: '80%'
             }}
           />
         </Grid>

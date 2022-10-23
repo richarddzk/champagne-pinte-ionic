@@ -19,7 +19,8 @@ export const theme = {
     main: '#CCBF90',
     amber: amber[200],
     blueGrey,
-    dark: '#050203'
+    dark: '#050203',
+    light: '#ebe3c6'
   },
   secondary: {
     main: '#010510',
@@ -54,6 +55,7 @@ const AsgardThemeProvider: React.FC<AsgardThemeProviderProps> = ({ children }) =
           } as PaletteColorOptions,
           secondary: {
             ...theme.secondary,
+            main: !darkModeActive ? '#000' : '#fff',
             principal: !darkModeActive ? '#000' : '#fff'
           } as PaletteColorOptions,
           background: {

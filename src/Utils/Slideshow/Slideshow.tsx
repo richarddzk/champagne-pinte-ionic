@@ -113,7 +113,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
                     width={200}
                     image={classes.maisonButton}
                     title={item.name}
-                    fullybackground={1}
+                    fullybackground
                     onClick={() => {
                       Router.push(` ${item.page}`)
                     }}

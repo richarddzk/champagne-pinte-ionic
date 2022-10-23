@@ -17,6 +17,10 @@ buildscript {
 
 apply from: "variables.gradle"
 
+ext {
+    compileSdkVersion1 = compileSdkVersion
+}
+
 allprojects {
     repositories {
         google()

@@ -1,6 +1,6 @@
 import React from 'react'
 import { PaymentElement } from '@stripe/react-stripe-js'
-import { Grid, Typography, Button } from '@mui/material'
+import { Grid, Button } from '@mui/material'
 import dynamic from 'next/dynamic'
 
 import loading2 from 'react-useanimations/lib/loading2'
@@ -13,7 +13,7 @@ const UseAnimations = dynamic(() => import('react-useanimations'), {
 })
 
 const CheckoutForm: React.FC<CheckoutFormProps> = (props) => {
-  const { classes, nbProduit, total, isLoading } = props
+  const { isLoading } = props
   const { isTablette } = useScreen()
 
   return (
@@ -22,12 +22,13 @@ const CheckoutForm: React.FC<CheckoutFormProps> = (props) => {
 
       {!isTablette && (
         <Grid style={{ textAlign: 'end' }} justifyContent="flex-end" alignItems="flex-end">
-          <Typography className={classes.typo} variant="h6">
-            Montant total ({nbProduit} {nbProduit === 1 ? 'bouteille' : 'bouteilles'}
-            ):
-            {total} €
-          </Typography>
-          <Button disabled={isLoading} id="submit" type="submit" variant="outlined">
+          <Button
+            disabled={isLoading}
+            id="submit"
+            type="submit"
+            style={{ font: '  1.2em Times New Roman, serif' }}
+            variant="outlined"
+          >
             {isLoading ? (
               <UseAnimations
                 key={uuid()}

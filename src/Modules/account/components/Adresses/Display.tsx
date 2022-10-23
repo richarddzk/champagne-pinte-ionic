@@ -157,13 +157,13 @@ function EnhancedTableToolbar(props: any) {
           Adresses
         </Typography>
       )}
-      <Tooltip title="Add">
+      <Tooltip title="Ajouter une nouvelle adresse">
         <IconButton onClick={handleAdd}>
           <AddCircleOutlineIcon />
         </IconButton>
       </Tooltip>
       {numSelected > 1 ? (
-        <Tooltip title="Delete">
+        <Tooltip title="Supprimer les adresses cellectionées">
           <IconButton onClick={handleDel}>
             <DeleteIcon />
           </IconButton>
@@ -194,17 +194,16 @@ function AdressesTable({ addresses, isSelected, handleClick, update }: any) {
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            {update && <StyledTableCell align="right">Select</StyledTableCell>}
+            {update && <StyledTableCell align="right"> </StyledTableCell>}
             <StyledTableCell align="right">Nom</StyledTableCell>
             <StyledTableCell align="right">Prenom</StyledTableCell>
             <StyledTableCell align="right">Rue et n°</StyledTableCell>
-            <StyledTableCell align="right">Complement</StyledTableCell>
+            <StyledTableCell align="right">Complément</StyledTableCell>
             <StyledTableCell align="right">Ville</StyledTableCell>
             <StyledTableCell align="right">Code postal</StyledTableCell>
-            <StyledTableCell align="right">Region</StyledTableCell>
+            <StyledTableCell align="right">Région</StyledTableCell>
             <StyledTableCell align="right">Pays</StyledTableCell>
-            <StyledTableCell align="right">N° Telephone</StyledTableCell>
-            <StyledTableCell align="left">Par defaut</StyledTableCell>
+            <StyledTableCell align="right">N° Téléphone</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -243,15 +242,6 @@ function AdressesTable({ addresses, isSelected, handleClick, update }: any) {
                   <StyledTableCell align="right">{adresse.state}</StyledTableCell>
                   <StyledTableCell align="right">{adresse.country}</StyledTableCell>
                   <StyledTableCell align="right">{adresse.phone}</StyledTableCell>
-                  <StyledTableCell padding="checkbox" align="right">
-                    <Checkbox
-                      color="primary"
-                      checked={adresse.isDefault}
-                      inputProps={{
-                        'aria-labelledby': adresse.id
-                      }}
-                    />
-                  </StyledTableCell>
                 </StyledTableRow>
               )
             })}

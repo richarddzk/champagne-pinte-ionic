@@ -94,7 +94,13 @@ const ProductComponentSwiper: React.FC<ProductComponentProps> = (props) => {
         }}
         elevation={elevation}
       >
-        <Grid id="container" item>
+        <Grid
+          id="container"
+          style={{
+            justifyContent: 'center'
+          }}
+          item
+        >
           <ProductImageSwiper
             height={height}
             images={items}
@@ -117,7 +123,7 @@ const ProductComponentSwiper: React.FC<ProductComponentProps> = (props) => {
                   <ButtonStyled
                     width={250}
                     height={50}
-                    fullybackground={1}
+                    fullybackground
                     title={`Découvrir notre ${title === 'Rose' ? 'Rosé' : title}`}
                     onClick={onClick}
                   />

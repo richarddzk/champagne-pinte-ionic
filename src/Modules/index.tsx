@@ -14,6 +14,7 @@ import { ProductImage, ProductComponent, ProductDescription } from './ProductIte
 import ConfirmEmail from './confirmEmail'
 import ChangePassword from './changePassword'
 import Intro from './intro'
+import NousContacter from './nousContacter'
 
 export {
   Champagnes,
@@ -33,5 +34,6 @@ export {
   ProductDescription,
   ConfirmEmail,
   ChangePassword,
-  Intro
+  Intro,
+  NousContacter
 }

@@ -20,7 +20,8 @@ const referential = {
   '/charte': { name: 'Charte données personnelles & cookies ', path: 'charte' },
   '/conditions': { name: 'Conditions générales d’utilisation ', path: 'conditions' },
   '/confirmEmail': { name: 'Email de confirmation ', path: 'confirmEmail' },
-  '/changePassword': { name: 'Changer votre mot de passe ', path: 'changePassword' }
+  '/changePassword': { name: 'Changer votre mot de passe ', path: 'changePassword' },
+  '/nousContacter': { name: 'Nous contacter ', path: 'nousContacter' }
 }
 
 const PathLink: React.FC = () => {

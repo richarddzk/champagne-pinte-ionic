@@ -88,7 +88,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ props }) => {
           </Typography>
         </Grid>
         <Grid style={{ minWidth: 130 }} item>
-          {!account && (
+          {!account && adresse.firstName !== '' && (
             <FormControl variant="standard">
               <InputLabel htmlFor="Choisissez une adresse">Choisissez une adresse</InputLabel>
               <NativeSelect
@@ -114,7 +114,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ props }) => {
             required
             id="firstName"
             name="firstName"
-            label="Prenom"
+            label="Prénom"
             fullWidth
             error={isSubmitting && !adresse.firstName}
             autoComplete="given-name"
@@ -170,7 +170,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ props }) => {
           <TextField
             id="address2"
             name="address2"
-            label="Complement"
+            label="Complément"
             error={isSubmitting && !adresse.address_2}
             fullWidth
             autoComplete="shipping address-line2"
@@ -189,7 +189,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ props }) => {
             required
             id="city"
             name="city"
-            label="City"
+            label="Localité"
             error={isSubmitting && !adresse.city}
             fullWidth
             autoComplete="shipping address-level2"
@@ -210,7 +210,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ props }) => {
             error={isSubmitting && !adresse.state}
             name="state"
             autoComplete="Departement"
-            label="Departement"
+            label="Département"
             fullWidth
             variant="standard"
             value={adresse.state}
@@ -260,7 +260,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ props }) => {
                 id="phone"
                 error={isSubmitting && !adresse.phone}
                 name="phone"
-                label="Numero de telephone"
+                label="Numéro de téléphone"
                 autoComplete="phone"
                 variant="standard"
                 value={adresse.phone}
@@ -286,7 +286,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ props }) => {
                       }}
                     />
                   }
-                  label="Utiliser la meme adresse pour la facturation"
+                  label="Utiliser la même adresse pour la facturation"
                 />
               </Grid>
             )}

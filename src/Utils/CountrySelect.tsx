@@ -21,9 +21,15 @@ interface CountrySelectProps {
   setCountry: (val: { label: string | null; value: string | null }) => void
   // eslint-disable-next-line react/require-default-props
   noTitle?: boolean
+  className?: any
+  size?: 'small' | 'medium'
+  name?: any
+  error?: any
+  helperText?: any
 }
 
-const CountrySelect: React.FC<CountrySelectProps> = ({ country, setCountry }) => {
+const CountrySelect: React.FC<CountrySelectProps> = (props) => {
+  const { country, setCountry } = props
   countries.registerLocale(frLocale)
 
   const countryObj = countries.getNames('fr', { select: 'official' })
@@ -50,6 +56,7 @@ const CountrySelect: React.FC<CountrySelectProps> = ({ country, setCountry }) =>
 
   return (
     <Autocomplete
+      {...props}
       aria-label="CountrySelect"
       id="country-select-demo"
       fullWidth
@@ -72,8 +79,8 @@ const CountrySelect: React.FC<CountrySelectProps> = ({ country, setCountry }) =>
         })
         return true
       }}
-      renderOption={(props, option) => (
-        <Box component="li" sx={{ '& > image': { mr: 2, flexShrink: 0 } }} {...props}>
+      renderOption={(childProps, option) => (
+        <Box component="li" sx={{ '& > image': { mr: 2, flexShrink: 0 } }} {...childProps}>
           <Image
             width="20"
             height="15"
@@ -85,6 +92,7 @@ const CountrySelect: React.FC<CountrySelectProps> = ({ country, setCountry }) =>
       )}
       renderInput={(params) => (
         <TextField
+          {...props}
           {...params}
           aria-label="CountrySelect"
           label="Pays"

@@ -81,7 +81,7 @@ const CharteDonnees: React.FC = () => {
     <Main>
       <Grid className={classes.grid}>
         <Typography className={classes.titre}>Charte données personnelles & cookies</Typography>
-        <Typography className={classes.titre3}>Dernière mise à jour : Novembre 2020</Typography>
+        <Typography className={classes.titre3}>Dernière mise à jour : Novembre 2022</Typography>
         <Typography className={classes.titre4}>CHARTE DES DONNÉES PERSONNELLES</Typography>
         <Typography className={classes.titre3}>
           {' '}
@@ -115,7 +115,7 @@ const CharteDonnees: React.FC = () => {
         </Typography>
         <Typography className={classes.body1}>
           Nous pouvons être amenés à traiter des données à caractère personnel des catégories
-          suivantes :
+          suivantes.
         </Typography>
         <Typography className={classes.body1}>Informations que vous nous fournissez :</Typography>
 
@@ -126,9 +126,9 @@ const CharteDonnees: React.FC = () => {
             </ListItemIcon>
             <ListItemText
               id="Vos données d’identification"
-              primary="  Vos données d’identification telles que vos prénom, nom de famille,
+              primary="Vos données d’identification telles que vos prénom, nom de famille,
               sexe, civilité, nationalité, date de naissance, adresse postale, pays
-              de résidence, adresse électronique et numéro de téléphone ;"
+              de résidence, adresse électronique et numéro de téléphone"
             />
           </ListItem>
           <ListItem>
@@ -139,7 +139,7 @@ const CharteDonnees: React.FC = () => {
               id="Vos
               préférences et vos centres d’intérêt"
               primary="  Vos
-              préférences et vos centres d’intérêt ;"
+              préférences et vos centres d’intérêt"
             />
           </ListItem>
           <ListItem>
@@ -150,7 +150,7 @@ const CharteDonnees: React.FC = () => {
               id="informations renseignées
               via le formulaire"
               primary="  Les informations renseignées
-              via le formulaire « Nous contacter » ; "
+              via le formulaire « Nous contacter » "
             />
           </ListItem>
           <ListItem>
@@ -218,7 +218,7 @@ const CharteDonnees: React.FC = () => {
               informations sur nos offres, actualités et évènements (newsletters,
               invitations et autres publications) ainsi que les offres, actualités
               et événements concernant les autres entités du groupe EARL Pinte soit
-              par e-mail, SMS, MMS, téléphone ou courrier postal ; "
+              par e-mail, SMS, MMS, téléphone ou courrier postal"
             />
           </ListItem>
           <ListItem>
@@ -234,7 +234,7 @@ const CharteDonnees: React.FC = () => {
               personnelles – par exemple votre adresse électronique – avec les
               informations que vous avez fournies sur les réseaux sociaux) (pour les
               internautes en Allemagne, Pologne et au Japon, où le consentement est
-              requis) ;"
+              requis)"
             />
           </ListItem>
           <ListItem>
@@ -244,7 +244,7 @@ const CharteDonnees: React.FC = () => {
             <ListItemText
               id="informations renseignées
               via le formulaire"
-              primary="   Personnaliser les contenus du Site ;  "
+              primary="   Personnaliser les contenus du Site "
             />
           </ListItem>
           <ListItem>
@@ -272,7 +272,7 @@ const CharteDonnees: React.FC = () => {
             </ListItemIcon>
             <ListItemText
               id="Vos données d’identification"
-              primary="   Créer un compte sur le Site puis le gérer ;"
+              primary="   Créer un compte sur le Site puis le gérer"
             />
           </ListItem>
           <ListItem>
@@ -312,7 +312,7 @@ const CharteDonnees: React.FC = () => {
             </ListItemIcon>
             <ListItemText
               id="Vos données d’identification"
-              primary=" pour assurer la sécurité de notre Site et de ses utilisateurs
+              primary="Pour assurer la sécurité de notre Site et de ses utilisateurs
               et la conformité aux Conditions Générales d’Utilisation "
             />
           </ListItem>
@@ -327,7 +327,7 @@ const CharteDonnees: React.FC = () => {
               nos produits et services et la relation avec nos clients en vous
               adressant suite à une transaction des informations sur nos offres,
               actualités et événements (newsletters, invitations et autres
-              publications) sur des produits et/ou services analogues ;"
+              publications) sur des produits et/ou services analogues "
             />
           </ListItem>
           <ListItem>
@@ -339,7 +339,7 @@ const CharteDonnees: React.FC = () => {
               via le formulaire"
               primary="Réaliser des
               statistiques et mieux comprendre vos préférences et centres d’intérêt
-              ; "
+               "
             />
           </ListItem>
           <ListItem>
@@ -350,7 +350,7 @@ const CharteDonnees: React.FC = () => {
               id="informations renseignées
               via le formulaire"
               primary="  Répondre à vos questions adressées via le formulaire « Nous
-              contacter » ou d’autres formulaires similaires ;"
+              contacter » ou d’autres formulaires similaires"
             />
           </ListItem>
           <ListItem>
@@ -363,7 +363,7 @@ const CharteDonnees: React.FC = () => {
               primary=" Vous montrer des
               publicités ciblées et trouver d'autres personnes comme vous sur les
               réseaux sociaux, pour les utilisateurs des pays où votre consentement
-              n'est pas requis ;"
+              n'est pas requis"
             />
           </ListItem>
           <ListItem>
@@ -375,7 +375,7 @@ const CharteDonnees: React.FC = () => {
               via le formulaire"
               primary=" Mener des enquêtes de satisfaction, sous réserve
               d’un consentement requis aux termes de la règlementation de votre pays
-              ; "
+              "
             />
           </ListItem>
           <ListItem>
@@ -416,8 +416,8 @@ const CharteDonnees: React.FC = () => {
             </ListItemIcon>
             <ListItemText
               id="nos affiliés"
-              primary="   nos affiliés, pour vous fournir un contenu
-              et des services pertinents ;"
+              primary="  Nos affiliés, pour vous fournir un contenu
+              et des services pertinents"
             />
           </ListItem>
           <ListItem>
@@ -427,7 +427,7 @@ const CharteDonnees: React.FC = () => {
             <ListItemText
               id="nos prestataires de service de paiement
               "
-              primary=" nos prestataires de service de paiement
+              primary=" Nos prestataires de service de paiement
               "
             />
           </ListItem>
@@ -437,8 +437,8 @@ const CharteDonnees: React.FC = () => {
             </ListItemIcon>
             <ListItemText
               id="nos prestataires"
-              primary="  nos prestataires de service de paiement
-              nos prestataires d’hébergement ; "
+              primary="  Nos prestataires de service de paiement
+              nos prestataires d’hébergement "
             />
           </ListItem>
           <ListItem>
@@ -447,16 +447,16 @@ const CharteDonnees: React.FC = () => {
             </ListItemIcon>
             <ListItemText
               id="nos prestataires"
-              primary="      nos prestataires support et marketing
+              primary="      Nos prestataires support et marketing
               (outils d’e-mailing, service client, service de billetterie, service
-              d’analyse statistique) ;"
+              d’analyse statistique) "
             />
           </ListItem>
           <ListItem>
             <ListItemIcon>
               <HorizontalRuleIcon htmlColor="#ccbf90" fontSize="small" />
             </ListItemIcon>
-            <ListItemText id="les réseaux sociaux " primary=" les réseaux sociaux ; " />
+            <ListItemText id="les réseaux sociaux " primary=" les réseaux sociaux  " />
           </ListItem>
           <ListItem>
             <ListItemIcon>
@@ -464,11 +464,11 @@ const CharteDonnees: React.FC = () => {
             </ListItemIcon>
             <ListItemText
               id="toutes autorités"
-              primary="  toutes autorités,
+              primary="  Toutes autorités,
               juridiction ou tout autre tiers autorisé, lorsque la communication des
               données personnelles est requise par la loi, une disposition
               règlementaire ou une décision de justice ou si cette communication est
-              nécessaire pour assurer la protection et la défense de nos droits ;"
+              nécessaire pour assurer la protection et la défense de nos droits "
             />
           </ListItem>
           <ListItem>
@@ -477,9 +477,9 @@ const CharteDonnees: React.FC = () => {
             </ListItemIcon>
             <ListItemText
               id="tous acheteurs"
-              primary="   tous acheteurs en cas de restructuration de Pinte y compris la cession
+              primary="   Tous acheteurs en cas de restructuration de Pinte y compris la cession
               totale ou partielle d’actifs, fusion, absorption, acquisition,
-              scission et plus généralement toute opération de réorganisation ;"
+              scission et plus généralement toute opération de réorganisation "
             />
           </ListItem>
           <ListItem>
@@ -489,7 +489,7 @@ const CharteDonnees: React.FC = () => {
             <ListItemText
               id="nos
               sous-traitants"
-              primary="nos sous-traitants."
+              primary="Nos sous-traitants."
             />
           </ListItem>
         </List>
@@ -513,7 +513,7 @@ const CharteDonnees: React.FC = () => {
         <Typography className={classes.body1}>
           Pour toutes questions concernant les transferts de données personnelles en dehors de
           l’Espace Economique Européen, vous pouvez nous contacter à l’adresse indiquée ci-dessous
-          (section « Coordonnées du délégué à la protection des données : Contact DPO.
+          (section « Coordonnées du délégué à la protection des données : Contact DPO).
         </Typography>
         <Typography className={classes.titre3}>
           6. Durée de conservation des données à caractère personnel
@@ -629,7 +629,7 @@ const CharteDonnees: React.FC = () => {
             <ListItemText
               id="meilleure expérience"
               primary=" Vous offrir une meilleure expérience de navigation
-              sur le Site ; "
+              sur le Site  "
             />
           </ListItem>
           <ListItem>
@@ -640,7 +640,7 @@ const CharteDonnees: React.FC = () => {
               id="informations de connexion
               "
               primary=" Vous permettre de paramétrer vos préférences
-              (informations de connexion, choix du pays et de la langue) ; "
+              (informations de connexion, choix du pays et de la langue)  "
             />
           </ListItem>
           <ListItem>
@@ -651,7 +651,7 @@ const CharteDonnees: React.FC = () => {
               id="Protéger
               votre sécurité"
               primary="  Protéger
-              votre sécurité ;  "
+              votre sécurité   "
             />
           </ListItem>
           <ListItem>
@@ -661,7 +661,7 @@ const CharteDonnees: React.FC = () => {
             <ListItemText
               id="Mesurer et améliorer"
               primary="   Mesurer et améliorer les services proposés sur le
-              Site ; "
+              Site  "
             />
           </ListItem>
           <ListItem>
@@ -671,7 +671,7 @@ const CharteDonnees: React.FC = () => {
             <ListItemText
               id="Collaborer "
               primary="  Collaborer avec nos partenaires et évaluer nos actions
-              marketing. "
+              marketing "
             />
           </ListItem>
         </List>
@@ -689,7 +689,7 @@ const CharteDonnees: React.FC = () => {
             <ListItemText
               id="nom du site"
               primary=" Le nom du site internet d’où il
-              provient,"
+              provient"
             />
           </ListItem>
           <ListItem>
@@ -699,7 +699,7 @@ const CharteDonnees: React.FC = () => {
             <ListItemText
               id="Combien de temps
               "
-              primary=" Combien de temps le cookie sera stocké sur votre appareil,"
+              primary=" Combien de temps le cookie sera stocké sur votre appareil"
             />
           </ListItem>
           <ListItem>
@@ -708,7 +708,7 @@ const CharteDonnees: React.FC = () => {
             </ListItemIcon>
             <ListItemText
               id="numéro unique"
-              primary="  Un numéro unique – généralement attribué de manière aléatoire.  "
+              primary="  Un numéro unique – généralement attribué de manière aléatoire  "
             />
           </ListItem>
         </List>

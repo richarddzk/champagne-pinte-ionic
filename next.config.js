@@ -50,6 +50,7 @@ module.exports = withPlugins(
         '/newsletter': { page: '/newsletter', query: { title: 'Newsletter' } },
         '/panier': { page: '/panier', query: { title: 'Panier' } },
         '/produit/[id]': { page: '/produit/[id]', query: { title: 'Page Produit' } },
+        '/nousContacter': { page: '/nousContacter', query: { title: 'Nous contacter' } },
 
       }
     }

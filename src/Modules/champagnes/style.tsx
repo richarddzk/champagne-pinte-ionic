@@ -12,8 +12,12 @@ const useStyles = makeStyles()((theme: Theme) => ({
     }
   },
   productComponent: {
-    marginBottom: '10%',
+    backgroundColor: theme.palette.background.second,
+    paddingBottom: 100,
     paddingTop: 100
+  },
+  center: {
+    textAlign: '-webkit-center' as any
   },
   gridImage: {
     minWidth: 400,

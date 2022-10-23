@@ -25,10 +25,10 @@ export interface HomeProductProps {
   description?: boolean
 }
 
-const descriptionBrut = `Cuvée emblématique de la Maison depuis sa création, elle en est l'expression
-la plus accomplie et la plus aboutie.`
+const descriptionBrut =
+  'Cuvée emblématique de la Maison depuis sa création, la plus accomplie et la plus aboutie.'
 const descriptionRose =
-  'Integration parfaite de toute la diversité des cépages révélant la complexité qui les caractérises.'
+  'Intégration parfaite de toute la diversité de nos cépages dans un rosé sublimé.'
 
 const HomeProduct: React.FC<HomeProductProps> = React.memo(
   ({ loading, products, backgroundColor, buttonPanier, description }) => {
@@ -49,7 +49,7 @@ const HomeProduct: React.FC<HomeProductProps> = React.memo(
           products.map((product) => {
             if (description) {
               descriptionElmt = (
-                <Typography align="justify" className={classes.typoJust} variant="h5">
+                <Typography align="center" className={classes.typoJust} variant="h5">
                   {product.title?.toLowerCase() === 'brut' ? descriptionBrut : descriptionRose}
                 </Typography>
               )

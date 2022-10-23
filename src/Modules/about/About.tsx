@@ -223,6 +223,7 @@ const About: React.FC = () => {
           ref={ref}
           animate={controls}
           initial="hidden"
+          className={classes.gridtextRaisin}
           transition={{
             duration: 1
             // type: 'tween',
@@ -233,7 +234,6 @@ const About: React.FC = () => {
           }}
         >
           <Grid
-            className={classes.gridtextRaisin}
             container
             direction={!isTablette ? 'row' : 'column'}
             justifyContent="space-around"

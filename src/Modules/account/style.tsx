@@ -15,7 +15,7 @@ const useStyles = makeStyles()((theme: any) => ({
     padding: 5
   },
   shippingRadioButton: {
-    color: theme.palette.principal
+    color: theme.palette.primary.principal
   },
   typo: {
     marginLeft: 10,
